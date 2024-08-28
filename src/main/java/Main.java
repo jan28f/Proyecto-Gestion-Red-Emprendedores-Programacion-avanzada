@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,11 +6,15 @@ public class Main{
 
   public static void main(String [] args) throws IOException
   {  
-      Main app = new Main();
-      app.menuPrincipal();
+    Main app = new Main();
+    app.menuPrincipal();
   }
+  
   public void menuPrincipal() throws IOException
   {
+    HashMap<String, Emprendimiento> emprendimientos = new HashMap<String, Emprendimiento>();
+    HashMap<String, Proyecto> proyectos = new HashMap<String, Proyecto>();
+    
       BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
       int opcion = -1;
       while (opcion != 0)
