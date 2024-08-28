@@ -20,38 +20,56 @@ public class Emprendimiento
       this.proyectos = new ArrayList<Proyecto>();
       this.apoyos = new ArrayList<Apoyo>();
     }
-    //Setters
-    public void setNombre(String nombre)
+
+    // Setters
+    public void setNombreEmprendimiento(String nombreEmprendimiento)
     {
-      this.nombre = nombre;
+      this.nombreEmprendimiento = nombreEmprendimiento;
     }
-    public void setEdad(int edad)
+    public void setNombrePropietario(String nombrePropietario)
     {
-      this.edad = edad;
+      this.nombrePropietario = nombrePropietario;
     }
-    public void setProfesion(String profesion)
+    public void setEspecialidad(String especialidad)
     {
-      this.profesion = profesion;
-    }  
-    public void setExperiencia(String experiencia)
-    {
-      this.experiencia = experiencia;
-    }  
-    //Getters
-    public String getNombre()
-    {
-      return nombre;
+      this.especialidad = especialidad;
     }
-    public int getEdad()
+    public void setCapitalMonetario(int capitalMonetario)
     {
-      return edad;
-    }  
-    public String getProfesion()
+      this.capitalMonetario = capitalMonetario;
+    }
+    public void setTotalEmpleados(int totalEmpleados)
     {
-      return profesion;
-    }  
-    public String getExperiencia()
+      this.totalEmpleados = totalEmpleados;
+    }
+    
+    // Getters
+    public String getNombreEmprendimiento()
     {
-      return experiencia;
-    }  
+      return nombreEmprendimiento;
+    }
+    public String getNombrePropietario()
+    {
+      return nombrePropietario;
+    }
+    public String getEspecialidad()
+    {
+      return especialidad;
+    }
+    public int getCapitalMonetario()
+    {
+      return capitalMonetario;
+    }
+    public int getTotalEmpleados()
+    {
+      return totalEmpleados;
+    }
+    public ArrayList<Proyecto> getProyectos()
+    {
+      return proyectos;
+    }
+    public ArrayList<Apoyo> getApoyos()
+    {
+      return apoyos;
+    }
   }
