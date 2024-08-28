@@ -1,16 +1,24 @@
+import java.util.ArrayList;
+
 public class Emprendimiento
   {
-    private String nombre;
-    private int edad;
-    private String profesion;
-    private String experiencia;
+    private String nombreEmprendimiento;
+    private String nombrePropietario;
+    private String especialidad;
+    private ArrayList<Proyecto> proyectos;
+    private int capitalMonetario;
+    private int totalEmpleados;
+    private ArrayList<Apoyo> apoyos;
 
-    public Emprendimiento(String nombre,int edad,String profesion, String experiencia)
+    public Emprendimiento(String nombreEmprendimiento, String nombrePropietario, String especialidad, int capitalMonetario, int totalEmpleados)
     {
-      this.nombre = nombre;
-      this.edad = edad;
-      this.profesion = profesion;
-      this.experiencia = experiencia;
+      this.nombreEmprendimiento = nombreEmprendimiento;
+      this.nombrePropietario = nombrePropietario;
+      this.especialidad = especialidad;
+      this.capitalMonetario = capitalMonetario;
+      this.totalEmpleados = totalEmpleados;
+      this.proyectos = new ArrayList<Proyecto>();
+      this.apoyos = new ArrayList<Apoyo>();
     }
     //Setters
     public void setNombre(String nombre)
