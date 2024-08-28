@@ -1,11 +1,11 @@
-public class Emprendedores
+public class Emprendimiento
   {
     private String nombre;
     private int edad;
     private String profesion;
     private String experiencia;
 
-    public Emprendedores(String nombre,int edad,String profesion, String experiencia)
+    public Emprendimiento(String nombre,int edad,String profesion, String experiencia)
     {
       this.nombre = nombre;
       this.edad = edad;
