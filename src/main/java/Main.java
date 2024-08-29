@@ -50,8 +50,7 @@ public class Main
 					}
 					else
 						System.out.println("No se encontro " + aBuscar + " en el registro de emprendimientos");
-					System.out.print("Presiona Enter para continuar...");
-					lector.readLine();
+
 					break;
 				case 2:
 					System.out.println("============================");
@@ -70,6 +69,25 @@ public class Main
 						System.out.println("No se encontro " + aBuscar + " en el registro de proyectos");
 					break;
 				case 3:
+					System.out.println("============================");
+					System.out.println("  Registrar emprendimiento");
+					System.out.println("============================");
+					System.out.println("Ingrese la informacion solicitada a continuacion para registrar el emprendimiento");
+
+					System.out.print("Nombre del emprendimiento: ");
+					String nombreEmprendimiento = lector.readLine();
+					System.out.print("Nombre del propietario del emprendimiento: ");
+					String nombreDueno = lector.readLine();
+					System.out.print("Especialidad de la empresa: ");
+					String especialidadEmpresa = lector.readLine();
+					System.out.print("Capital monetario de la empresa: ");
+					int capitalMonetario = Integer.parseInt(lector.readLine());
+					System.out.print("Total de empleados: ");
+					int totalEmpleados = Integer.parseInt(lector.readLine());
+					Emprendimiento nuevoEmprendimiento = new Emprendimiento(nombreEmprendimiento, nombreDueno, especialidadEmpresa, capitalMonetario, totalEmpleados);
+					
+					emprendimientos.put(nombreEmprendimiento, nuevoEmprendimiento);
+					System.out.print("Se ha registrado exitosamente su emprendimiento");
 					break;
 				case 4:
 					break;
@@ -80,7 +98,9 @@ public class Main
 					System.out.println("Opcion invalida");
 					System.out.println("Marque otra opcion");
 					break;
-		  	}    
+		  	}
+			System.out.print("\nPresiona Enter para continuar...");
+			lector.readLine();    
 	  	} while (opcion != 5);
 	  	lector.close();
 	}
