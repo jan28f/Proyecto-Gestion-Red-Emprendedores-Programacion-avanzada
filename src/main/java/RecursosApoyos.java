@@ -1,4 +1,4 @@
-public RecursosApoyos
+public class RecursosApoyos
   {
     private int totalEmpleados;
     private int capital;
