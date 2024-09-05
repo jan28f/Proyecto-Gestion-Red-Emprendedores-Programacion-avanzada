@@ -2,7 +2,7 @@ public class Emprendimiento
   {
     private String nombre;
     private String propietario;
-    private String ArrayList <Proyecto> proyectos;
+    private ArrayList <Proyecto> proyectos;
     private RecursosApoyos recursosYapoyo;
     private String area;
     public Emprendimiento(String nombre, String propietario , String area)
@@ -10,7 +10,7 @@ public class Emprendimiento
       this.nombre = nombre;
       this.propietario = propietario;
       proyectos = new ArrayList<Proyecto>();
-      recursosYapoyo = new Proyecto();
+      recursosYapoyo = new RecursosApoyos();
       this.area = area;
     }
     //Getters
@@ -39,5 +39,34 @@ public class Emprendimiento
     {
       this.area = area;
     }  
-    
+    public void insertarProyecto(Proyecto project)
+    {
+      boolean esta = false;
+      for (int i = 0 ;  i < proyectos.size() ; i++)
+        {
+           if (proyectos.get(i).getNombreProyecto().equals(project.getNombreProyecto())) 
+               {
+                 System.out.println("El proyecto ya se encuentra");
+                 esta = true;
+                 break;
+               }
+        }
+      if (esta == false)
+      {
+        proyectos.add(project);
+        System.out.println("Se ha agregado el proyecto de forma correcta");
+      }
+    }
+    public String buscarPorNombre(HashMap<String,Emprendimiento> mapa , String name)
+        {
+          if (mapa.containsKey(name))
+          {
+            Emprendimiento aux = mapa.get(name);
+            return aux.getNombre() + aux.getPropietario();
+          }
+          else
+          {
+            return "No se encontro el nombre del emprendimiento";
+          }  
+        }
   }  
