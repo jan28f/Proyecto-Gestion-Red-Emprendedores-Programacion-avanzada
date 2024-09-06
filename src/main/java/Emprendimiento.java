@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 public class Emprendimiento
   {
     private String nombre;
@@ -96,12 +95,21 @@ public class Emprendimiento
         for (int i = 0 ; i < totalProyectos ; i++)
         {
           Proyecto proyecto = proyectos.get(i);
-          System.out.println("Nombre: " + proyecto.getNombreProyecto());
-          System.out.println("Encargado: " + proyecto.getEncargado());
-          System.out.println("Costo: " + proyecto.getCostoEstimado());
-          System.out.println("Personal: " + proyecto.getPersonalRequerido());
-          System.out.println("Estado: " + proyecto.getEstadoActual() + "\n");
+          proyecto.info();
+          System.out.println();
         }
       }
+    }
+    public Proyecto getProyecto(String aBuscar)
+    {
+      for (int i = 0 ; i < proyectos.size() ; i++)
+      {
+        Proyecto proyecto = proyectos.get(i);
+        if (proyecto.getNombreProyecto().equals(aBuscar))
+        {
+          return proyecto;
+        }
+      }
+      return null;
     }
   }  
