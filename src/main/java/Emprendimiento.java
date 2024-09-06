@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 public class Emprendimiento
   {
     private String nombre;
@@ -5,12 +7,13 @@ public class Emprendimiento
     private ArrayList <Proyecto> proyectos;
     private RecursosApoyos recursosYapoyo;
     private String area;
+    
     public Emprendimiento(String nombre, String propietario , String area)
     {
       this.nombre = nombre;
       this.propietario = propietario;
       proyectos = new ArrayList<Proyecto>();
-      recursosYapoyo = new RecursosApoyos();
+      this.recursosYapoyo = new RecursosApoyos(5,100000,20000);
       this.area = area;
     }
     //Getters
@@ -38,7 +41,8 @@ public class Emprendimiento
     public void setArea(String area)
     {
       this.area = area;
-    }  
+    }
+    
     public void insertarProyecto(Proyecto project)
     {
       boolean esta = false;
@@ -57,16 +61,5 @@ public class Emprendimiento
         System.out.println("Se ha agregado el proyecto de forma correcta");
       }
     }
-    public String buscarPorNombre(HashMap<String,Emprendimiento> mapa , String name)
-        {
-          if (mapa.containsKey(name))
-          {
-            Emprendimiento aux = mapa.get(name);
-            return aux.getNombre() + aux.getPropietario();
-          }
-          else
-          {
-            return "No se encontro el nombre del emprendimiento";
-          }  
-        }
+    
   }  
