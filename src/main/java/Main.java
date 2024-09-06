@@ -52,7 +52,7 @@ public class Main
           cargarCasosPrueba(mapa);
           break;
         case 5:
-          System.out.print("Saliendo del programa...");
+          System.out.println("Saliendo del programa...");
           break;
         default:
           break;
@@ -112,11 +112,11 @@ public class Main
 
     if (mapa.remove(aEliminar) != null)
     {
-      System.out.println("Se ha eliminado " + aEliminar + "del registro de emprendedores");
+      System.out.println("Se ha eliminado " + aEliminar + " del registro de emprendedores");
     }
     else
     {
-      System.out.println("No se ha encontrado " + aEliminar + "en el registro de emprendedores para eliminarlo");
+      System.out.println("No se ha encontrado " + aEliminar + " en el registro de emprendedores para eliminarlo");
     }
   }
   public void cargarCasosPrueba(HashMap<String, Emprendimiento> mapa) throws IOException
@@ -127,17 +127,19 @@ public class Main
     Proyecto proyecto2;
     Emprendimiento emprendedor3;
     Proyecto proyecto3;
-    emprendedor1 = new Emprendimiento("Samsung","Juan    Perez","Frabicante celulares");
-    proyecto1 = new Proyecto("Nuevo Samsung","Xi ping",20,20000,"Activo");
+    emprendedor1 = new Emprendimiento("Samsung","Juan Perez","");
+    proyecto1 = new Proyecto("Nuevo celular","Xi ping",20,20000,"Activo");
     emprendedor1.insertarProyecto(proyecto1);
     emprendedor2 = new Emprendimiento("Entel","Jose Mena","Telecomunicaciones");
     proyecto2 = new Proyecto("Arreglar internet","Franny",21,30000,"Activo");
     mapa.put(emprendedor1.getNombre(),emprendedor1);
+    System.out.println("Se ha registrado la empresa " + emprendedor1.getNombre());
     mapa.put(emprendedor2.getNombre(),emprendedor2);
+    System.out.println("Se ha registrado la empresa " + emprendedor2.getNombre());
+
   }
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
   {
-    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
     int opcion = -1;
     do
     {  
@@ -219,7 +221,6 @@ public class Main
   }
   public void menuProyecto(Proyecto proyecto) throws IOException
   {
-    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
     int opcion = -1;
     do
     {  
