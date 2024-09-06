@@ -14,7 +14,6 @@ public class Main
   }
   public static void main(String [] args) throws IOException
   {
-    
     Main app = new Main();
     app.menuPrincipal();
   }
@@ -122,9 +121,12 @@ public class Main
   public void cargarCasosPrueba(HashMap<String, Emprendimiento> mapa) throws IOException
   {
     Emprendimiento emprendedor1 = new Emprendimiento("Samsung", "Juan Perez", "Tecnología");
-    Proyecto proyecto1 = new Proyecto("Nuevo Celular", "Xi Ping", 15, 50000, "Activo");
-    Proyecto proyecto2 = new Proyecto("Investigación 5G", "Ana Lopez", 10, 70000, "Activo");
-    Proyecto proyecto3 = new Proyecto("Expansión Global", "Pedro Martinez", 8, 60000, "Planificado");
+    Proyecto proyecto1 = new Proyecto("Nuevo Celular", "Xi Ping", 15, 50000, "Completado");
+    Proyecto proyecto2 = new Proyecto("Investigación 5G", "Ana Lopez", 10, 70000, "Completado");
+    Proyecto proyecto3 = new Proyecto("Expansión Global", "Pedro Martinez", 8, 60000, "En progreso");
+    proyecto1.registrarGanancias(762500);
+    proyecto2.registrarGanancias(16200);
+    proyecto3.registrarGanancias(27800);
     emprendedor1.insertarProyecto(proyecto1);
     emprendedor1.insertarProyecto(proyecto2);
     emprendedor1.insertarProyecto(proyecto3);
@@ -132,8 +134,10 @@ public class Main
     System.out.println("Se ha registrado el emprendimiento " + emprendedor1.getNombre());
 
     Emprendimiento emprendedor2 = new Emprendimiento("Entel", "Jose Mena", "Telecomunicaciones");
-    proyecto1 = new Proyecto("Arreglar Internet", "Franny Garcia", 20, 30000, "Activo");
+    proyecto1 = new Proyecto("Arreglar Internet", "Franny Garcia", 20, 30000, "Completado");
     proyecto2 = new Proyecto("Expansión Fibra Óptica", "Luis Morales", 15, 50000, "En Progreso");
+    proyecto1.registrarGanancias(45000);
+    proyecto2.registrarGanancias(0); 
     emprendedor2.insertarProyecto(proyecto1);
     emprendedor2.insertarProyecto(proyecto2);
     mapa.put(emprendedor2.getNombre(), emprendedor2);
@@ -143,6 +147,9 @@ public class Main
     proyecto1 = new Proyecto("Planta Solar", "Carlos Fernandez", 25, 100000, "Planificado");
     proyecto2 = new Proyecto("Energía Eólica", "Sandra Lima", 20, 80000, "Activo");
     proyecto3 = new Proyecto("Planta de Biomasa", "Manuel Diaz", 18, 70000, "En Progreso");
+    proyecto1.registrarGanancias(0);
+    proyecto2.registrarGanancias(65000);
+    proyecto3.registrarGanancias(-12700);
     emprendedor3.insertarProyecto(proyecto1);
     emprendedor3.insertarProyecto(proyecto2);
     emprendedor3.insertarProyecto(proyecto3);
@@ -150,9 +157,12 @@ public class Main
     System.out.println("Se ha registrado el emprendimiento " + emprendedor3.getNombre());
 
     Emprendimiento emprendedor4 = new Emprendimiento("Microsoft","Freddy","Desarrollador Sofware");
-    Proyecto proyecto4 = new Proyecto("Desarollar windows 12","Sebastian",150,5000000,"Activo");
+    Proyecto proyecto4 = new Proyecto("Desarollar windows 12","Sebastian",150,5000000,"Completado");
     Proyecto proyecto5 = new Proyecto("Agregar un nuevo parche a window","Fabian",75,2300000,"Activo");
     Proyecto proyecto6 = new Proyecto("Desarrollar la interfaz de la nueva xbox","Dario",100,3000000,"Activo");
+    proyecto4.registrarGanancias(10000000);
+    proyecto5.registrarGanancias(0); 
+    proyecto6.registrarGanancias(-270000);
     emprendedor4.insertarProyecto(proyecto4);
     emprendedor4.insertarProyecto(proyecto5);
     emprendedor4.insertarProyecto(proyecto6);
@@ -174,9 +184,10 @@ public class Main
       System.out.println("3) Modificar total de empleados");
       System.out.println("4) Modificar capital");
       System.out.println("5) Modificar total apoyo");
-      System.out.println("6) Ver proyectos");
-      System.out.println("7) Buscar proyecto");
-      System.out.println("8) Volver menu principal\n");
+      System.out.println("6) Ver resultados y crecimiento");
+      System.out.println("7) Ver proyectos");
+      System.out.println("8) Buscar proyecto");
+      System.out.println("9) Volver menu principal\n");
       System.out.print("Ingrese una opcion: ");
 
       opcion = Integer.parseInt(lector.readLine());
@@ -217,9 +228,13 @@ public class Main
           System.out.println("Se ha cambiado con exito");
           break;
         case 6:
-          emprendimiento.verProyectos();
+          emprendimiento.resultados();
+          System.out.println("El emprendimiento a crecido " + String.format("%.2f", emprendimiento.calcularCrecimiento()) + "%");
           break;
         case 7:
+          emprendimiento.verProyectos();
+          break;
+        case 8:
           System.out.print("Ingrese el nombre del proyecto a buscar: ");
           String aBuscar = lector.readLine();
           Proyecto proyecto = emprendimiento.getProyecto(aBuscar);
@@ -232,14 +247,14 @@ public class Main
             menuProyecto(proyecto);
           }
           break;
-        case 8:
+        case 9:
           break;
         default:
           break;
       }
       System.out.print("Presiona Enter para continuar...");
       lector.readLine();
-    } while (opcion != 8);
+    } while (opcion != 9);
   }
   public void menuProyecto(Proyecto proyecto) throws IOException
   {
@@ -254,8 +269,9 @@ public class Main
       System.out.println("2) Cambiar encargado de proyecto");
       System.out.println("3) Modificar personal requerido");
       System.out.println("4) Modificar costo del proyecto");
-      System.out.println("5) Modificar estado del proyecto");
-      System.out.println("6) Volver menu emprendimiento\n");
+      System.out.println("5) Registrar ganancias del proyecto");
+      System.out.println("6) Modificar estado del proyecto");
+      System.out.println("7) Volver menu emprendimiento\n");
       System.out.print("Ingrese una opcion: ");
 
       opcion = Integer.parseInt(lector.readLine());
@@ -290,13 +306,19 @@ public class Main
           System.out.println("\nSe ha modificado el costo del proyecto");
           break;
         case 5:
+          System.out.print("Ingrese las ganancias del proyecto: ");
+          int ganancias = Integer.parseInt(lector.readLine());
+
+          proyecto.registrarGanancias(ganancias);
+          break;
+        case 6:
           System.out.print("Ingrese el estado actual del proyecto: ");
           String nuevoEstado = lector.readLine();
 
           proyecto.setEstadoActual(nuevoEstado);
           System.out.println("\nSe ha modificado el estado del proyecto a " + nuevoEstado);
           break;
-        case 6:
+        case 7:
           System.out.println("Volviendo al menu anterior...");
           break;
         default:
