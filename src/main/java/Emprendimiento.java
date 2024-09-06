@@ -75,13 +75,33 @@ public class Emprendimiento
     }
     public void info()
     {
-      System.out.println("Se ha encontrado un emprendimiento\n");
-      System.out.print("Nombre del emprendimiento: " + nombre);
+      System.out.println("Nombre del emprendimiento: " + nombre);
       System.out.println("Propietario del emprendimiento: " + propietario);
       System.out.println("Area de trabajo del emprendimiento: " + area);
       RecursosApoyos recursosApoyos = this.getRecursosYApoyo();
       System.out.println("Empleados del emprendimiento: " + recursosApoyos.getTotalEmpleados());
       System.out.println("Capital monetario del emprendimiento: " + recursosApoyos.getCapital());
       System.out.println("Total de apoyo monetario del emprendimiento: " + recursosApoyos.getMontoApoyo());
+    }
+    public void verProyectos()
+    {
+      int totalProyectos = proyectos.size();
+      if (totalProyectos == 0)
+      {
+        System.out.println("No se tienen proyectos registrados");
+      }
+      else
+      {
+        System.out.println("Lista de proyectos:\n");
+        for (int i = 0 ; i < totalProyectos ; i++)
+        {
+          Proyecto proyecto = proyectos.get(i);
+          System.out.println("Nombre: " + proyecto.getNombreProyecto());
+          System.out.println("Encargado: " + proyecto.getEncargado());
+          System.out.println("Costo: " + proyecto.getCostoEstimado());
+          System.out.println("Personal: " + proyecto.getPersonalRequerido());
+          System.out.println("Estado: " + proyecto.getEstadoActual() + "\n");
+        }
+      }
     }
   }  
