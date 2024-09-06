@@ -46,6 +46,21 @@ public class Main
       switch(opcion)
       {
         case 1:
+          System.out.print("Ingresa el nombre del emprendimiento: ");
+          String nombre = lector.readLine();
+          System.out.print("Ingresa el nombre del propietario del emprendimiento: ");
+          String propietario = lector.readLine();
+          System.out.print("Ingresa el area a la que se dedica el emprendimiento: ");
+          String area = lector.readLine();
+          System.out.print("Ingrese cuantos empleados tiene el emprendimiento: ");
+          int empleados = Integer.parseInt(lector.readLine());
+          System.out.print("Ingrese el capital inicial del emprendimiento: ");
+          int capital = Integer.parseInt(lector.readLine());
+          System.out.print("Ingrese el monto de los apoyos que tiene el emprendimiento: ");
+          int montoApoyo = Integer.parseInt(lector.readLine());
+          RecursosApoyos recursosYApoyos = new RecursosApoyos(empleados, capital, montoApoyo);
+          Emprendimiento nuevoEmprendimiento = new Emprendimiento(nombre, propietario, area, recursosYApoyos);
+          mapa.put(nombre, nuevoEmprendimiento);
           break;
         case 2:
           break;
