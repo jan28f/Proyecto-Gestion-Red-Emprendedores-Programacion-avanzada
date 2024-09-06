@@ -85,6 +85,17 @@ public class Main
           }
           break;
         case 3:
+          System.out.print("Ingrese el nombre del emprendimiento a eliminar: ");
+          String aEliminar = lector.readLine();
+
+          if (mapa.remove(aEliminar) != null)
+          {
+            System.out.print("Se ha eliminado " + aEliminar + "del registro de emprendedores");
+          }
+          else
+          {
+            System.out.print("No se ha encontrado " + aEliminar + "en el registro de emprendedores para eliminarlo");
+          }
           break;
         case 4:
           emprendedor1 = new Emprendimiento("Juan    Perez","Samsung","Telefonia Movil");
