@@ -32,4 +32,8 @@ public class RecursosApoyos
       {
         this.montoApoyo = montoApoyo;
       }
+    public void setCapital(int capital)
+    {
+      this.capital = capital;
+    }
   }  
