@@ -5,10 +5,12 @@ import java.io.InputStreamReader;
 
 public class Main
 {
-  HashMap <String,Emprendimiento> mapa;
+  public HashMap <String, Emprendimiento> mapa;
+  public BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+
   public Main()
   {
-    this.mapa = new HashMap<>();
+    this.mapa = new HashMap<String, Emprendimiento>();
   }
   public static void main(String [] args) throws IOException
   {
@@ -26,7 +28,6 @@ public class Main
     Emprendimiento emprendedor3;
     Proyecto proyecto3;
 
-    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
     int opcion = -1;
     do
     {
@@ -46,30 +47,7 @@ public class Main
       switch(opcion)
       {
         case 1:
-          System.out.print("Ingresa el nombre del emprendimiento: ");
-          String nombre = lector.readLine();
-          System.out.print("Ingresa el nombre del propietario del emprendimiento: ");
-          String propietario = lector.readLine();
-          System.out.print("Ingresa el area a la que se dedica el emprendimiento: ");
-          String area = lector.readLine();
-          System.out.print("Ingrese cuantos empleados tiene el emprendimiento: ");
-          int empleados = Integer.parseInt(lector.readLine());
-          System.out.print("Ingrese el capital inicial del emprendimiento: ");
-          int capital = Integer.parseInt(lector.readLine());
-          System.out.print("Ingrese el monto de los apoyos que tiene el emprendimiento: ");
-          int montoApoyo = Integer.parseInt(lector.readLine());
-
-          RecursosApoyos recursosYApoyos = new RecursosApoyos(empleados, capital, montoApoyo);
-          Emprendimiento nuevoEmprendimiento = new Emprendimiento(nombre, propietario, area, recursosYApoyos);
-          if (mapa.get(nombre) == null)
-          {
-            mapa.put(nombre, nuevoEmprendimiento);
-            System.out.println("Se agrego el emprendimiento " + nombre + " al registro");
-          }
-          else
-          {
-            System.out.println("\nYa existe un emprendimiento con el nombre registro " + nombre);
-          }
+          registrarEmprendimiento(mapa);
           break;
         case 2:
           System.out.print("Ingresa el nombre del emprendimiento a buscar: ");
@@ -120,29 +98,33 @@ public class Main
     lector.close();
   }
 
-  public void registrarMapa(String clave, Emprendimiento aux)
+  public void registrarEmprendimiento(HashMap<String, Emprendimiento> mapa) throws IOException
+  {
+    System.out.print("Ingresa el nombre del emprendimiento: ");
+    String nombre = lector.readLine();
+    System.out.print("Ingresa el nombre del propietario del emprendimiento: ");
+    String propietario = lector.readLine();
+    System.out.print("Ingresa el area a la que se dedica el emprendimiento: ");
+    String area = lector.readLine();
+    System.out.print("Ingrese cuantos empleados tiene el emprendimiento: ");
+    int empleados = Integer.parseInt(lector.readLine());
+    System.out.print("Ingrese el capital inicial del emprendimiento: ");
+    int capital = Integer.parseInt(lector.readLine());
+    System.out.print("Ingrese el monto de los apoyos que tiene el emprendimiento: ");
+    int montoApoyo = Integer.parseInt(lector.readLine());
+
+    RecursosApoyos recursosYApoyos = new RecursosApoyos(empleados, capital, montoApoyo);
+    Emprendimiento nuevoEmprendimiento = new Emprendimiento(nombre, propietario, area, recursosYApoyos);
+    if (mapa.get(nombre) == null)
     {
-      if (!mapa.containsKey(clave))
-      {
-        mapa.put(clave,aux);
-      }
-      else
-      {
-        System.out.println("Ya se encuentra en el mapa");
-      }
+      mapa.put(nombre, nuevoEmprendimiento);
+      System.out.println("Se agrego el emprendimiento " + nombre + " al registro");
     }
-  public String buscarPorNombre( String name)
+    else
     {
-      if (mapa.containsKey(name))
-      {
-        Emprendimiento aux = mapa.get(name);
-        return "Nombre: " + aux.getNombre() + ", Propietario: " + aux.getPropietario();
-      }
-      else
-      {
-        return "No se encontro el nombre del emprendimiento";
-      }  
+      System.out.println("\nYa existe un emprendimiento con el nombre registro " + nombre);
     }
+  }
 
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
   {
