@@ -78,6 +78,7 @@ public class Main
           Emprendimiento emprendimiento = mapa.get(aBuscar);
           if (emprendimiento != null)
           {
+            System.out.println("Se ha encontrado un emprendimiento\n");
             menuEmprendimiento(emprendimiento);
             emprendimiento.info();
           }
@@ -100,13 +101,13 @@ public class Main
           }
           break;
         case 4:
-          emprendedor1 = new Emprendimiento("Juan    Perez","Samsung","Telefonia Movil");
+          emprendedor1 = new Emprendimiento("Samsung","Juan    Perez","Frabicante celulares");
           proyecto1 = new Proyecto("Nuevo Samsung","Xi ping",20,20000,"Activo");
           emprendedor1.insertarProyecto(proyecto1);
-          emprendedor2 = new Emprendimiento("Jose Mena","Entel","Movil");
+          emprendedor2 = new Emprendimiento("Entel","Jose Mena","Telecomunicaciones");
           proyecto2 = new Proyecto("Arreglar internet","Franny",21,30000,"Activo");
-          registrarMapa("Juan Perez",emprendedor1);
-          registrarMapa("Jose Mena",emprendedor2);
+          mapa.put(emprendedor1.getNombre(),emprendedor1);
+          mapa.put(emprendedor2.getNombre(),emprendedor2);
           break;
         case 5:
           System.out.print("Saliendo del programa...");
@@ -154,7 +155,7 @@ public class Main
       System.out.println("    Menu emprendimiento");
       System.out.println("============================");
       emprendimiento.info();
-      System.out.println("1) Cambiar propietario");
+      System.out.println("\n1) Cambiar propietario");
       System.out.println("2) Cambiar area de emprendimiento");
       System.out.println("3) Modificar total de empleados");
       System.out.println("4) Modificar capital");
@@ -178,6 +179,7 @@ public class Main
         case 5:
           break;
         case 6:
+          emprendimiento.verProyectos();
           break;
         case 7:
           break;
@@ -186,6 +188,9 @@ public class Main
         default:
           break;
       }
+      System.out.print("Presiona Enter para continuar...");
+      lector.readLine();
     } while (opcion != 8);
+    
   }
 }
