@@ -53,17 +53,7 @@ public class Main
           buscarEmprendimiento(mapa);
           break;
         case 3:
-          System.out.print("Ingrese el nombre del emprendimiento a eliminar: ");
-          String aEliminar = lector.readLine();
-
-          if (mapa.remove(aEliminar) != null)
-          {
-            System.out.println("Se ha eliminado " + aEliminar + "del registro de emprendedores");
-          }
-          else
-          {
-            System.out.println("No se ha encontrado " + aEliminar + "en el registro de emprendedores para eliminarlo");
-          }
+          eliminarEmprendimiento(mapa);
           break;
         case 4:
           emprendedor1 = new Emprendimiento("Samsung","Juan    Perez","Frabicante celulares");
@@ -126,6 +116,20 @@ public class Main
     else
     {
       System.out.println("No se ha encontrado ningun emprendimiento registrado con el nombre de " + aBuscar);
+    }
+  }
+  public void eliminarEmprendimiento(HashMap<String, Emprendimiento> mapa) throws IOException
+  {
+    System.out.print("Ingrese el nombre del emprendimiento a eliminar: ");
+    String aEliminar = lector.readLine();
+
+    if (mapa.remove(aEliminar) != null)
+    {
+      System.out.println("Se ha eliminado " + aEliminar + "del registro de emprendedores");
+    }
+    else
+    {
+      System.out.println("No se ha encontrado " + aEliminar + "en el registro de emprendedores para eliminarlo");
     }
   }
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
