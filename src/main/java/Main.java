@@ -182,6 +182,17 @@ public class Main
           emprendimiento.verProyectos();
           break;
         case 7:
+          System.out.print("Ingrese el nombre del proyecto a buscar: ");
+          String aBuscar = lector.readLine();
+          Proyecto proyecto = emprendimiento.getProyecto(aBuscar);
+          if (proyecto == null)
+          {
+            System.out.println("No se ha encontrado el proyecto " + aBuscar);
+          }
+          else
+          {
+            menuProyecto(proyecto);
+          }
           break;
         case 8:
           break;
@@ -191,6 +202,45 @@ public class Main
       System.out.print("Presiona Enter para continuar...");
       lector.readLine();
     } while (opcion != 8);
-    
+  }
+  public void menuProyecto(Proyecto proyecto) throws IOException
+  {
+    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+    int opcion = -1;
+    do
+    {  
+      System.out.println("============================");
+      System.out.println("        Menu proyecto");
+      System.out.println("============================");
+      proyecto.info();
+      System.out.println("\n1) Cambiar nombre de proyecto");
+      System.out.println("2) Cambiar encargado de proyecto");
+      System.out.println("3) Modificar personal requerido");
+      System.out.println("4) Modificar costo del proyecto");
+      System.out.println("5) Modificar estado del proyecto");
+      System.out.println("6) Volver menu emprendimiento\n");
+      System.out.print("Ingrese una opcion: ");
+
+      opcion = Integer.parseInt(lector.readLine());
+      switch (opcion)
+      {
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+        case 5:
+          break;
+        case 6:
+          break;
+        default:
+          break;
+      }
+      System.out.print("Presiona Enter para continuar...");
+      lector.readLine();
+    } while (opcion != 6);
   }
 }
