@@ -64,7 +64,7 @@ public class Main
           if (mapa.get(nombre) == null)
           {
             mapa.put(nombre, nuevoEmprendimiento);
-            System.out.println("Se agrego el emprendimiento " + nombre + "al registro");
+            System.out.println("Se agrego el emprendimiento " + nombre + " al registro");
           }
           else
           {
@@ -79,6 +79,7 @@ public class Main
           if (emprendimiento != null)
           {
             menuEmprendimiento(emprendimiento);
+            emprendimiento.info();
           }
           else
           {
@@ -91,11 +92,11 @@ public class Main
 
           if (mapa.remove(aEliminar) != null)
           {
-            System.out.print("Se ha eliminado " + aEliminar + "del registro de emprendedores");
+            System.out.println("Se ha eliminado " + aEliminar + "del registro de emprendedores");
           }
           else
           {
-            System.out.print("No se ha encontrado " + aEliminar + "en el registro de emprendedores para eliminarlo");
+            System.out.println("No se ha encontrado " + aEliminar + "en el registro de emprendedores para eliminarlo");
           }
           break;
         case 4:
@@ -153,7 +154,7 @@ public class Main
       System.out.println("    Menu emprendimiento");
       System.out.println("============================");
       emprendimiento.info();
-      System.out.println("\n1) Cambiar propietario");
+      System.out.println("1) Cambiar propietario");
       System.out.println("2) Cambiar area de emprendimiento");
       System.out.println("3) Modificar total de empleados");
       System.out.println("4) Modificar capital");
