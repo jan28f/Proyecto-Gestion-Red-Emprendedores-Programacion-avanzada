@@ -5,7 +5,7 @@ public class Proyecto
     private int personalRequerido;
     private int costoEstimado;
     private String estadoActual;
-    public Proyecto(String nombreProyecto,String encargado,int personalRequerido, int costoEstimado, String estadoActual)
+    public Proyecto(String nombreProyecto,String encargado,int personalRequerido, int  costoEstimado, String estadoActual)
     {
       this.nombreProyecto = nombreProyecto;
       this.encargado = encargado;
@@ -30,7 +30,7 @@ public class Proyecto
     {
       return costoEstimado;
     }
-    public int getEstadoActual()
+    public String getEstadoActual()
     {
       return estadoActual;
     }
