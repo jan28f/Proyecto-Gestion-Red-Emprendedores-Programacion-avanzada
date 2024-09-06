@@ -175,7 +175,7 @@ public class Main
           break;
         case 2:
           System.out.println("Indica una nueva area de emprendimiento");
-          String nuevaArea = lector.readLine(lector);
+          String nuevaArea = lector.readLine();
           System.out.println("Se ha cambiado con exito");
           emprendimiento.setArea(nuevaArea);
           System.out.println("Se ha cambiado con exito");
