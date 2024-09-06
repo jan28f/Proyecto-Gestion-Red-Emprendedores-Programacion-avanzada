@@ -148,6 +148,17 @@ public class Main
     emprendedor3.insertarProyecto(proyecto3);
     mapa.put(emprendedor3.getNombre(), emprendedor3);
     System.out.println("Se ha registrado el emprendimiento " + emprendedor3.getNombre());
+
+    Emprendimiento emprendedor4 = new Emprendimiento("Microsoft","Freddy","Desarrollador Sofware");
+    Proyecto proyecto4 = new Proyecto("Desarollar windows 12","Sebastian",150,5000000,"Activo");
+    Proyecto proyecto5 = new Proyecto("Agregar un nuevo parche a window","Fabian",75,2300000,"Activo");
+    Proyecto proyecto6 = new Proyecto("Desarrollar la interfaz de la nueva xbox","Dario",100,3000000,"Activo");
+    emprendedor4.insertarProyecto(proyecto4);
+    emprendedor4.insertarProyecto(proyecto5);
+    emprendedor4.insertarProyecto(proyecto6);
+    mapa.put(emprendedor4.getNombre(),emprendedor3);
+    System.out.println("Se ha registrado el emprendimiento " + emprendedor4.getNombre());
+    
   }
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
   {
