@@ -53,6 +53,18 @@ public class Emprendimiento
     {
       this.area = area;
     }
+    public void setRecursosYapoyosEmpleados(int totalApoyo)
+    {
+      this.recursosYapoyo.setTotalEmpleados(totalApoyo);
+    }
+    public void setRecursosYapoyosCapital(int capital)
+    {
+       this.recursosYapoyo.setCapital(capital); 
+    }
+    public void setRecursosYapoyosMonto(int montoApoyo)
+    {
+      this.recursosYapoyo.setMontoApoyo(montoApoyo);
+    }
     
     public void insertarProyecto(Proyecto project)
     {
