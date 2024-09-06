@@ -168,14 +168,38 @@ public class Main
       switch (opcion)
       {
         case 1:
+          System.out.println("Indica el nuevo propietario");
+          String nuevoPropietario = lector.readLine();
+          emprendimiento.setPropietario(nuevoPropietario);
+          System.out.println("Se ha cambiado con exito");
           break;
         case 2:
+          System.out.println("Indica una nueva area de emprendimiento");
+          String nuevaArea = lector.readLine(lector);
+          System.out.println("Se ha cambiado con exito");
+          emprendimiento.setArea(nuevaArea);
+          System.out.println("Se ha cambiado con exito");
           break;
         case 3:
+          System.out.println("Indica una nueva cantidad de empleados");
+          String numero1 = lector.readLine();
+          int nuevoTotalEmpleados = Integer.parseInt(numero1);
+          emprendimiento.recursosYapoyo.setTotalEmpleados(nuevoTotalEmpleados);
+          System.out.println("Se ha cambiado con exito");
           break;
         case 4:
+          System.out.println("Indica una nueva Capital");
+          String numero2 = lector.readLine();
+          int nuevoCapital = Integer.parseInt(numero2);
+          emprendimiento.recursosYapoyo.setCapital(nuevoCapital);
+          System.out.println("Se ha cambiado con exito");
           break;
         case 5:
+          System.out.println("Indica un nuevo total de apoyo");
+          String numero3 = lector.readLine()
+          int nuevoTotalApoyo = Integer.parseInt(numero3);
+          set.recusosYapoyo.setMontoApoyo(nuevoTotalApoyo);
+          System.out.println("Se ha cambiado con exito");
           break;
         case 6:
           emprendimiento.verProyectos();
