@@ -184,21 +184,21 @@ public class Main
           System.out.println("Indica una nueva cantidad de empleados");
           String numero1 = lector.readLine();
           int nuevoTotalEmpleados = Integer.parseInt(numero1);
-          emprendimiento.recursosYapoyo.setTotalEmpleados(nuevoTotalEmpleados);
+          emprendimiento.setRecursosYapoyosEmpleados(nuevoTotalEmpleados);
           System.out.println("Se ha cambiado con exito");
           break;
         case 4:
           System.out.println("Indica una nueva Capital");
           String numero2 = lector.readLine();
           int nuevoCapital = Integer.parseInt(numero2);
-          emprendimiento.recursosYapoyo.setCapital(nuevoCapital);
+          emprendimiento.setRecursosYapoyosCapital(nuevoCapital);
           System.out.println("Se ha cambiado con exito");
           break;
         case 5:
           System.out.println("Indica un nuevo total de apoyo");
-          String numero3 = lector.readLine()
+          String numero3 = lector.readLine();
           int nuevoTotalApoyo = Integer.parseInt(numero3);
-          set.recusosYapoyo.setMontoApoyo(nuevoTotalApoyo);
+          emprendimiento.setRecursosYapoyosMonto(nuevoTotalApoyo);
           System.out.println("Se ha cambiado con exito");
           break;
         case 6:
