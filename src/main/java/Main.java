@@ -64,10 +64,11 @@ public class Main
           if (mapa.get(nombre) == null)
           {
             mapa.put(nombre, nuevoEmprendimiento);
+            System.out.println("Se agrego el emprendimiento " + nombre + "al registro");
           }
           else
           {
-            System.out.print("\nYa existe un emprendimiento con el nombre registro " + nombre);
+            System.out.println("\nYa existe un emprendimiento con el nombre registro " + nombre);
           }
           break;
         case 2:
@@ -77,7 +78,7 @@ public class Main
           Emprendimiento emprendimiento = mapa.get(aBuscar);
           if (emprendimiento != null)
           {
-            emprendimiento.info();
+            menuEmprendimiento(emprendimiento);
           }
           else
           {
@@ -151,7 +152,8 @@ public class Main
       System.out.println("============================");
       System.out.println("    Menu emprendimiento");
       System.out.println("============================");
-      System.out.println("1) Cambiar propietario");
+      emprendimiento.info();
+      System.out.println("\n1) Cambiar propietario");
       System.out.println("2) Cambiar area de emprendimiento");
       System.out.println("3) Modificar total de empleados");
       System.out.println("4) Modificar capital");
