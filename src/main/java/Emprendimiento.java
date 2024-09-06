@@ -36,6 +36,10 @@ public class Emprendimiento
     public String getArea()
     {
       return area;
+    }
+    public RecursosApoyos getRecursosYApoyo()
+    {
+      return recursosYapoyo;
     }  
     //Setter
     public void setNombre(String nombre)
