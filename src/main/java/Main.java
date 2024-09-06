@@ -121,22 +121,33 @@ public class Main
   }
   public void cargarCasosPrueba(HashMap<String, Emprendimiento> mapa) throws IOException
   {
-    Emprendimiento emprendedor1;
-    Proyecto proyecto1;
-    Emprendimiento emprendedor2;
-    Proyecto proyecto2;
-    Emprendimiento emprendedor3;
-    Proyecto proyecto3;
-    emprendedor1 = new Emprendimiento("Samsung","Juan Perez","");
-    proyecto1 = new Proyecto("Nuevo celular","Xi ping",20,20000,"Activo");
+    Emprendimiento emprendedor1 = new Emprendimiento("Samsung", "Juan Perez", "Tecnología");
+    Proyecto proyecto1 = new Proyecto("Nuevo Celular", "Xi Ping", 15, 50000, "Activo");
+    Proyecto proyecto2 = new Proyecto("Investigación 5G", "Ana Lopez", 10, 70000, "Activo");
+    Proyecto proyecto3 = new Proyecto("Expansión Global", "Pedro Martinez", 8, 60000, "Planificado");
     emprendedor1.insertarProyecto(proyecto1);
-    emprendedor2 = new Emprendimiento("Entel","Jose Mena","Telecomunicaciones");
-    proyecto2 = new Proyecto("Arreglar internet","Franny",21,30000,"Activo");
-    mapa.put(emprendedor1.getNombre(),emprendedor1);
-    System.out.println("Se ha registrado la empresa " + emprendedor1.getNombre());
-    mapa.put(emprendedor2.getNombre(),emprendedor2);
-    System.out.println("Se ha registrado la empresa " + emprendedor2.getNombre());
+    emprendedor1.insertarProyecto(proyecto2);
+    emprendedor1.insertarProyecto(proyecto3);
+    mapa.put(emprendedor1.getNombre(), emprendedor1);
+    System.out.println("Se ha registrado el emprendimiento " + emprendedor1.getNombre());
 
+    Emprendimiento emprendedor2 = new Emprendimiento("Entel", "Jose Mena", "Telecomunicaciones");
+    proyecto1 = new Proyecto("Arreglar Internet", "Franny Garcia", 20, 30000, "Activo");
+    proyecto2 = new Proyecto("Expansión Fibra Óptica", "Luis Morales", 15, 50000, "En Progreso");
+    emprendedor2.insertarProyecto(proyecto1);
+    emprendedor2.insertarProyecto(proyecto2);
+    mapa.put(emprendedor2.getNombre(), emprendedor2);
+    System.out.println("Se ha registrado el emprendimiento " + emprendedor2.getNombre());
+
+    Emprendimiento emprendedor3 = new Emprendimiento("EcoEnergy", "Laura Ruiz", "Energía Renovable");
+    proyecto1 = new Proyecto("Planta Solar", "Carlos Fernandez", 25, 100000, "Planificado");
+    proyecto2 = new Proyecto("Energía Eólica", "Sandra Lima", 20, 80000, "Activo");
+    proyecto3 = new Proyecto("Planta de Biomasa", "Manuel Diaz", 18, 70000, "En Progreso");
+    emprendedor3.insertarProyecto(proyecto1);
+    emprendedor3.insertarProyecto(proyecto2);
+    emprendedor3.insertarProyecto(proyecto3);
+    mapa.put(emprendedor3.getNombre(), emprendedor3);
+    System.out.println("Se ha registrado el emprendimiento " + emprendedor3.getNombre());
   }
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
   {
