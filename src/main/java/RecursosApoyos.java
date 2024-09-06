@@ -26,6 +26,10 @@ public class RecursosApoyos
     public void setTotalEmpleados(int totalEmpleados)
       {
         this.totalEmpleados = totalEmpleados;
+        if (this.totalEmpleados < 1)
+        {
+          this.totalEmpleados = 1;
+        }
       }
 
     public void setMontoApoyo(int montoApoyo)
