@@ -61,7 +61,14 @@ public class Main
 
           RecursosApoyos recursosYApoyos = new RecursosApoyos(empleados, capital, montoApoyo);
           Emprendimiento nuevoEmprendimiento = new Emprendimiento(nombre, propietario, area, recursosYApoyos);
-          mapa.put(nombre, nuevoEmprendimiento);
+          if (mapa.get(nombre) == null)
+          {
+            mapa.put(nombre, nuevoEmprendimiento);
+          }
+          else
+          {
+            System.out.print("\nYa existe un emprendimiento con el nombre registro " + nombre);
+          }
           break;
         case 2:
           System.out.print("Ingresa el nombre del emprendimiento a buscar: ");
