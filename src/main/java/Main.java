@@ -58,11 +58,31 @@ public class Main
           int capital = Integer.parseInt(lector.readLine());
           System.out.print("Ingrese el monto de los apoyos que tiene el emprendimiento: ");
           int montoApoyo = Integer.parseInt(lector.readLine());
+
           RecursosApoyos recursosYApoyos = new RecursosApoyos(empleados, capital, montoApoyo);
           Emprendimiento nuevoEmprendimiento = new Emprendimiento(nombre, propietario, area, recursosYApoyos);
           mapa.put(nombre, nuevoEmprendimiento);
           break;
         case 2:
+          System.out.print("Ingresa el nombre del emprendimiento a buscar: ");
+          String aBuscar = lector.readLine();
+
+          Emprendimiento emprendimiento = mapa.get(aBuscar);
+          if (emprendimiento != null)
+          {
+            System.out.println("Se ha encontrado un emprendimiento\n");
+            System.out.print("Nombre del emprendimiento: " + emprendimiento.getNombre());
+            System.out.println("Propietario del emprendimiento: " + emprendimiento.getPropietario());
+            System.out.println("Area de trabajo del emprendimiento: " + emprendimiento.getArea());
+            RecursosApoyos recursosApoyos = emprendimiento.getRecursosYApoyo();
+            System.out.println("Empleados del emprendimiento: " + recursosApoyos.getTotalEmpleados());
+            System.out.println("Capital monetario del emprendimiento: " + recursosApoyos.getCapital());
+            System.out.println("Total de apoyo monetario del emprendimiento: " + recursosApoyos.getMontoApoyo());
+          }
+          else
+          {
+            System.out.println("No se ha encontrado ningun emprendimiento registrado con el nombre de " + aBuscar);
+          }
           break;
         case 3:
           break;
