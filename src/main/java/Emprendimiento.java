@@ -16,6 +16,14 @@ public class Emprendimiento
       this.recursosYapoyo = new RecursosApoyos(5,100000,20000);
       this.area = area;
     }
+    public Emprendimiento(String nombre, String propietario , String area, RecursosApoyos recursosApoyos)
+    {
+      this.nombre = nombre;
+      this.propietario = propietario;
+      proyectos = new ArrayList<Proyecto>();
+      this.recursosYapoyo = recursosApoyos;
+      this.area = area;
+    }
     //Getters
     public String getNombre()
     {
