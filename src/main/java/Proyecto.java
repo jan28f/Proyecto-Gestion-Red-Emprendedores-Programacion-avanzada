@@ -4,6 +4,7 @@ public class Proyecto
     private String encargado;
     private int personalRequerido;
     private int costoEstimado;
+    private int ganancias;
     private String estadoActual;
     public Proyecto(String nombreProyecto,String encargado,int personalRequerido, int  costoEstimado, String estadoActual)
     {
@@ -30,6 +31,10 @@ public class Proyecto
     {
       return costoEstimado;
     }
+    public int getGanancias()
+    {
+      return ganancias;
+    }
     public String getEstadoActual()
     {
       return estadoActual;
@@ -51,6 +56,10 @@ public class Proyecto
     {
       this.costoEstimado = costoEstimado;
     }
+    public void setGanancias(int ganancias)
+    {
+      this.ganancias = ganancias;
+    }
     public void setEstadoActual(String estadoActual)
     {
       this.estadoActual = estadoActual;
@@ -63,5 +72,17 @@ public class Proyecto
       System.out.println("Costo: " + costoEstimado);
       System.out.println("Personal: " + personalRequerido);
       System.out.println("Estado: " + estadoActual);
+    }
+    public int registrarGanancias(int ganancias)
+    {
+      int beneficios = ganancias - ganancias;
+      this.ganancias +=  ganancias;
+      if (this.ganancias < 0)
+      {
+        estadoActual = "Cancelado";
+        System.out.println("Se ha cancelado el proyecto debido a las perdidas");
+      }
+
+      return beneficios;
     }
   }  
