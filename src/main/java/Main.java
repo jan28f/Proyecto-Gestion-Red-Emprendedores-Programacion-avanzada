@@ -186,8 +186,10 @@ public class Main
       System.out.println("5) Modificar total apoyo");
       System.out.println("6) Ver resultados y crecimiento");
       System.out.println("7) Ver proyectos");
-      System.out.println("8) Buscar proyecto");
-      System.out.println("9) Volver menu principal\n");
+      System.out.println("8) Registrar proyecto");
+      System.out.println("9) Buscar proyecto");
+      System.out.println("10) Eliminar proyecto");
+      System.out.println("11) Volver menu principal\n");
       System.out.print("Ingrese una opcion: ");
 
       opcion = Integer.parseInt(lector.readLine());
@@ -235,6 +237,17 @@ public class Main
           emprendimiento.verProyectos();
           break;
         case 8:
+          System.out.print("Ingrese el nombre del proyecto: ");
+          String nombre = lector.readLine();
+          System.out.print("Ingrese el encargado del proyecto: ");
+          String encargado = lector.readLine();
+          System.out.print("Ingrese el personal del proyecto: ");
+          int personal = Integer.parseInt(lector.readLine());
+          System.out.print("Ingrese el costo del proyecto: ");
+          int costo = Integer.parseInt(lector.readLine());
+          emprendimiento.insertarProyecto(nombre, encargado, personal, costo);
+          break;
+        case 9:
           System.out.print("Ingrese el nombre del proyecto a buscar: ");
           String aBuscar = lector.readLine();
           Proyecto proyecto = emprendimiento.getProyecto(aBuscar);
@@ -247,14 +260,19 @@ public class Main
             menuProyecto(proyecto);
           }
           break;
-        case 9:
+        case 10:
+          System.out.print("Ingrese el nombre del proyecto a eliminar: ");
+          String aEliminar = lector.readLine();
+          emprendimiento.eliminarProyecto(aEliminar);
+          break;
+        case 11:
           break;
         default:
           break;
       }
       System.out.print("Presiona Enter para continuar...");
       lector.readLine();
-    } while (opcion != 9);
+    } while (opcion != 11);
   }
   public void menuProyecto(Proyecto proyecto) throws IOException
   {

@@ -14,6 +14,14 @@ public class Proyecto
       this.costoEstimado = costoEstimado;
       this.estadoActual = estadoActual;
     }
+    public Proyecto(String nombreProyecto,String encargado,int personalRequerido, int  costoEstimado)
+    {
+      this.nombreProyecto = nombreProyecto;
+      this.encargado = encargado;
+      this.personalRequerido = personalRequerido;
+      this.costoEstimado = costoEstimado;
+      this.estadoActual = "Activo";
+    }
     //Getter
     public String getNombreProyecto()
     {

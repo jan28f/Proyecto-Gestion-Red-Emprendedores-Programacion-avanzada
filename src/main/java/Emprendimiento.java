@@ -87,6 +87,33 @@ public class Emprendimiento
       System.out.println("Se ha agregado el proyecto de forma correcta");
     }
   }
+  public void insertarProyecto(String nombre, String encargado, int personal, int costo)
+  {
+    for (int i = 0 ;  i < proyectos.size() ; i++)
+    {
+      if (proyectos.get(i).getNombreProyecto().equals(nombre)) 
+      {
+        System.out.println("El proyecto ya se encuentra");
+        return;
+      }
+    }
+    Proyecto nuevoProyecto = new Proyecto(nombre, encargado, personal, costo);
+    proyectos.add(nuevoProyecto);
+    System.out.println("Se ha agregado el proyecto de forma correcta");
+  }
+  public void eliminarProyecto(String aEliminar)
+  {
+    for (int i = 0 ; i < proyectos.size() ; i++)
+    {
+      if (proyectos.get(i).getNombreProyecto().equals(aEliminar))
+      {
+        proyectos.remove(i);
+        System.out.println("Se ha eliminado el proyecto " + aEliminar);
+        return;
+      }
+    }
+    System.out.println("No se ha encontrado " + aEliminar);
+  }
   public void info()
   {
     System.out.println("Nombre del emprendimiento: " + nombre);
