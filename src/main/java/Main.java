@@ -77,14 +77,7 @@ public class Main
           Emprendimiento emprendimiento = mapa.get(aBuscar);
           if (emprendimiento != null)
           {
-            System.out.println("Se ha encontrado un emprendimiento\n");
-            System.out.print("Nombre del emprendimiento: " + emprendimiento.getNombre());
-            System.out.println("Propietario del emprendimiento: " + emprendimiento.getPropietario());
-            System.out.println("Area de trabajo del emprendimiento: " + emprendimiento.getArea());
-            RecursosApoyos recursosApoyos = emprendimiento.getRecursosYApoyo();
-            System.out.println("Empleados del emprendimiento: " + recursosApoyos.getTotalEmpleados());
-            System.out.println("Capital monetario del emprendimiento: " + recursosApoyos.getCapital());
-            System.out.println("Total de apoyo monetario del emprendimiento: " + recursosApoyos.getMontoApoyo());
+            emprendimiento.info();
           }
           else
           {
@@ -124,6 +117,7 @@ public class Main
       } while (opcion != 5);
     lector.close();
   }
+
   public void registrarMapa(String clave, Emprendimiento aux)
     {
       if (!mapa.containsKey(clave))
@@ -148,4 +142,47 @@ public class Main
       }  
     }
 
+  public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
+  {
+    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+    int opcion = -1;
+    do
+    {  
+      System.out.println("============================");
+      System.out.println("    Menu emprendimiento");
+      System.out.println("============================");
+      System.out.println("1) Cambiar propietario");
+      System.out.println("2) Cambiar area de emprendimiento");
+      System.out.println("3) Modificar total de empleados");
+      System.out.println("4) Modificar capital");
+      System.out.println("5) Modificar total apoyo");
+      System.out.println("6) Ver proyectos");
+      System.out.println("7) Buscar proyecto");
+      System.out.println("8) Volver menu principal\n");
+      System.out.print("Ingrese una opcion: ");
+
+      opcion = Integer.parseInt(lector.readLine());
+      switch (opcion)
+      {
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+        case 5:
+          break;
+        case 6:
+          break;
+        case 7:
+          break;
+        case 8:
+          break;
+        default:
+          break;
+      }
+    } while (opcion != 8);
+  }
 }

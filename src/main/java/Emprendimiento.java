@@ -73,5 +73,15 @@ public class Emprendimiento
         System.out.println("Se ha agregado el proyecto de forma correcta");
       }
     }
-    
+    public void info()
+    {
+      System.out.println("Se ha encontrado un emprendimiento\n");
+      System.out.print("Nombre del emprendimiento: " + nombre);
+      System.out.println("Propietario del emprendimiento: " + propietario);
+      System.out.println("Area de trabajo del emprendimiento: " + area);
+      RecursosApoyos recursosApoyos = this.getRecursosYApoyo();
+      System.out.println("Empleados del emprendimiento: " + recursosApoyos.getTotalEmpleados());
+      System.out.println("Capital monetario del emprendimiento: " + recursosApoyos.getCapital());
+      System.out.println("Total de apoyo monetario del emprendimiento: " + recursosApoyos.getMontoApoyo());
+    }
   }  
