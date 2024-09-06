@@ -21,13 +21,6 @@ public class Main
 
   public void menuPrincipal() throws IOException
   {
-    Emprendimiento emprendedor1;
-    Proyecto proyecto1;
-    Emprendimiento emprendedor2;
-    Proyecto proyecto2;
-    Emprendimiento emprendedor3;
-    Proyecto proyecto3;
-
     int opcion = -1;
     do
     {
@@ -56,13 +49,7 @@ public class Main
           eliminarEmprendimiento(mapa);
           break;
         case 4:
-          emprendedor1 = new Emprendimiento("Samsung","Juan    Perez","Frabicante celulares");
-          proyecto1 = new Proyecto("Nuevo Samsung","Xi ping",20,20000,"Activo");
-          emprendedor1.insertarProyecto(proyecto1);
-          emprendedor2 = new Emprendimiento("Entel","Jose Mena","Telecomunicaciones");
-          proyecto2 = new Proyecto("Arreglar internet","Franny",21,30000,"Activo");
-          mapa.put(emprendedor1.getNombre(),emprendedor1);
-          mapa.put(emprendedor2.getNombre(),emprendedor2);
+          cargarCasosPrueba(mapa);
           break;
         case 5:
           System.out.print("Saliendo del programa...");
@@ -131,6 +118,22 @@ public class Main
     {
       System.out.println("No se ha encontrado " + aEliminar + "en el registro de emprendedores para eliminarlo");
     }
+  }
+  public void cargarCasosPrueba(HashMap<String, Emprendimiento> mapa) throws IOException
+  {
+    Emprendimiento emprendedor1;
+    Proyecto proyecto1;
+    Emprendimiento emprendedor2;
+    Proyecto proyecto2;
+    Emprendimiento emprendedor3;
+    Proyecto proyecto3;
+    emprendedor1 = new Emprendimiento("Samsung","Juan    Perez","Frabicante celulares");
+    proyecto1 = new Proyecto("Nuevo Samsung","Xi ping",20,20000,"Activo");
+    emprendedor1.insertarProyecto(proyecto1);
+    emprendedor2 = new Emprendimiento("Entel","Jose Mena","Telecomunicaciones");
+    proyecto2 = new Proyecto("Arreglar internet","Franny",21,30000,"Activo");
+    mapa.put(emprendedor1.getNombre(),emprendedor1);
+    mapa.put(emprendedor2.getNombre(),emprendedor2);
   }
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
   {
