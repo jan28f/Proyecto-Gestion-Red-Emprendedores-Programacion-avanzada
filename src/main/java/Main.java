@@ -5,8 +5,14 @@ import java.io.InputStreamReader;
 
 public class Main
 {
+  HashMap <String,Emprendimiento> mapa;
+  public Main()
+  {
+    this.mapa = new HashMap<>();
+  }
   public static void main(String [] args) throws IOException
-  {  
+  {
+    
     Main app = new Main();
     app.menuPrincipal();
   }
@@ -39,10 +45,13 @@ public class Main
       switch(opcion)
       {
         case 1:
-          emprendedor1 = new Emprendimiento("Juan Perez","Samsung","Telefonia Movil");
-          proyecto1 = new Proyecto("Nuevo Samsung","Xi ping",20000,"Activo");
+          emprendedor1 = new Emprendimiento("Juan    Perez","Samsung","Telefonia Movil");
+          proyecto1 = new Proyecto("Nuevo Samsung","Xi ping",20,20000,"Activo");
           emprendedor1.insertarProyecto(proyecto1);
-          re
+          emprendedor2 = new Emprendimiento("Jose Mena","Entel","Movil");
+          proyecto2 = new Proyecto("Arreglar internet","Franny",21,30000,"Activo");
+          registrarMapa("Juan Perez",emprendedor1);
+          registrarMapa("Jose Mena",emprendedor2);
           
 
           break;
@@ -51,7 +60,7 @@ public class Main
           
           break;
         case 3:
-              
+          System.out.println(buscarPorNombre("Jose Mena"));   
           break;
         case 4:
           break;
@@ -67,4 +76,28 @@ public class Main
       } while (opcion != 5);
     lector.close();
   }
+  public void registrarMapa(String clave, Emprendimiento aux)
+    {
+      if (!mapa.containsKey(clave))
+      {
+        mapa.put(clave,aux);
+      }
+      else
+      {
+        System.out.println("Ya se encuentra en el mapa");
+      }
+    }
+  public String buscarPorNombre( String name)
+    {
+      if (mapa.containsKey(name))
+      {
+        Emprendimiento aux = mapa.get(name);
+        return "Nombre: " + aux.getNombre() + ", Propietario: " + aux.getPropietario();
+      }
+      else
+      {
+        return "No se encontro el nombre del emprendimiento";
+      }  
+    }
+
 }
