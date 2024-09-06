@@ -34,9 +34,10 @@ public class Main
       System.out.println("============================");
       System.out.println("       Menu Principal");
       System.out.println("============================");
-      System.out.println("1) Registrar emprendimiento y proyectos");
-      System.out.println("3) Buscar emprendimiento");
-      System.out.println("2) Buscar proyecto");;
+      System.out.println("1) Registrar emprendimiento");
+      System.out.println("2) Buscar emprendimiento");
+      System.out.println("3) Eliminar emprendimiento");
+      System.out.println("4) Cargar datos de prueba");
       System.out.println("5) Salir del programa\n");
       System.out.print("Ingrese una opcion: ");
 
@@ -45,6 +46,12 @@ public class Main
       switch(opcion)
       {
         case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
           emprendedor1 = new Emprendimiento("Juan    Perez","Samsung","Telefonia Movil");
           proyecto1 = new Proyecto("Nuevo Samsung","Xi ping",20,20000,"Activo");
           emprendedor1.insertarProyecto(proyecto1);
@@ -52,27 +59,15 @@ public class Main
           proyecto2 = new Proyecto("Arreglar internet","Franny",21,30000,"Activo");
           registrarMapa("Juan Perez",emprendedor1);
           registrarMapa("Jose Mena",emprendedor2);
-          
-
-          break;
-        case 2:
-          
-          
-          break;
-        case 3:
-          System.out.println(buscarPorNombre("Jose Mena"));   
-          break;
-        case 4:
           break;
         case 5:
-          
+          System.out.print("Saliendo del programa...");
           break;
-        
         default:
           break;
         }
       System.out.print("Presiona Enter para continuar...");
-      lector.readLine();    
+      lector.readLine();
       } while (opcion != 5);
     lector.close();
   }
