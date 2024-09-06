@@ -80,7 +80,6 @@ public class Main
           {
             System.out.println("Se ha encontrado un emprendimiento\n");
             menuEmprendimiento(emprendimiento);
-            emprendimiento.info();
           }
           else
           {
@@ -225,16 +224,42 @@ public class Main
       switch (opcion)
       {
         case 1:
+          System.out.print("Ingrese el nuevo nombre del proyecto: ");
+          String nuevoNombre = lector.readLine();
+
+          proyecto.setNombreProyecto(nuevoNombre);
+          System.out.println("\nSe ha cambiado el nombre del proyecto a " + nuevoNombre);
           break;
         case 2:
+          System.out.print("Ingrese el nuevo encargado del proyecto: ");
+          String nuevoEncargado = lector.readLine();
+
+          proyecto.setEncargado(nuevoEncargado);
+          System.out.println("\nSe ha cambiado el encargado del proyecto a " + nuevoEncargado);
           break;
         case 3:
+          System.out.print("Ingrese la nueva cantidad de personal del proyecto: ");
+          int nuevoPersonal = Integer.parseInt(lector.readLine());
+
+          proyecto.setPersonalRequerido(nuevoPersonal);
+          System.out.println("\nSe ha modificado la cantidad de personal en el proyecto");
           break;
         case 4:
+          System.out.print("Ingrese el nuevo costo del proyecto: ");
+          int nuevoCosto = Integer.parseInt(lector.readLine());
+
+          proyecto.setCostoEstimado(nuevoCosto);
+          System.out.println("\nSe ha modificado el costo del proyecto");
           break;
         case 5:
+          System.out.print("Ingrese el estado actual del proyecto: ");
+          String nuevoEstado = lector.readLine();
+
+          proyecto.setEstadoActual(nuevoEstado);
+          System.out.println("\nSe ha modificado el estado del proyecto a " + nuevoEstado);
           break;
         case 6:
+          System.out.println("Volviendo al menu anterior...");
           break;
         default:
           break;
