@@ -50,19 +50,7 @@ public class Main
           registrarEmprendimiento(mapa);
           break;
         case 2:
-          System.out.print("Ingresa el nombre del emprendimiento a buscar: ");
-          String aBuscar = lector.readLine();
-
-          Emprendimiento emprendimiento = mapa.get(aBuscar);
-          if (emprendimiento != null)
-          {
-            System.out.println("Se ha encontrado un emprendimiento\n");
-            menuEmprendimiento(emprendimiento);
-          }
-          else
-          {
-            System.out.println("No se ha encontrado ningun emprendimiento registrado con el nombre de " + aBuscar);
-          }
+          buscarEmprendimiento(mapa);
           break;
         case 3:
           System.out.print("Ingrese el nombre del emprendimiento a eliminar: ");
@@ -97,7 +85,6 @@ public class Main
       } while (opcion != 5);
     lector.close();
   }
-
   public void registrarEmprendimiento(HashMap<String, Emprendimiento> mapa) throws IOException
   {
     System.out.print("Ingresa el nombre del emprendimiento: ");
@@ -125,7 +112,22 @@ public class Main
       System.out.println("\nYa existe un emprendimiento con el nombre registro " + nombre);
     }
   }
+  public void buscarEmprendimiento(HashMap<String, Emprendimiento> mapa) throws IOException
+  {
+    System.out.print("Ingresa el nombre del emprendimiento a buscar: ");
+    String aBuscar = lector.readLine();
 
+    Emprendimiento emprendimiento = mapa.get(aBuscar);
+    if (emprendimiento != null)
+    {
+      System.out.println("Se ha encontrado un emprendimiento\n");
+      menuEmprendimiento(emprendimiento);
+    }
+    else
+    {
+      System.out.println("No se ha encontrado ningun emprendimiento registrado con el nombre de " + aBuscar);
+    }
+  }
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
   {
     BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
