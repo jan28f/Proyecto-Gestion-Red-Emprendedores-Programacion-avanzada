@@ -5,8 +5,8 @@ import java.io.InputStreamReader;
 
 public class Main
 {
-  public HashMap <String, Emprendimiento> mapa;
-  public BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+  private HashMap <String, Emprendimiento> mapa;
+  private BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
   public Main()
   {
