@@ -54,5 +54,14 @@ public class Proyecto
     public void setEstadoActual(String estadoActual)
     {
       this.estadoActual = estadoActual;
-    }  
+    }
+    
+    public void info()
+    {
+      System.out.println("Nombre del proyecto: " + nombreProyecto);
+      System.out.println("Encargado: " + encargado);
+      System.out.println("Costo: " + costoEstimado);
+      System.out.println("Personal: " + personalRequerido);
+      System.out.println("Estado: " + estadoActual);
+    }
   }  
