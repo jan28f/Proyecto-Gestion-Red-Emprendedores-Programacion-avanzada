@@ -187,8 +187,8 @@ public class Main
       System.out.println("6) Ver resultados y crecimiento");
       System.out.println("7) Ver proyectos");
       System.out.println("8) Registrar proyecto");
-      System.out.println("9) Buscar proyecto");
-      System.out.println("10) Buscar proyecto");
+      System.out.println("9) Buscar proyecto por nombre");
+      System.out.println("10) Buscar proyecto por identificador");
       System.out.println("11) Eliminar proyecto");
       System.out.println("12) Volver menu principal\n");
       System.out.print("Ingrese una opcion: ");
