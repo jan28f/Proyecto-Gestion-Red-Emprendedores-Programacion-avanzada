@@ -87,7 +87,7 @@ public class Emprendimiento
       System.out.println("Se ha agregado el proyecto de forma correcta");
     }
   }
-  public void insertarProyecto(String nombre, String encargado, int personal, int costo)
+  public void insertarProyecto(int identificador, String nombre, String encargado, int personal, int costo)
   {
     for (int i = 0 ;  i < proyectos.size() ; i++)
     {
@@ -97,7 +97,7 @@ public class Emprendimiento
         return;
       }
     }
-    Proyecto nuevoProyecto = new Proyecto(nombre, encargado, personal, costo);
+    Proyecto nuevoProyecto = new Proyecto(identificador, nombre, encargado, personal, costo);
     proyectos.add(nuevoProyecto);
     System.out.println("Se ha agregado el proyecto de forma correcta");
   }
@@ -149,6 +149,18 @@ public class Emprendimiento
     {
       Proyecto proyecto = proyectos.get(i);
       if (proyecto.getNombreProyecto().equals(aBuscar))
+      {
+        return proyecto;
+      }
+    }
+    return null;
+  }
+  public Proyecto getProyecto(int aBuscar)
+  {
+    for (int i = 0 ; i < proyectos.size() ; i++)
+    {
+      Proyecto proyecto = proyectos.get(i);
+      if (proyecto.getIdentificador() == aBuscar)
       {
         return proyecto;
       }

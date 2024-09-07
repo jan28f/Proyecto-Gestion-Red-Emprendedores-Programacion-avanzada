@@ -1,20 +1,22 @@
 public class Proyecto
   {
+    private int identificador;
     private String nombreProyecto;
     private String encargado;
     private int personalRequerido;
     private int costoEstimado;
     private int ganancias;
     private String estadoActual;
-    public Proyecto(String nombreProyecto,String encargado,int personalRequerido, int  costoEstimado, String estadoActual)
+    public Proyecto(int identificador, String nombreProyecto,String encargado,int personalRequerido, int  costoEstimado, String estadoActual)
     {
+      this.identificador = identificador;
       this.nombreProyecto = nombreProyecto;
       this.encargado = encargado;
       this.personalRequerido = personalRequerido;
       this.costoEstimado = costoEstimado;
       this.estadoActual = estadoActual;
     }
-    public Proyecto(String nombreProyecto,String encargado,int personalRequerido, int  costoEstimado)
+    public Proyecto(int identificador, String nombreProyecto,String encargado,int personalRequerido, int  costoEstimado)
     {
       this.nombreProyecto = nombreProyecto;
       this.encargado = encargado;
@@ -23,6 +25,10 @@ public class Proyecto
       this.estadoActual = "Activo";
     }
     //Getter
+    public int getIdentificador()
+    {
+      return identificador;
+    }
     public String getNombreProyecto()
     {
       return nombreProyecto;
@@ -48,6 +54,10 @@ public class Proyecto
       return estadoActual;
     }
     //Setter
+    public void setIdentificador(int identificador)
+    {
+      this.identificador = identificador;
+    }
     public void setNombreProyecto(String nombreProyecto)
     {
       this.nombreProyecto = nombreProyecto;
@@ -75,6 +85,7 @@ public class Proyecto
     
     public void info()
     {
+      System.out.println("Identificador del proyecto: " + identificador);
       System.out.println("Nombre del proyecto: " + nombreProyecto);
       System.out.println("Encargado: " + encargado);
       System.out.println("Costo: " + costoEstimado);

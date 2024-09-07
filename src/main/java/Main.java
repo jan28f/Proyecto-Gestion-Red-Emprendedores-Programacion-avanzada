@@ -121,9 +121,9 @@ public class Main
   public void cargarCasosPrueba(HashMap<String, Emprendimiento> mapa) throws IOException
   {
     Emprendimiento emprendedor1 = new Emprendimiento("Samsung", "Juan Perez", "Tecnología");
-    Proyecto proyecto1 = new Proyecto("Nuevo Celular", "Xi Ping", 15, 50000, "Completado");
-    Proyecto proyecto2 = new Proyecto("Investigación 5G", "Ana Lopez", 10, 70000, "Completado");
-    Proyecto proyecto3 = new Proyecto("Expansión Global", "Pedro Martinez", 8, 60000, "En progreso");
+    Proyecto proyecto1 = new Proyecto(0201, "Nuevo Celular", "Xi Ping", 15, 50000, "Completado");
+    Proyecto proyecto2 = new Proyecto(7801, "Investigación 5G", "Ana Lopez", 10, 70000, "Completado");
+    Proyecto proyecto3 = new Proyecto(1290, "Expansión Global", "Pedro Martinez", 8, 60000, "En progreso");
     proyecto1.registrarGanancias(762500);
     proyecto2.registrarGanancias(16200);
     proyecto3.registrarGanancias(27800);
@@ -134,8 +134,8 @@ public class Main
     System.out.println("Se ha registrado el emprendimiento " + emprendedor1.getNombre());
 
     Emprendimiento emprendedor2 = new Emprendimiento("Entel", "Jose Mena", "Telecomunicaciones");
-    proyecto1 = new Proyecto("Arreglar Internet", "Franny Garcia", 20, 30000, "Completado");
-    proyecto2 = new Proyecto("Expansión Fibra Óptica", "Luis Morales", 15, 50000, "En Progreso");
+    proyecto1 = new Proyecto(9036, "Arreglar Internet", "Franny Garcia", 20, 30000, "Completado");
+    proyecto2 = new Proyecto(3901, "Expansión Fibra Óptica", "Luis Morales", 15, 50000, "En Progreso");
     proyecto1.registrarGanancias(45000);
     proyecto2.registrarGanancias(0); 
     emprendedor2.insertarProyecto(proyecto1);
@@ -144,9 +144,9 @@ public class Main
     System.out.println("Se ha registrado el emprendimiento " + emprendedor2.getNombre());
 
     Emprendimiento emprendedor3 = new Emprendimiento("EcoEnergy", "Laura Ruiz", "Energía Renovable");
-    proyecto1 = new Proyecto("Planta Solar", "Carlos Fernandez", 25, 100000, "Planificado");
-    proyecto2 = new Proyecto("Energía Eólica", "Sandra Lima", 20, 80000, "Activo");
-    proyecto3 = new Proyecto("Planta de Biomasa", "Manuel Diaz", 18, 70000, "En Progreso");
+    proyecto1 = new Proyecto(4011, "Planta Solar", "Carlos Fernandez", 25, 100000, "Planificado");
+    proyecto2 = new Proyecto(6170, "Energía Eólica", "Sandra Lima", 20, 80000, "Activo");
+    proyecto3 = new Proyecto(1052, "Planta de Biomasa", "Manuel Diaz", 18, 70000, "En Progreso");
     proyecto1.registrarGanancias(0);
     proyecto2.registrarGanancias(65000);
     proyecto3.registrarGanancias(-12700);
@@ -157,9 +157,9 @@ public class Main
     System.out.println("Se ha registrado el emprendimiento " + emprendedor3.getNombre());
 
     Emprendimiento emprendedor4 = new Emprendimiento("Microsoft","Freddy","Desarrollador Sofware");
-    Proyecto proyecto4 = new Proyecto("Desarollar windows 12","Sebastian",150,5000000,"Completado");
-    Proyecto proyecto5 = new Proyecto("Agregar un nuevo parche a window","Fabian",75,2300000,"Activo");
-    Proyecto proyecto6 = new Proyecto("Desarrollar la interfaz de la nueva xbox","Dario",100,3000000,"Activo");
+    Proyecto proyecto4 = new Proyecto(6015, "Desarollar windows 12","Sebastian",150,5000000,"Completado");
+    Proyecto proyecto5 = new Proyecto(7010, "Agregar un nuevo parche a window","Fabian",75,2300000,"Activo");
+    Proyecto proyecto6 = new Proyecto(5910, "Desarrollar la interfaz de la nueva xbox","Dario",100,3000000,"Activo");
     proyecto4.registrarGanancias(10000000);
     proyecto5.registrarGanancias(0); 
     proyecto6.registrarGanancias(-270000);
@@ -188,8 +188,9 @@ public class Main
       System.out.println("7) Ver proyectos");
       System.out.println("8) Registrar proyecto");
       System.out.println("9) Buscar proyecto");
-      System.out.println("10) Eliminar proyecto");
-      System.out.println("11) Volver menu principal\n");
+      System.out.println("10) Buscar proyecto");
+      System.out.println("11) Eliminar proyecto");
+      System.out.println("12) Volver menu principal\n");
       System.out.print("Ingrese una opcion: ");
 
       opcion = Integer.parseInt(lector.readLine());
@@ -239,13 +240,15 @@ public class Main
         case 8:
           System.out.print("Ingrese el nombre del proyecto: ");
           String nombre = lector.readLine();
+          System.out.print("Ingrese el identificador del proyecto: ");
+          int id = Integer.parseInt(lector.readLine());
           System.out.print("Ingrese el encargado del proyecto: ");
           String encargado = lector.readLine();
           System.out.print("Ingrese el personal del proyecto: ");
           int personal = Integer.parseInt(lector.readLine());
           System.out.print("Ingrese el costo del proyecto: ");
           int costo = Integer.parseInt(lector.readLine());
-          emprendimiento.insertarProyecto(nombre, encargado, personal, costo);
+          emprendimiento.insertarProyecto(id, nombre, encargado, personal, costo);
           break;
         case 9:
           System.out.print("Ingrese el nombre del proyecto a buscar: ");
@@ -261,18 +264,31 @@ public class Main
           }
           break;
         case 10:
+          System.out.print("Ingrese el identificador del proyecto a buscar: ");
+          int identificador = Integer.parseInt(lector.readLine());
+          proyecto = emprendimiento.getProyecto(identificador);
+          if (proyecto == null)
+          {
+            System.out.println("No se ha encontrado el proyecto con identificador " + identificador);
+          }
+          else
+          {
+            menuProyecto(proyecto);
+          }
+          break;
+        case 11:
           System.out.print("Ingrese el nombre del proyecto a eliminar: ");
           String aEliminar = lector.readLine();
           emprendimiento.eliminarProyecto(aEliminar);
           break;
-        case 11:
+        case 12:
           break;
         default:
           break;
       }
       System.out.print("Presiona Enter para continuar...");
       lector.readLine();
-    } while (opcion != 11);
+    } while (opcion != 12);
   }
   public void menuProyecto(Proyecto proyecto) throws IOException
   {
@@ -349,6 +365,6 @@ public class Main
       }
       System.out.print("Presiona Enter para continuar...");
       lector.readLine();
-    } while (opcion != 6);
+    } while (opcion != 7);
   }
 }
