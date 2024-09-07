@@ -326,8 +326,13 @@ public class Main
         case 5:
           System.out.print("Ingrese las ganancias del proyecto: ");
           int ganancias = Integer.parseInt(lector.readLine());
+          System.out.print("Ingrese las perdidas del proyecto: ");
+          int perdidas = Integer.parseInt(lector.readLine());
 
-          proyecto.registrarGanancias(ganancias);
+          if (perdidas == 0)
+            proyecto.registrarGanancias(ganancias);
+          else
+            proyecto.registrarGanancias(ganancias, perdidas);
           break;
         case 6:
           System.out.print("Ingrese el estado actual del proyecto: ");

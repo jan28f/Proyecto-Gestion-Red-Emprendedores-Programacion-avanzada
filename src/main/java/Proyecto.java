@@ -81,16 +81,22 @@ public class Proyecto
       System.out.println("Personal: " + personalRequerido);
       System.out.println("Estado: " + estadoActual);
     }
-    public int registrarGanancias(int ganancias)
+    public void registrarGanancias(int ganancias)
     {
-      int beneficios = ganancias - ganancias;
       this.ganancias +=  ganancias;
       if (this.ganancias < 0)
       {
         estadoActual = "Cancelado";
         System.out.println("Se ha cancelado el proyecto debido a las perdidas");
       }
-
-      return beneficios;
+    }
+    public void registrarGanancias(int ganancias, int perdidas)
+    {
+      this.ganancias += (ganancias - perdidas);
+      if (this.ganancias < 0)
+      {
+        estadoActual = "Cancelado";
+        System.out.println("Se ha cancelado el proyecto debido a las perdidas");
+      }
     }
   }  
