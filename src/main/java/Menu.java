@@ -2,14 +2,71 @@ import java.util.*;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.FileReader;
 
 public class Menu
 {
   private HashMap <String, Emprendimiento> mapa = new HashMap<String, Emprendimiento>();;
   private BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
+  public void cargarCasosPrueba() throws IOException
+  {
+    String archivoEmprendimientos = "src/main/java/datos/empPrueba.csv";
+    String archivoProyectos = "src/main/java/datos/proPrueba.csv";
+    BufferedReader lectorArchivo = new BufferedReader(new FileReader(archivoEmprendimientos));
+    String linea;
+
+    System.out.println("Cargando emprendimientos...");
+    while ((linea = lectorArchivo.readLine()) != null)
+    {
+      String[] info = linea.split(",");
+
+      String nombre = info[0];
+      String propietario = info[1];
+      String area = info[2];
+      int empleados = Integer.parseInt(info[3]);
+      int capital = Integer.parseInt(info[4]);
+      int ganancias = Integer.parseInt(info[5]);
+
+      RecursosApoyos recursosYApoyos = new RecursosApoyos(empleados, capital, ganancias);
+      Emprendimiento emprendimiento = new Emprendimiento(nombre, propietario, area, recursosYApoyos);
+      mapa.put(nombre, emprendimiento);
+      System.out.println("Se ha registrado el emprendimiento " + nombre);
+    }
+    lectorArchivo.close();
+
+    System.out.println("Cargando proyectos...");
+    lectorArchivo = new BufferedReader(new FileReader(archivoProyectos));
+    while ((linea = lectorArchivo.readLine()) != null)
+    {
+      String[] info = linea.split(",");
+
+      String nombreEmprendimiento = info[0];
+      int idProyecto = Integer.parseInt(info[1]);
+      String nombreProyecto = info[2];
+      String encargadoProyecto = info[3];
+      int personalRequerido = Integer.parseInt(info[4]);
+      int costoEstimado = Integer.parseInt(info[5]);
+      String estadoActual = info[6];
+
+      Proyecto proyecto = new Proyecto(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, estadoActual);
+      Emprendimiento emprendimiento = mapa.get(nombreEmprendimiento);
+      if (emprendimiento != null)
+      {
+        emprendimiento.insertarProyecto(proyecto);
+        System.out.println("Se ha agregado el proyecto " + nombreProyecto + " al emprendimiento " + nombreEmprendimiento);
+      }
+      else
+      {
+        System.out.println("Emprendimiento no encontrado: " + nombreEmprendimiento);
+      }
+    }
+    lectorArchivo.close();
+  }
+
   public void menuPrincipal() throws IOException
   {
+    cargarCasosPrueba();
     int opcion = -1;
     do
     {
@@ -19,8 +76,7 @@ public class Menu
       System.out.println("1) Registrar emprendimiento");
       System.out.println("2) Buscar emprendimiento");
       System.out.println("3) Eliminar emprendimiento");
-      System.out.println("4) Cargar datos de prueba");
-      System.out.println("5) Salir del programa\n");
+      System.out.println("4) Salir del programa\n");
       System.out.print("Ingrese una opcion: ");
 
       String numero = lector.readLine();
@@ -37,9 +93,6 @@ public class Menu
           eliminarEmprendimiento(mapa);
           break;
         case 4:
-          cargarCasosPrueba(mapa);
-          break;
-        case 5:
           System.out.println("Saliendo del programa...");
           break;
         default:
@@ -47,7 +100,7 @@ public class Menu
         }
       System.out.print("Presiona Enter para continuar...");
       lector.readLine();
-      } while (opcion != 5);
+      } while (opcion != 4);
     lector.close();
   }
   public void registrarEmprendimiento(HashMap<String, Emprendimiento> mapa) throws IOException
@@ -106,58 +159,6 @@ public class Menu
     {
       System.out.println("No se ha encontrado " + aEliminar + " en el registro de emprendedores para eliminarlo");
     }
-  }
-  public void cargarCasosPrueba(HashMap<String, Emprendimiento> mapa) throws IOException
-  {
-    Emprendimiento emprendedor1 = new Emprendimiento("Samsung", "Juan Perez", "Tecnología");
-    Proyecto proyecto1 = new Proyecto(0201, "Nuevo Celular", "Xi Ping", 15, 50000, "Completado");
-    Proyecto proyecto2 = new Proyecto(7801, "Investigación 5G", "Ana Lopez", 10, 70000, "Completado");
-    Proyecto proyecto3 = new Proyecto(1290, "Expansión Global", "Pedro Martinez", 8, 60000, "En progreso");
-    proyecto1.registrarGanancias(762500);
-    proyecto2.registrarGanancias(16200);
-    proyecto3.registrarGanancias(27800);
-    emprendedor1.insertarProyecto(proyecto1);
-    emprendedor1.insertarProyecto(proyecto2);
-    emprendedor1.insertarProyecto(proyecto3);
-    mapa.put(emprendedor1.getNombre(), emprendedor1);
-    System.out.println("Se ha registrado el emprendimiento " + emprendedor1.getNombre());
-
-    Emprendimiento emprendedor2 = new Emprendimiento("Entel", "Jose Mena", "Telecomunicaciones");
-    proyecto1 = new Proyecto(9036, "Arreglar Internet", "Franny Garcia", 20, 30000, "Completado");
-    proyecto2 = new Proyecto(3901, "Expansión Fibra Óptica", "Luis Morales", 15, 50000, "En Progreso");
-    proyecto1.registrarGanancias(45000);
-    proyecto2.registrarGanancias(0); 
-    emprendedor2.insertarProyecto(proyecto1);
-    emprendedor2.insertarProyecto(proyecto2);
-    mapa.put(emprendedor2.getNombre(), emprendedor2);
-    System.out.println("Se ha registrado el emprendimiento " + emprendedor2.getNombre());
-
-    Emprendimiento emprendedor3 = new Emprendimiento("EcoEnergy", "Laura Ruiz", "Energía Renovable");
-    proyecto1 = new Proyecto(4011, "Planta Solar", "Carlos Fernandez", 25, 100000, "Planificado");
-    proyecto2 = new Proyecto(6170, "Energía Eólica", "Sandra Lima", 20, 80000, "Activo");
-    proyecto3 = new Proyecto(1052, "Planta de Biomasa", "Manuel Diaz", 18, 70000, "En Progreso");
-    proyecto1.registrarGanancias(0);
-    proyecto2.registrarGanancias(65000);
-    proyecto3.registrarGanancias(-12700);
-    emprendedor3.insertarProyecto(proyecto1);
-    emprendedor3.insertarProyecto(proyecto2);
-    emprendedor3.insertarProyecto(proyecto3);
-    mapa.put(emprendedor3.getNombre(), emprendedor3);
-    System.out.println("Se ha registrado el emprendimiento " + emprendedor3.getNombre());
-
-    Emprendimiento emprendedor4 = new Emprendimiento("Microsoft","Freddy","Desarrollador Sofware");
-    Proyecto proyecto4 = new Proyecto(6015, "Desarollar windows 12","Sebastian",150,5000000,"Completado");
-    Proyecto proyecto5 = new Proyecto(7010, "Agregar un nuevo parche a window","Fabian",75,2300000,"Activo");
-    Proyecto proyecto6 = new Proyecto(5910, "Desarrollar la interfaz de la nueva xbox","Dario",100,3000000,"Activo");
-    proyecto4.registrarGanancias(10000000);
-    proyecto5.registrarGanancias(0); 
-    proyecto6.registrarGanancias(-270000);
-    emprendedor4.insertarProyecto(proyecto4);
-    emprendedor4.insertarProyecto(proyecto5);
-    emprendedor4.insertarProyecto(proyecto6);
-    mapa.put(emprendedor4.getNombre(),emprendedor3);
-    System.out.println("Se ha registrado el emprendimiento " + emprendedor4.getNombre());
-    
   }
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
   {
