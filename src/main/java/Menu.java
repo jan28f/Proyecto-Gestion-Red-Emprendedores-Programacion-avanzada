@@ -11,8 +11,8 @@ public class Menu
 
   public void cargarCasosPrueba() throws IOException
   {
-    String archivoEmprendimientos = "src/main/java/datos/empPrueba.csv";
-    String archivoProyectos = "src/main/java/datos/proPrueba.csv";
+    String archivoEmprendimientos = "datos/empPrueba.csv";
+    String archivoProyectos = "datos/proPrueba.csv";
     BufferedReader lectorArchivo = new BufferedReader(new FileReader(archivoEmprendimientos));
     String linea;
 
