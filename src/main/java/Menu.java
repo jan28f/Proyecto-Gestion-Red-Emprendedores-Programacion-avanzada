@@ -1,19 +1,17 @@
 import java.util.*;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class Menu
 {
-  private HashMap <String, Emprendimiento> mapa = new HashMap<String, Emprendimiento>();;
+  private RedEmprendedores redemprendimiento = new RedEmprendedores();
   private BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
   public void cargarCasosPrueba() throws IOException
   {
-    String archivoEmprendimientos = "datos/empPrueba.csv";
-    String archivoProyectos = "datos/proPrueba.csv";
-    BufferedReader lectorArchivo = new BufferedReader(new FileReader(archivoEmprendimientos));
+    InputStream archivoEmprendimientos = getClass().getClassLoader().getResourceAsStream("datos/emprendimientosPrueba.csv");
+    InputStream archivoProyectos = getClass().getClassLoader().getResourceAsStream("datos/proyectosPrueba.csv");
+    BufferedReader lectorArchivo = new BufferedReader(new InputStreamReader(archivoEmprendimientos));
+
     String linea;
 
     System.out.println("Cargando emprendimientos...");
@@ -28,15 +26,13 @@ public class Menu
       int capital = Integer.parseInt(info[4]);
       int ganancias = Integer.parseInt(info[5]);
 
-      RecursosApoyos recursosYApoyos = new RecursosApoyos(empleados, capital, ganancias);
-      Emprendimiento emprendimiento = new Emprendimiento(nombre, propietario, area, recursosYApoyos);
-      mapa.put(nombre, emprendimiento);
+      redemprendimiento.registrarEmprendimiento(nombre, propietario, area, empleados, capital, ganancias);
       System.out.println("Se ha registrado el emprendimiento " + nombre);
     }
     lectorArchivo.close();
 
     System.out.println("Cargando proyectos...");
-    lectorArchivo = new BufferedReader(new FileReader(archivoProyectos));
+    lectorArchivo = new BufferedReader(new InputStreamReader(archivoProyectos));
     while ((linea = lectorArchivo.readLine()) != null)
     {
       String[] info = linea.split(",");
@@ -50,7 +46,7 @@ public class Menu
       String estadoActual = info[6];
 
       Proyecto proyecto = new Proyecto(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, estadoActual);
-      Emprendimiento emprendimiento = mapa.get(nombreEmprendimiento);
+      Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(nombreEmprendimiento);
       if (emprendimiento != null)
       {
         emprendimiento.insertarProyecto(proyecto);
@@ -84,13 +80,13 @@ public class Menu
       switch(opcion)
       {
         case 1:
-          registrarEmprendimiento(mapa);
+          registrarEmprendimiento();
           break;
         case 2:
-          buscarEmprendimiento(mapa);
+          buscarEmprendimiento();
           break;
         case 3:
-          eliminarEmprendimiento(mapa);
+          eliminarEmprendimiento();
           break;
         case 4:
           System.out.println("Saliendo del programa...");
@@ -103,7 +99,7 @@ public class Menu
       } while (opcion != 4);
     lector.close();
   }
-  public void registrarEmprendimiento(HashMap<String, Emprendimiento> mapa) throws IOException
+  public void registrarEmprendimiento() throws IOException
   {
     System.out.print("Ingresa el nombre del emprendimiento: ");
     String nombre = lector.readLine();
@@ -118,47 +114,25 @@ public class Menu
     System.out.print("Ingrese el monto de los apoyos que tiene el emprendimiento: ");
     int montoApoyo = Integer.parseInt(lector.readLine());
 
-    RecursosApoyos recursosYApoyos = new RecursosApoyos(empleados, capital, montoApoyo);
-    Emprendimiento nuevoEmprendimiento = new Emprendimiento(nombre, propietario, area, recursosYApoyos);
-    if (mapa.get(nombre) == null)
-    {
-      mapa.put(nombre, nuevoEmprendimiento);
-      System.out.println("Se agrego el emprendimiento " + nombre + " al registro");
-    }
-    else
-    {
-      System.out.println("\nYa existe un emprendimiento con el nombre registro " + nombre);
-    }
+    redemprendimiento.registrarEmprendimiento(nombre, propietario, area, empleados, capital, montoApoyo);
   }
-  public void buscarEmprendimiento(HashMap<String, Emprendimiento> mapa) throws IOException
+  public void buscarEmprendimiento() throws IOException
   {
     System.out.print("Ingresa el nombre del emprendimiento a buscar: ");
     String aBuscar = lector.readLine();
 
-    Emprendimiento emprendimiento = mapa.get(aBuscar);
+    Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(aBuscar);
     if (emprendimiento != null)
     {
-      System.out.println("Se ha encontrado un emprendimiento\n");
       menuEmprendimiento(emprendimiento);
     }
-    else
-    {
-      System.out.println("No se ha encontrado ningun emprendimiento registrado con el nombre de " + aBuscar);
-    }
   }
-  public void eliminarEmprendimiento(HashMap<String, Emprendimiento> mapa) throws IOException
+  public void eliminarEmprendimiento() throws IOException
   {
     System.out.print("Ingrese el nombre del emprendimiento a eliminar: ");
     String aEliminar = lector.readLine();
 
-    if (mapa.remove(aEliminar) != null)
-    {
-      System.out.println("Se ha eliminado " + aEliminar + " del registro de emprendedores");
-    }
-    else
-    {
-      System.out.println("No se ha encontrado " + aEliminar + " en el registro de emprendedores para eliminarlo");
-    }
+    redemprendimiento.eliminarEmprendimiento(aEliminar);
   }
   public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
   {
