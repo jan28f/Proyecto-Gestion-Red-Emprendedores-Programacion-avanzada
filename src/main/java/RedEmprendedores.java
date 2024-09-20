@@ -20,7 +20,6 @@ public class RedEmprendedores
         }
         Emprendimiento emprendimiento = new Emprendimiento(nombre, propietario, area, empleados, capital, montoApoyo);
         emprendimientos.put(nombre, emprendimiento);
-
         if (emprendimientos.get(nombre) != null)
         {
             System.out.println("No se ha podido registrar " + nombre);

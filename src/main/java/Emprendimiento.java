@@ -2,215 +2,233 @@ import java.util.ArrayList;
 
 public class Emprendimiento
 {
-  private String nombre;
-  private String propietario;
-  private ArrayList <Proyecto> proyectos;
-  private RecursosApoyos recursosYapoyo;
-  private String area;
-  private float crecimiento;
+    private String nombre;
+    private String propietario;
+    private String area;
+    private RecursosApoyos recursosApoyo;
+    private ArrayList <Proyecto> proyectos;
+    private float crecimiento;
     
-  public Emprendimiento(String nombre, String propietario , String area)
-  {
-    this.nombre = nombre;
-    this.propietario = propietario;
-    proyectos = new ArrayList<Proyecto>();
-    this.recursosYapoyo = new RecursosApoyos(5,100000,20000);
-    this.area = area;
-  }
-  public Emprendimiento(String nombre, String propietario , String area, RecursosApoyos recursosApoyos)
-  {
-    this.nombre = nombre;
-    this.propietario = propietario;
-    proyectos = new ArrayList<Proyecto>();
-    this.recursosYapoyo = recursosApoyos;
-    this.area = area;
-    crecimiento = 0.0f;
-  }
-  //Getters
-  public String getNombre()
-  {
-    return nombre;
-  }
-  public String getPropietario()
-  {
-    return propietario;
-  }
-  public String getArea()
-  {
-    return area;
-  }
-  public RecursosApoyos getRecursosYApoyo()
-  {
-    return recursosYapoyo;
-  }  
-  //Setter
-  public void setNombre(String nombre)
-  {
-    this.nombre = nombre;
-  }
-  public void setPropietario(String propietario)
-  {
-    this.propietario = propietario;
-  }
-  public void setArea(String area)
-  {
-    this.area = area;
-  }
-  public void setRecursosYapoyosEmpleados(int totalApoyo)
-  {
-    this.recursosYapoyo.setTotalEmpleados(totalApoyo);
-  }
-  public void setRecursosYapoyosCapital(int capital)
-  {
-    this.recursosYapoyo.setCapital(capital); 
-  }
-  public void setRecursosYapoyosMonto(int montoApoyo)
-  {
-    this.recursosYapoyo.setMontoApoyo(montoApoyo);
-  }
+    // Constructor
+    public Emprendimiento(String nombre, String propietario , String area)
+    {
+        this.nombre = nombre;
+        this.propietario = propietario;
+        this.area = area;
+        this.recursosApoyo = new RecursosApoyos(1,0,0);
+        proyectos = new ArrayList<Proyecto>();
+    }
+    public Emprendimiento(String nombre, String propietario, String area, int empleados, int capital, int montoApoyo)
+    {
+        this.nombre = nombre;
+        this.propietario = propietario;
+        proyectos = new ArrayList<Proyecto>();
+        this.recursosApoyo = new RecursosApoyos(empleados, capital, montoApoyo);
+        this.area = area;
+        crecimiento = 0.0f;
+    }
+
+    //Getters
+    public String getNombre()
+    {
+        return nombre;
+    }
+    public String getPropietario()
+    {
+        return propietario;
+    }
+    public String getArea()
+    {
+        return area;
+    }
+    public float getCrecimiento()
+    {
+        return crecimiento;
+    }
     
-  public void insertarProyecto(Proyecto project)
-  {
-    boolean esta = false;
-    for (int i = 0 ;  i < proyectos.size() ; i++)
+    //Setter
+    public void setNombre(String nombre)
     {
-      if (proyectos.get(i).getNombreProyecto().equals(project.getNombreProyecto())) 
-      {
-        System.out.println("El proyecto ya se encuentra");
-        esta = true;
-        break;
-      }
+        this.nombre = nombre;
     }
-    if (esta == false)
+    public void setPropietario(String propietario)
     {
-      proyectos.add(project);
-      System.out.println("Se ha agregado el proyecto de forma correcta");
+        this.propietario = propietario;
     }
-  }
-  public void insertarProyecto(int identificador, String nombre, String encargado, int personal, int costo)
-  {
-    for (int i = 0 ;  i < proyectos.size() ; i++)
+    public void setArea(String area)
     {
-      if (proyectos.get(i).getNombreProyecto().equals(nombre)) 
-      {
-        System.out.println("El proyecto ya se encuentra");
-        return;
-      }
+        this.area = area;
     }
-    Proyecto nuevoProyecto = new Proyecto(identificador, nombre, encargado, personal, costo);
-    proyectos.add(nuevoProyecto);
-    System.out.println("Se ha agregado el proyecto de forma correcta");
-  }
-  public void eliminarProyecto(String aEliminar)
-  {
-    for (int i = 0 ; i < proyectos.size() ; i++)
+    public void setTotalEmpleados(int totalEmpleados)
     {
-      if (proyectos.get(i).getNombreProyecto().equals(aEliminar))
-      {
-        proyectos.remove(i);
-        System.out.println("Se ha eliminado el proyecto " + aEliminar);
-        return;
-      }
+        recursosApoyo.setTotalEmpleados(totalEmpleados);
     }
-    System.out.println("No se ha encontrado " + aEliminar);
-  }
-  public void info()
-  {
-    System.out.println("Nombre del emprendimiento: " + nombre);
-    System.out.println("Propietario del emprendimiento: " + propietario);
-    System.out.println("Area de trabajo del emprendimiento: " + area);
-    RecursosApoyos recursosApoyos = this.getRecursosYApoyo();
-    System.out.println("Empleados del emprendimiento: " + recursosApoyos.getTotalEmpleados());
-    System.out.println("Capital monetario del emprendimiento: " + recursosApoyos.getCapital());
-    System.out.println("Total de apoyo monetario del emprendimiento: " + recursosApoyos.getMontoApoyo());
-    System.out.println("Crecimiento: " + crecimiento + "%");
-  }
-  public void verProyectos()
-  {
-    int totalProyectos = proyectos.size();
-    if (totalProyectos == 0)
+    public void setCapital(int capital)
     {
-      System.out.println("No se tienen proyectos registrados");
+        recursosApoyo.setCapital(capital);
     }
-    else
+    public void setCapitalInicial(int capitalInicial)
     {
-      System.out.println("Lista de proyectos:\n");
-      for (int i = 0 ; i < totalProyectos ; i++)
-      {
-        Proyecto proyecto = proyectos.get(i);
-        proyecto.info();
-        System.out.println();
-      }
+        recursosApoyo.setCapitalInicial(capitalInicial);
     }
-  }
-  public Proyecto getProyecto(String aBuscar)
-  {
-    for (int i = 0 ; i < proyectos.size() ; i++)
+    public void setMontoApoyo(int montoApoyo)
     {
-      Proyecto proyecto = proyectos.get(i);
-      if (proyecto.getNombreProyecto().equals(aBuscar))
-      {
-        return proyecto;
-      }
+        recursosApoyo.setMontoApoyo(montoApoyo);
     }
-    return null;
-  }
-  public Proyecto getProyecto(int aBuscar)
-  {
-    for (int i = 0 ; i < proyectos.size() ; i++)
+    public void setCrecimiento(float crecimiento)
     {
-      Proyecto proyecto = proyectos.get(i);
-      if (proyecto.getIdentificador() == aBuscar)
-      {
-        return proyecto;
-      }
-    }
-    return null;
-  }
-  public float calcularCrecimiento()
-  {
-    int totalGanancias = 0;
-    for (int i = 0 ; i < proyectos.size() ; i++)
-    {
-      totalGanancias += proyectos.get(i).getGanancias();
+        this.crecimiento = crecimiento;
     }
 
-    crecimiento += (totalGanancias / (float)recursosYapoyo.getCapital()) * 100;
-    return totalGanancias;
-  }
-  public void resultados()
-  {
-    int totalProyectos = proyectos.size();
-    int proyectosExitosos = 0;
-    int proyectosCancelados = 0;
-    for (int i = 0 ; i < proyectos.size() ; i++)
+    // Metodos
+    public Proyecto conseguirProyecto(int aBuscar)
     {
-      if (proyectos.get(i).getEstadoActual().equals("Completado"))
-      {
-        proyectosExitosos++;
-      }
-      else if (proyectos.get(i).getEstadoActual().equals("Cancelado"))
-      {
-        proyectosCancelados++;
-      }
+        for (Proyecto proyecto : proyectos)
+        {
+            if (proyecto.getIdentificador() == aBuscar)
+            {
+                return proyecto;
+            }
+        }
+        return null;
     }
-
-    System.out.println("Resultados del emprendimiento " + nombre + "\n");
-    System.out.println("Total de proyectos: " + totalProyectos);
-    System.out.println("Proyectos exitosos: " + proyectosExitosos);
-    System.out.println("Proyectos cancelados: " + proyectosCancelados);
-
-    if (proyectosExitosos == totalProyectos)
+    public Proyecto conseguirProyecto(String aBuscar)
     {
-      System.out.println("El emprendimiento ha sido exitoso en todos sus proyectos.");
-    } 
-    else if (proyectosCancelados == totalProyectos)
-    {
-      System.out.println("El emprendimiento ha fallado en todos sus proyectos.");
-    } 
-    else
-    {
-      System.out.println("El emprendimiento tiene resultados mixtos.");
+        for (Proyecto proyecto : proyectos)
+        {
+            if (proyecto.getNombreProyecto().equals(aBuscar))
+            {
+                return proyecto;
+            }
+        }
+        return null;
     }
-  }
+    public boolean insertarProyecto(int identificador, String nombre, String encargado, int personalRequerido, int costo)
+    {
+        if (conseguirProyecto(identificador) != null)
+        {
+            Proyecto proyecto = new Proyecto(identificador, nombre, encargado, personalRequerido, costo);
+            proyectos.add(proyecto);
+            return true;
+        }
+        System.out.println("Ya existe un proyecto con el identificador " + identificador);
+        return false;
+    }
+    public boolean insertarProyecto(int identificador, String nombre, String encargado, int personalRequerido, int costo, String estado)
+    {
+        if (conseguirProyecto(identificador) == null)
+        {
+            Proyecto proyecto = new Proyecto(identificador, nombre, encargado, personalRequerido, costo, estado);
+            proyectos.add(proyecto);
+            return true;
+        }
+        System.out.println("Ya existe un proyecto con el identificador " + identificador);
+        return false;
+    }
+    public boolean insertarProyecto(int identificador, String nombre, String encargado, int personalRequerido, int costo, int ganancias, String estado)
+    {
+        if (conseguirProyecto(identificador) == null)
+        {
+            Proyecto proyecto = new Proyecto(identificador, nombre, encargado, personalRequerido, costo, ganancias, estado);
+            proyectos.add(proyecto);
+            return true;
+        }
+        System.out.println("Ya existe un proyecto con el identificador " + identificador);
+        return false;
+    }
+    public boolean eliminarProyecto(int aEliminar)
+    {
+        Proyecto proyecto = conseguirProyecto(aEliminar);
+        if (proyecto != null)
+        {
+            System.out.println("Se ha eliminado el proyecto con el identificador " + aEliminar);
+            proyectos.remove(proyecto);
+            return true;
+        }
+        System.out.println("No se ha encontrado algun proyecto con el identificador " + aEliminar);
+        return false;
+    }
+    public boolean eliminarProyecto(String aEliminar)
+    {
+        Proyecto proyecto = conseguirProyecto(aEliminar);
+        if (proyecto != null)
+        {
+            System.out.println("Se ha eliminado el proyecto con el nombre " + aEliminar);
+            proyectos.remove(proyecto);
+            return true;
+        }
+        System.out.println("No se ha encontrado algun proyecto con el nombre " + aEliminar);
+        return false;
+    }
+    public void verProyectos()
+    {
+        if (proyectos.size() == 0)
+        {
+            System.out.println("No se han registrado proyectos");
+        }
+        else
+        {
+            int cont = 0;
+            for (Proyecto proyecto : proyectos)
+            {
+                System.out.println("Proyecto " + cont);
+                System.out.println("==========================");
+                proyecto.info();
+                System.out.println("\n");
+                cont++;
+            }
+        }
+    }
+    public void calcularCrecimiento()
+    {
+        float totalGanancias = 0;
+        for (Proyecto proyecto : proyectos)
+        {
+            totalGanancias += proyecto.getGanancias();
+        }
+
+        float crecimiento = (totalGanancias / recursosApoyo.getCapitalInicial()) * 100;
+        setCrecimiento(crecimiento);
+    }
+    public void info()
+    {
+        calcularCrecimiento();
+        System.out.println("Nombre emprendimiento: " + nombre);
+        System.out.println("Propietario: " + propietario);
+        System.out.println("Area de trabajo del emprendimiento: " + area);
+        recursosApoyo.info();
+        System.out.println("Crecimiento: " + crecimiento + "%");
+    }
+    public void resultados()
+    {
+        int totalGanancias = 0;
+        int proyectosCompletos = 0;
+        int proyectosActivos = 0;
+        int proyectosCancelados = 0;
+
+        for (Proyecto proyecto : proyectos)
+        {
+            totalGanancias += proyecto.getGanancias();
+            if (proyecto.getEstado().equals("Completado"))
+            {
+                proyectosCompletos++;
+            }
+            else if (proyecto.getEstado().equals("En curso"))
+            {
+                proyectosActivos++;
+            }
+            else
+            {
+                proyectosCancelados++;
+            }
+        }
+
+        System.out.println("Resumen de estado de proyectos");
+        System.out.println("==============================\n");
+        System.out.println("Total proyectos: " + proyectos.size());
+        System.out.println("Proyectos completados: " + proyectosCompletos);
+        System.out.println("Proyectos cancelados: " + proyectosCancelados);
+        System.out.println("Proyectos en curso: "  + proyectosActivos);
+        System.out.println("Total ganancias: " + totalGanancias);
+    }
 }
