@@ -154,9 +154,8 @@ public class Menu
             System.out.println("10) Cambiar total de empleados del emprendimiento");
             System.out.println("11) Cambiar capital del emprendimiento");
             System.out.println("12) Volver menu principal\n");
-            System.out.print("Ingrese una opcion: ");
 
-            opcion = Integer.parseInt(lector.readLine());
+            opcion = leerEntero("Ingrese una opcion: ");
             switch (opcion)
             {
                 case 1:
@@ -242,63 +241,44 @@ public class Menu
             System.out.println("        Menu proyecto");
             System.out.println("============================");
             proyecto.info();
-            System.out.println("\n1) Cambiar nombre de proyecto");
-            System.out.println("2) Cambiar encargado de proyecto");
-            System.out.println("3) Modificar personal requerido");
-            System.out.println("4) Modificar costo del proyecto");
-            System.out.println("5) Registrar ganancias del proyecto");
-            System.out.println("6) Modificar estado del proyecto");
+            System.out.println("\n1) Registrar ganancias");
+            System.out.println("2) Cambiar nombre de proyecto");
+            System.out.println("3) Cambiar encargado de proyecto");
+            System.out.println("4) Cambiar personal requerido para el proyecto");
+            System.out.println("5) Cambiar costo del proyecto");
+            System.out.println("6) Cambiar estado del proyecto");
             System.out.println("7) Volver menu emprendimiento\n");
-            System.out.print("Ingrese una opcion: ");
 
-            opcion = Integer.parseInt(lector.readLine());
+            opcion = leerEntero("Ingrese una opcion: ");
             switch (opcion)
             {
                 case 1:
-                    System.out.print("Ingrese el nuevo nombre del proyecto: ");
-                    String nuevoNombre = lector.readLine();
-
-                    proyecto.setNombreProyecto(nuevoNombre);
-                    System.out.println("\nSe ha cambiado el nombre del proyecto a " + nuevoNombre);
+                    int ganancias = leerEntero("Ingrese las ganancias del proyecto: ");
+                    if (leerCadena("¿Quiere registrar perdidas? (s/n)").equals("s"))
+                    {
+                        proyecto.registrarGanancias(ganancias, leerEntero("Ingrese las perdidas del proyecto: "));
+                    }
+                    System.out.println("\nLas ganancias del proyecto son: " + proyecto.getGanancias());
                     break;
                 case 2:
-                    System.out.print("Ingrese el nuevo encargado del proyecto: ");
-                    String nuevoEncargado = lector.readLine();
-
-                    proyecto.setEncargado(nuevoEncargado);
-                    System.out.println("\nSe ha cambiado el encargado del proyecto a " + nuevoEncargado);
+                    proyecto.setNombreProyecto(leerCadena("Ingrese el nuevo nombre del proyecto: "));
+                    System.out.println("\nSe ha cambio el nombre del proyecto a: " + proyecto.getNombreProyecto());
                     break;
                 case 3:
-                    System.out.print("Ingrese la nueva cantidad de personal del proyecto: ");
-                    int nuevoPersonal = Integer.parseInt(lector.readLine());
-
-                    proyecto.setPersonalRequerido(nuevoPersonal);
-                    System.out.println("\nSe ha modificado la cantidad de personal en el proyecto");
+                    proyecto.setEncargado(leerCadena("Ingrese al nuevo encargado del proyecto: "));
+                    System.out.println("\nSe ha cambiado al encargado del proyecto a: " + proyecto.getEncargado());
                     break;
                 case 4:
-                    System.out.print("Ingrese el nuevo costo del proyecto: ");
-                    int nuevoCosto = Integer.parseInt(lector.readLine());
-
-                    proyecto.setCosto(nuevoCosto);
-                    System.out.println("\nSe ha modificado el costo del proyecto");
+                    proyecto.setPersonalRequerido(leerEntero("Ingrese la nueva cantidad de personal requerido en el proyecto: "));
+                    System.out.println("\nSe ha cambiado el personal requerido del proyecto a: " + proyecto.getPersonalRequerido());
                     break;
                 case 5:
-                    System.out.print("Ingrese las ganancias del proyecto: ");
-                    int ganancias = Integer.parseInt(lector.readLine());
-                    System.out.print("Ingrese las perdidas del proyecto: ");
-                    int perdidas = Integer.parseInt(lector.readLine());
-
-                    if (perdidas == 0)
-                        proyecto.registrarGanancias(ganancias);
-                    else
-                        proyecto.registrarGanancias(ganancias, perdidas);
+                    proyecto.setCosto(leerEntero("Ingrese el nuevo costo del proyecto: "));
+                    System.out.println("\nSe ha cambiado el costo del proyecto a: " + proyecto.getCosto());
                     break;
                 case 6:
-                    System.out.print("Ingrese el estado actual del proyecto: ");
-                    String nuevoEstado = lector.readLine();
-
-                    proyecto.setEstadoActual(nuevoEstado);
-                    System.out.println("\nSe ha modificado el estado del proyecto a " + nuevoEstado);
+                    proyecto.setEstadoActual("Ingrese el nuevo estado del proyecto (En curso / Completo / Cancelado): ");
+                    System.out.println("\nSe ha cambiado el estado del proyecto a: " + proyecto.getEstado());
                     break;
                 case 7:
                     System.out.println("Volviendo al menu anterior...");
