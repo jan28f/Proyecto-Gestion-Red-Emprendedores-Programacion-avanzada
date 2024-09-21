@@ -174,7 +174,7 @@ public class Emprendimiento
                 System.out.println("Proyecto " + cont);
                 System.out.println("==========================");
                 proyecto.info();
-                System.out.println("\n");
+                System.out.println("");
                 cont++;
             }
         }

@@ -1,4 +1,3 @@
-import java.util.*;
 import java.io.*;
 
 public class Menu
@@ -66,9 +65,9 @@ public class Menu
         int opcion = -1;
         do
         {
-            System.out.println("============================");
+            System.out.println("==============================");
             System.out.println("       Menu Principal");
-            System.out.println("============================");
+            System.out.println("==============================");
             System.out.println("1) Registrar emprendimiento");
             System.out.println("2) Buscar emprendimiento");
             System.out.println("3) Eliminar emprendimiento");
@@ -143,17 +142,17 @@ public class Menu
             System.out.println("    Menu emprendimiento");
             System.out.println("============================");
             emprendimiento.info();
-            System.out.println("\n1) Cambiar propietario");
-            System.out.println("2) Cambiar area de emprendimiento");
-            System.out.println("3) Modificar total de empleados");
-            System.out.println("4) Modificar capital");
-            System.out.println("5) Modificar total apoyo");
-            System.out.println("6) Ver resultados");
-            System.out.println("7) Ver proyectos");
-            System.out.println("8) Registrar proyecto");
-            System.out.println("9) Buscar proyecto por nombre");
-            System.out.println("10) Buscar proyecto por identificador");
-            System.out.println("11) Eliminar proyecto");
+            System.out.println("\n1) Registrar proyecto");
+            System.out.println("2) Buscar proyecto por identificador");
+            System.out.println("3) Buscar proyecto por nombre");
+            System.out.println("4) Eliminar proyecto por identificador");
+            System.out.println("5) Eliminar proyecto por nombre");
+            System.out.println("6) Ver proyectos");
+            System.out.println("7) Ver resultados de emprendimiento");
+            System.out.println("8) Cambiar propietario del emprendimiento");
+            System.out.println("9) Cambiar area del emprendimiento");
+            System.out.println("10) Cambiar total de empleados del emprendimiento");
+            System.out.println("11) Cambiar capital del emprendimiento");
             System.out.println("12) Volver menu principal\n");
             System.out.print("Ingrese una opcion: ");
 
@@ -161,88 +160,69 @@ public class Menu
             switch (opcion)
             {
                 case 1:
-                    System.out.println("Indica el nuevo propietario");
-                    String nuevoPropietario = lector.readLine();
-                    emprendimiento.setPropietario(nuevoPropietario);
-                    System.out.println("Se ha cambiado con exito");
-                    break;
-                case 2:
-                    System.out.println("Indica una nueva area de emprendimiento");
-                    String nuevaArea = lector.readLine();
-                    System.out.println("Se ha cambiado con exito");
-                    emprendimiento.setArea(nuevaArea);
-                    System.out.println("Se ha cambiado con exito");
-                    break;
-                case 3:
-                    System.out.println("Indica una nueva cantidad de empleados");
-                    String numero1 = lector.readLine();
-                    int nuevoTotalEmpleados = Integer.parseInt(numero1);
-                    emprendimiento.setTotalEmpleados(nuevoTotalEmpleados);
-                    System.out.println("Se ha cambiado con exito");
-                    break;
-                case 4:
-                    System.out.println("Indica una nueva Capital");
-                    String numero2 = lector.readLine();
-                    int nuevoCapital = Integer.parseInt(numero2);
-                    emprendimiento.setCapital(nuevoCapital);
-                    System.out.println("Se ha cambiado con exito");
-                    break;
-                case 5:
-                    System.out.println("Indica un nuevo total de apoyo");
-                    String numero3 = lector.readLine();
-                    int nuevoTotalApoyo = Integer.parseInt(numero3);
-                    emprendimiento.setMontoApoyo(nuevoTotalApoyo);
-                    System.out.println("Se ha cambiado con exito");
-                    break;
-                case 6:
-                    emprendimiento.resultados();
-                    break;
-                case 7:
-                    emprendimiento.verProyectos();
-                    break;
-                case 8:
-                    System.out.print("Ingrese el nombre del proyecto: ");
-                    String nombre = lector.readLine();
-                    System.out.print("Ingrese el identificador del proyecto: ");
-                    int id = Integer.parseInt(lector.readLine());
-                    System.out.print("Ingrese el encargado del proyecto: ");
-                    String encargado = lector.readLine();
-                    System.out.print("Ingrese el personal del proyecto: ");
-                    int personal = Integer.parseInt(lector.readLine());
-                    System.out.print("Ingrese el costo del proyecto: ");
-                    int costo = Integer.parseInt(lector.readLine());
+                    int id = leerEntero("Ingrese el identificador del proyecto: ");
+                    String nombre = leerCadena("Ingrese el nombre del proyecto: ");
+                    String encargado = leerCadena("Ingrese el encargado del proyecto: ");
+                    int personal = leerEntero("Ingrese el personal requerido por el proyecto: ");
+                    int costo = leerEntero("Ingrese el costo del proyecto: ");
                     emprendimiento.insertarProyecto(id, nombre, encargado, personal, costo);
                     break;
-                case 9:
-                    System.out.print("Ingrese el nombre del proyecto a buscar: ");
-                    String aBuscar = lector.readLine();
-                    Proyecto proyecto = emprendimiento.conseguirProyecto(aBuscar);
-                    if (proyecto == null)
-                    {
-                        System.out.println("No se ha encontrado el proyecto " + aBuscar);
-                    }
-                    else
+                case 2:
+                    int idBuscar = leerEntero("Ingrese el identificador del proyecto a buscar: ");
+                    Proyecto proyecto = emprendimiento.conseguirProyecto(idBuscar);
+                    if (proyecto != null)
                     {
                         menuProyecto(proyecto);
                     }
+                    else
+                    {
+                        System.out.println("No se ha encontrado el proyecto con identificador " + idBuscar);
+                    }
+                    break;
+                case 3:
+                    String nombreBuscar = leerCadena("Ingrese el nombre del proyecto a buscar: ");
+                    proyecto = emprendimiento.conseguirProyecto(nombreBuscar);
+                    if (proyecto != null)
+                    {
+                        menuProyecto(proyecto);
+                    }
+                    else
+                    {
+                        System.out.println("No se ha encontrado el proyecto con nombre " + nombreBuscar);
+                    }
+                    break;
+                case 4:
+                    int idEliminar = leerEntero("Ingrese el identificador del proyecto a eliminar: ");
+                    emprendimiento.eliminarProyecto(idEliminar);
+                case 5:
+                    String nombreEliminar = leerCadena("Ingrese el nombre del proyecto a eliminar: ");
+                    emprendimiento.eliminarProyecto(nombreEliminar);
+                    break;
+                case 6:
+                    emprendimiento.verProyectos();
+                    break;
+                case 7:
+                    emprendimiento.resultados();
+                    break;
+                case 8:
+                    String propietarioNuevo = leerCadena("Ingrese el nombre del nuevo propietario del emprendimiento: ");
+                    emprendimiento.setPropietario(propietarioNuevo);
+                    System.out.println("Se ha cambiado el propietario del emprendimiento a " + propietarioNuevo);
+                    break;
+                case 9:
+                    String areaNuevo = leerCadena("Ingrese la nueva area de trabajo del emprendimiento: ");
+                    emprendimiento.setArea(areaNuevo);
+                    System.out.println("Se ha cambiado el area de trabajo del emprendimiento a " + areaNuevo);
                     break;
                 case 10:
-                    System.out.print("Ingrese el identificador del proyecto a buscar: ");
-                    int identificador = Integer.parseInt(lector.readLine());
-                    proyecto = emprendimiento.conseguirProyecto(identificador);
-                    if (proyecto == null)
-                    {
-                        System.out.println("No se ha encontrado el proyecto con identificador " + identificador);
-                    }
-                    else
-                    {
-                        menuProyecto(proyecto);
-                    }
+                    int totalEmpleadosNuevo = leerEntero("Ingrese el nuevo total de empleados del emprendimiento: ");
+                    emprendimiento.setTotalEmpleados(totalEmpleadosNuevo);
+                    System.out.println("Se ha cambiado el total de empleados del emprendimiento a: " + totalEmpleadosNuevo);
                     break;
                 case 11:
-                    System.out.print("Ingrese el nombre del proyecto a eliminar: ");
-                    String aEliminar = lector.readLine();
-                    emprendimiento.eliminarProyecto(aEliminar);
+                    int capitalNuevo = leerEntero("Ingrese el nuevo capital del emprendimiento: ");
+                    emprendimiento.setCapital(capitalNuevo);
+                    System.out.println("Se ha cambiado el capital del emprendimiento a: " + capitalNuevo);
                     break;
                 case 12:
                     break;
@@ -329,5 +309,19 @@ public class Menu
             System.out.print("Presiona Enter para continuar...");
             lector.readLine();
         } while (opcion != 7);
+    }
+    public int leerEntero(String mensaje) throws IOException
+    {
+        System.out.printf(mensaje);
+        int valor = Integer.parseInt(lector.readLine());
+
+        return valor;
+    }
+    public String leerCadena(String mensaje) throws IOException
+    {
+        System.out.printf(mensaje);
+        String cadena = lector.readLine();
+
+        return cadena;
     }
 }
