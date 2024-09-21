@@ -72,20 +72,30 @@ public class Menu
             System.out.println("2) Buscar emprendimiento");
             System.out.println("3) Eliminar emprendimiento");
             System.out.println("4) Salir del programa\n");
-            System.out.print("Ingrese una opcion: ");
 
-            String numero = lector.readLine();
-            opcion = Integer.parseInt(numero);
+            opcion = leerEntero("Ingrese una opcion: ");
             switch(opcion)
             {
                 case 1:
-                    registrarEmprendimiento();
+                    String nombre = leerCadena("Ingresa el nombre del emprendimiento: ");
+                    String propietario = leerCadena("Ingresa el nombre del propietario del emprendimiento: ");
+                    String area = leerCadena("Ingresa el area a la que se dedica el emprendimiento: ");
+                    int empleados = leerEntero("Ingrese cuantos empleados tiene el emprendimiento: ");
+                    int capital = leerEntero("Ingrese el capital inicial del emprendimiento: ");
+                    int montoApoyo = leerEntero("Ingrese el monto de los apoyos que tiene el emprendimiento: ");
+                    redemprendimiento.registrarEmprendimiento(nombre, propietario, area, empleados, capital, montoApoyo);
                     break;
                 case 2:
-                    buscarEmprendimiento();
+                    String aBuscar = leerCadena("Ingresa el nombre del emprendimiento a buscar: ");
+                    Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(aBuscar);
+                    if (emprendimiento != null)
+                    {
+                    menuEmprendimiento(emprendimiento);
+                    }
                     break;
                 case 3:
-                    eliminarEmprendimiento();
+                    String aEliminar = leerCadena("Ingrese el nombre del emprendimiento a eliminar: ");
+                    redemprendimiento.eliminarEmprendimiento(aEliminar);
                     break;
                 case 4:
                     System.out.println("Saliendo del programa...");
@@ -97,41 +107,6 @@ public class Menu
             lector.readLine();
         } while (opcion != 4);
         lector.close();
-    }
-    public void registrarEmprendimiento() throws IOException
-    {
-        System.out.print("Ingresa el nombre del emprendimiento: ");
-        String nombre = lector.readLine();
-        System.out.print("Ingresa el nombre del propietario del emprendimiento: ");
-        String propietario = lector.readLine();
-        System.out.print("Ingresa el area a la que se dedica el emprendimiento: ");
-        String area = lector.readLine();
-        System.out.print("Ingrese cuantos empleados tiene el emprendimiento: ");
-        int empleados = Integer.parseInt(lector.readLine());
-        System.out.print("Ingrese el capital inicial del emprendimiento: ");
-        int capital = Integer.parseInt(lector.readLine());
-        System.out.print("Ingrese el monto de los apoyos que tiene el emprendimiento: ");
-        int montoApoyo = Integer.parseInt(lector.readLine());
-
-        redemprendimiento.registrarEmprendimiento(nombre, propietario, area, empleados, capital, montoApoyo);
-    }
-    public void buscarEmprendimiento() throws IOException
-    {
-        System.out.print("Ingresa el nombre del emprendimiento a buscar: ");
-        String aBuscar = lector.readLine();
-
-        Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(aBuscar);
-        if (emprendimiento != null)
-        {
-        menuEmprendimiento(emprendimiento);
-        }
-    }
-    public void eliminarEmprendimiento() throws IOException
-    {
-        System.out.print("Ingrese el nombre del emprendimiento a eliminar: ");
-        String aEliminar = lector.readLine();
-
-        redemprendimiento.eliminarEmprendimiento(aEliminar);
     }
     public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
     {
