@@ -28,6 +28,23 @@ public class RedEmprendedores
         System.out.println("Se ha registrado " + nombre);
         return true;
     }
+    public boolean registrarEmprendimiento(String nombre, String propietario, String area, int empleados, int capital, int capitalInicial, int montoApoyo)
+    {
+        if (emprendimientos.get(nombre) != null)
+        {
+            System.out.println(nombre + " ya se encuentra registrado");
+            return false;
+        }
+        Emprendimiento emprendimiento = new Emprendimiento(nombre, propietario, area, empleados, capital, capitalInicial, montoApoyo);
+        emprendimientos.put(nombre, emprendimiento);
+        if (emprendimientos.get(nombre) != null)
+        {
+            System.out.println("No se ha podido registrar " + nombre);
+            return false;
+        }
+        System.out.println("Se ha registrado " + nombre);
+        return true;
+    }
     public Emprendimiento obtenerEmprendimiento(String aBuscar)
     {
         Emprendimiento emprendimiento = emprendimientos.get(aBuscar);
