@@ -13,14 +13,14 @@ public class RedEmprendedores
     // Metodos emprendimientos
     public boolean registrarEmprendimiento(String nombre, String propietario, String area, int empleados, int capital, int montoApoyo)
     {
-        if (emprendimientos.get(nombre) != null)
+        if (emprendimientos.containsKey(nombre))
         {
             System.out.println(nombre + " ya se encuentra registrado");
             return false;
         }
         Emprendimiento emprendimiento = new Emprendimiento(nombre, propietario, area, empleados, capital, montoApoyo);
         emprendimientos.put(nombre, emprendimiento);
-        if (emprendimientos.get(nombre) != null)
+        if (!emprendimientos.containsKey(nombre))
         {
             System.out.println("No se ha podido registrar " + nombre);
             return false;
@@ -30,19 +30,19 @@ public class RedEmprendedores
     }
     public boolean registrarEmprendimiento(String nombre, String propietario, String area, int empleados, int capital, int capitalInicial, int montoApoyo)
     {
-        if (emprendimientos.get(nombre) != null)
+        if (emprendimientos.containsKey(nombre))
         {
             System.out.println(nombre + " ya se encuentra registrado");
             return false;
         }
         Emprendimiento emprendimiento = new Emprendimiento(nombre, propietario, area, empleados, capital, capitalInicial, montoApoyo);
         emprendimientos.put(nombre, emprendimiento);
-        if (emprendimientos.get(nombre) != null)
+        if (!emprendimientos.containsKey(nombre))
         {
             System.out.println("No se ha podido registrar " + nombre);
             return false;
         }
-        System.out.println("Se ha registrado " + nombre);
+        System.out.println("Se ha registrado el emprendimiento" + nombre);
         return true;
     }
     public Emprendimiento obtenerEmprendimiento(String aBuscar)
