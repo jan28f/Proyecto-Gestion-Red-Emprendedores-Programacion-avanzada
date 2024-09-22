@@ -27,6 +27,15 @@ public class Emprendimiento
         this.area = area;
         crecimiento = 0.0f;
     }
+    public Emprendimiento(String nombre, String propietario, String area, int empleados, int capital, int capitalInicial, int montoApoyo)
+    {
+        this.nombre = nombre;
+        this.propietario = propietario;
+        proyectos = new ArrayList<Proyecto>();
+        this.recursosApoyo = new RecursosApoyos(empleados, capital, capitalInicial, montoApoyo);
+        this.area = area;
+        crecimiento = 0.0f;
+    }
 
     //Getters
     public String getNombre()
