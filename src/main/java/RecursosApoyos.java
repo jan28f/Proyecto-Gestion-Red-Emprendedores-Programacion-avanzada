@@ -13,6 +13,13 @@ public class RecursosApoyos
         capitalInicial = capital;
         this.montoApoyo = montoApoyo;
     }
+    public RecursosApoyos(int totalEmpleados, int capital, int capitalInicial, int montoApoyo)
+    {
+        this.totalEmpleados = totalEmpleados;
+        this.capital = capital;
+        this.capitalInicial = capitalInicial;
+        this.montoApoyo = montoApoyo;
+    }
 
     //Gettters
     public int getTotalEmpleados()
