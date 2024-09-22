@@ -232,15 +232,16 @@ public class Menu
     }
     public void guardarDatos() throws IOException
     {
+        System.out.println("Guardando informacion...");
         BufferedWriter escritorEmprendimientos = new BufferedWriter(new FileWriter(new File("datos", "emprendimientos.csv")));
         BufferedWriter escritorProyectos = new BufferedWriter(new FileWriter(new File("datos","proyectos.csv")));
         String clavesEmprendimiento = redemprendimiento.conseguirClaves();
-        System.out.println(clavesEmprendimiento);
         String[] claves = clavesEmprendimiento.split(",");
         
         for (String clave : claves)
         {
             Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(clave);
+            System.out.println("Emprendimiento: " + emprendimiento.getNombre());
             String infoEmprendimiento = emprendimiento.getNombre() + "," + emprendimiento.getPropietario() + "," +
                                         emprendimiento.getArea() + "," + emprendimiento.getTotalEmpleados() + "," +
                                         emprendimiento.getCapital() + "," + emprendimiento.getCapitalInicial() + "," +
@@ -249,7 +250,7 @@ public class Menu
             escritorEmprendimientos.newLine();
 
             String idProyectos = emprendimiento.conseguirIdProyectos();
-            System.out.println(idProyectos);
+            System.out.println("Identificadores de proyecto: " + idProyectos + "\n");
             String[] identificadores = idProyectos.split(",");
             for (String identificador : identificadores)
             {
@@ -285,9 +286,7 @@ public class Menu
             int capital = Integer.parseInt(infoEmprendimiento[4]);
             int capitalInicial = Integer.parseInt(infoEmprendimiento[5]);
             int montoApoyo = Integer.parseInt(infoEmprendimiento[6]);
-
             redemprendimiento.registrarEmprendimiento(nombre, propietario, area, empleados, capital, capitalInicial, montoApoyo);
-            System.out.println("Se ha registrado el emprendimiento " + nombre);
         }
         lectorArchivo.close();
         lectorArchivo = new BufferedReader(new InputStreamReader(archivoProyectos));
