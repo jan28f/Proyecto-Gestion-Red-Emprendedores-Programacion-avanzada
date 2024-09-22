@@ -49,4 +49,8 @@ public class RedEmprendedores
         System.out.println("Se ha eliminado " + aEliminar + " del registro");
         return true;
     }
+    public String conseguirClaves()
+    {
+        return String.join(",", emprendimientos.keySet());
+    }
 }

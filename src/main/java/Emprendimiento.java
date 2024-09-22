@@ -41,6 +41,22 @@ public class Emprendimiento
     {
         return area;
     }
+    public int getTotalEmpleados()
+    {
+        return recursosApoyo.getTotalEmpleados();
+    }
+    public int getCapital()
+    {
+        return recursosApoyo.getCapital();
+    }
+    public int getCapitalInicial()
+    {
+        return recursosApoyo.getCapitalInicial();
+    }
+    public int getMontoApoyo()
+    {
+        return recursosApoyo.getMontoApoyo();
+    }
     public float getCrecimiento()
     {
         return crecimiento;
@@ -231,4 +247,18 @@ public class Emprendimiento
         System.out.println("Proyectos en curso: "  + proyectosActivos);
         System.out.println("Total ganancias: " + totalGanancias);
     }
+    public String conseguirIdProyectos()
+{
+    String identificadores = "";
+    for (Proyecto proyecto : proyectos)
+    {
+        if (!identificadores.isEmpty())
+        {
+            identificadores += ",";
+        }
+        identificadores += String.valueOf(proyecto.getIdentificador());
+    }
+
+    return identificadores;
+}
 }
