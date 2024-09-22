@@ -5,63 +5,12 @@ public class Menu
     private RedEmprendedores redemprendimiento = new RedEmprendedores();
     private BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
-    public void cargarCasosPrueba() throws IOException
-    {
-        InputStream archivoEmprendimientos = getClass().getClassLoader().getResourceAsStream("datos/emprendimientosPrueba.csv");
-        InputStream archivoProyectos = getClass().getClassLoader().getResourceAsStream("datos/proyectosPrueba.csv");
-        BufferedReader lectorArchivo = new BufferedReader(new InputStreamReader(archivoEmprendimientos));
-
-        String linea;
-
-        System.out.println("Cargando emprendimientos...");
-        while ((linea = lectorArchivo.readLine()) != null)
-        {
-            String[] info = linea.split(",");
-
-            String nombre = info[0];
-            String propietario = info[1];
-            String area = info[2];
-            int empleados = Integer.parseInt(info[3]);
-            int capital = Integer.parseInt(info[4]);
-            int ganancias = Integer.parseInt(info[5]);
-
-            redemprendimiento.registrarEmprendimiento(nombre, propietario, area, empleados, capital, ganancias);
-            System.out.println("Se ha registrado el emprendimiento " + nombre);
-        }
-        lectorArchivo.close();
-
-        System.out.println("Cargando proyectos...");
-        lectorArchivo = new BufferedReader(new InputStreamReader(archivoProyectos));
-        while ((linea = lectorArchivo.readLine()) != null)
-        {
-            String[] info = linea.split(",");
-
-            String nombreEmprendimiento = info[0];
-            int idProyecto = Integer.parseInt(info[1]);
-            String nombreProyecto = info[2];
-            String encargadoProyecto = info[3];
-            int personalRequerido = Integer.parseInt(info[4]);
-            int costoEstimado = Integer.parseInt(info[5]);
-            int ganancias = Integer.parseInt(info[6]);
-            String estado = info[7];
-
-            Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(nombreEmprendimiento);
-            if (emprendimiento != null)
-            {
-                emprendimiento.insertarProyecto(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, ganancias, estado);
-                System.out.println("Se ha agregado el proyecto " + nombreProyecto + " al emprendimiento " + nombreEmprendimiento);
-            }
-            else
-            {
-                System.out.println("Emprendimiento no encontrado: " + nombreEmprendimiento);
-            }
-        }
-        lectorArchivo.close();
-    }
-
     public void menuPrincipal() throws IOException
     {
-        cargarCasosPrueba();
+        System.out.println("Cargando casos de prueba...");
+        cargarDatos("datos/emprendimientosPrueba.csv", "datos/proyectosPrueba.csv");
+        System.out.println("Cargando datos...");
+        cargarDatos("datos/emprendimientos.csv", "datos/proyectos.csv");
         int opcion = -1;
         do
         {
@@ -283,8 +232,8 @@ public class Menu
     }
     public void guardarDatos() throws IOException
     {
-        BufferedWriter escritorEmprendimientos = new BufferedWriter(new FileWriter("datos/emprendimientos.csv"));
-        BufferedWriter escritorProyectos = new BufferedWriter(new FileWriter("datos/proyectos.csv"));
+        BufferedWriter escritorEmprendimientos = new BufferedWriter(new FileWriter(new File("datos", "emprendimientos.csv")));
+        BufferedWriter escritorProyectos = new BufferedWriter(new FileWriter(new File("datos","proyectos.csv")));
         String clavesEmprendimiento = redemprendimiento.conseguirClaves();
         System.out.println(clavesEmprendimiento);
         String[] claves = clavesEmprendimiento.split(",");
@@ -316,5 +265,56 @@ public class Menu
         escritorEmprendimientos.close();
         escritorProyectos.close();
         System.out.println();
+    }
+    public void cargarDatos(String rutaEmprendimiento, String rutaProyectos) throws IOException
+    {
+        InputStream archivoEmprendimientos = getClass().getClassLoader().getResourceAsStream(rutaEmprendimiento);
+        InputStream archivoProyectos = getClass().getClassLoader().getResourceAsStream(rutaProyectos);
+        BufferedReader lectorArchivo = new BufferedReader(new InputStreamReader(archivoEmprendimientos));
+        
+        String linea;
+        System.out.println("Cargando emprendimientos...");
+        while ((linea = lectorArchivo.readLine()) != null)
+        {
+            String[] infoEmprendimiento = linea.split(",");
+
+            String nombre = infoEmprendimiento[0];
+            String propietario = infoEmprendimiento[1];
+            String area = infoEmprendimiento[2];
+            int empleados = Integer.parseInt(infoEmprendimiento[3]);
+            int capital = Integer.parseInt(infoEmprendimiento[4]);
+            int capitalInicial = Integer.parseInt(infoEmprendimiento[5]);
+            int montoApoyo = Integer.parseInt(infoEmprendimiento[6]);
+
+            redemprendimiento.registrarEmprendimiento(nombre, propietario, area, empleados, capital, capitalInicial, montoApoyo);
+            System.out.println("Se ha registrado el emprendimiento " + nombre);
+        }
+        lectorArchivo.close();
+        lectorArchivo = new BufferedReader(new InputStreamReader(archivoProyectos));
+        System.out.println("Cargando proyectos...");
+        while ((linea = lectorArchivo.readLine()) != null)
+        {
+            String[] infoProyecto = linea.split(",");
+            String nombreEmprendimiento = infoProyecto[0];
+            int idProyecto = Integer.parseInt(infoProyecto[1]);
+            String nombreProyecto = infoProyecto[2];
+            String encargadoProyecto = infoProyecto[3];
+            int personalRequerido = Integer.parseInt(infoProyecto[4]);
+            int costoEstimado = Integer.parseInt(infoProyecto[5]);
+            int ganancias = Integer.parseInt(infoProyecto[6]);
+            String estado = infoProyecto[7];
+
+            Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(nombreEmprendimiento);
+            if (emprendimiento != null)
+            {
+                emprendimiento.insertarProyecto(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, ganancias, estado);
+                System.out.println("Se ha agregado el proyecto " + nombreProyecto + " al emprendimiento " + nombreEmprendimiento);
+            }
+            else
+            {
+                 System.out.println("Emprendimiento no encontrado: " + nombreEmprendimiento);
+            }
+        }
+        lectorArchivo.close();
     }
 }
