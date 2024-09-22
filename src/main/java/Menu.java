@@ -99,6 +99,7 @@ public class Menu
                     break;
                 case 4:
                     System.out.println("Saliendo del programa...");
+                    guardarDatos();
                     break;
                 default:
                     break;
@@ -168,6 +169,7 @@ public class Menu
                 case 4:
                     int idEliminar = leerEntero("Ingrese el identificador del proyecto a eliminar: ");
                     emprendimiento.eliminarProyecto(idEliminar);
+                    break;
                 case 5:
                     String nombreEliminar = leerCadena("Ingrese el nombre del proyecto a eliminar: ");
                     emprendimiento.eliminarProyecto(nombreEliminar);
@@ -278,5 +280,41 @@ public class Menu
         String cadena = lector.readLine();
 
         return cadena;
+    }
+    public void guardarDatos() throws IOException
+    {
+        BufferedWriter escritorEmprendimientos = new BufferedWriter(new FileWriter("datos/emprendimientos.csv"));
+        BufferedWriter escritorProyectos = new BufferedWriter(new FileWriter("datos/proyectos.csv"));
+        String clavesEmprendimiento = redemprendimiento.conseguirClaves();
+        System.out.println(clavesEmprendimiento);
+        String[] claves = clavesEmprendimiento.split(",");
+        
+        for (String clave : claves)
+        {
+            Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(clave);
+            String infoEmprendimiento = emprendimiento.getNombre() + "," + emprendimiento.getPropietario() + "," +
+                                        emprendimiento.getArea() + "," + emprendimiento.getTotalEmpleados() + "," +
+                                        emprendimiento.getCapital() + "," + emprendimiento.getCapitalInicial() + "," +
+                                        emprendimiento.getMontoApoyo();
+            escritorEmprendimientos.write(infoEmprendimiento);
+            escritorEmprendimientos.newLine();
+
+            String idProyectos = emprendimiento.conseguirIdProyectos();
+            System.out.println(idProyectos);
+            String[] identificadores = idProyectos.split(",");
+            for (String identificador : identificadores)
+            {
+                Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(identificador));
+                String infoProyecto = emprendimiento.getNombre() + "," + identificador + "," + 
+                                      proyecto.getNombreProyecto() + "," + proyecto.getEncargado() + "," +
+                                      String.valueOf(proyecto.getPersonalRequerido()) + "," + String.valueOf(proyecto.getCosto())
+                                      + "," + String.valueOf(proyecto.getGanancias()) + "," + proyecto.getEstado();
+                escritorProyectos.write(infoProyecto);
+                escritorProyectos.newLine();                      
+            }
+        }
+        escritorEmprendimientos.close();
+        escritorProyectos.close();
+        System.out.println();
     }
 }
