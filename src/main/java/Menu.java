@@ -218,10 +218,20 @@ public class Menu
     }
     public int leerEntero(String mensaje) throws IOException
     {
-        System.out.printf(mensaje);
-        int valor = Integer.parseInt(lector.readLine());
-
-        return valor;
+        while (true)
+        {
+            System.out.printf(mensaje);
+            int valor;
+            try
+            {
+                valor = Integer.parseInt(lector.readLine());
+                return valor;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Un numero entero valido.");
+            }
+        }
     }
     public String leerCadena(String mensaje) throws IOException
     {
