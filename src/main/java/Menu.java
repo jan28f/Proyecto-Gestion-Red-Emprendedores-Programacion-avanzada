@@ -154,8 +154,11 @@ public class Menu
                 default:
                     break;
             }
-            System.out.print("Presiona Enter para continuar...");
-            lector.readLine();
+            if (opcion != 12)
+            {
+                System.out.print("Presiona Enter para continuar...");
+                lector.readLine();
+            }
         } while (opcion != 12);
     }
     public void menuProyecto(Proyecto proyecto) throws IOException
@@ -212,8 +215,11 @@ public class Menu
                     default:
                     break;
             }
-            System.out.print("Presiona Enter para continuar...");
-            lector.readLine();
+            if (opcion != 7)
+            {
+                System.out.print("Presiona Enter para continuar...");
+                lector.readLine();
+            }
         } while (opcion != 7);
     }
     public int leerEntero(String mensaje) throws IOException
@@ -229,7 +235,7 @@ public class Menu
             }
             catch (NumberFormatException e)
             {
-                System.out.println("Un numero entero valido.");
+                System.out.println("Ingrese un numero entero valido.");
             }
         }
     }
