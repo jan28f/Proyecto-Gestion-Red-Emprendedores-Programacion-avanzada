@@ -1,10 +1,23 @@
 import java.io.*;
 
+/**
+ * Clase encargada de representar los menus de la aplicacion, para que el usuario pueda interactuar
+ * y gestionar los emprendimientos y sus proyectos.
+ */
 public class Menu
 {
+    /**
+     * Declaracion de variables de la clase:
+     * redEmprendimientos: Instancia para gestionar los emprendimientos.
+     * lector: Entrada para que el usuario pueda interactuar.
+     */
     private RedEmprendedores redemprendimiento = new RedEmprendedores();
     private BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
+    /**
+     * Metodo que muestra el menu principal para que el usuario pueda interactuar con sus distintas opciones.
+     * @throws IOException Si ocurre un error con la entrada/salida.
+     */
     public void menuPrincipal() throws IOException
     {
         System.out.println("Cargando casos de prueba...");
@@ -58,6 +71,11 @@ public class Menu
         } while (opcion != 4);
         lector.close();
     }
+    /**
+     * Muestra el menu de opciones para gestionar un emprendimiento.
+     * @param emprendimiento Emprendimiento seleccionado.
+     * @throws IOException Si ocurre un error con la entrada/salida.
+     */
     public void menuEmprendimiento(Emprendimiento emprendimiento) throws IOException
     {
         int opcion = -1;
@@ -161,6 +179,11 @@ public class Menu
             }
         } while (opcion != 12);
     }
+    /**
+     * Muestra el menu de opciones para gestionar un proyecto.
+     * @param proyecto Proyecto seleccionado.
+     * @throws IOException Si ocurre un error con la entrada/salida.
+     */
     public void menuProyecto(Proyecto proyecto) throws IOException
     {
         int opcion = -1;
@@ -222,6 +245,12 @@ public class Menu
             }
         } while (opcion != 7);
     }
+    /**
+     * Se muestra un mensaje deseado y se lee un numero entero ingresado por el usuario.
+     * @param mensaje Mensaje a mostrar.
+     * @return Numero entero ingresado por el usuario
+     * @throws IOException Si ocurre un error con la entrada/salida.
+     */
     public int leerEntero(String mensaje) throws IOException
     {
         while (true)
@@ -239,6 +268,12 @@ public class Menu
             }
         }
     }
+    /**
+     * Se muestra un mensaje deseado y se lee una cadena de caracteres ingresada por el usuario.
+     * @param mensaje Mensaje a mostrar.
+     * @return Cadena de caracteres ingresada por el usuario.
+     * @throws IOException Si ocurre un error con la entrada/salida.
+     */
     public String leerCadena(String mensaje) throws IOException
     {
         System.out.printf(mensaje);
@@ -246,6 +281,10 @@ public class Menu
 
         return cadena;
     }
+    /**
+     * Guarda los datos actuales de emprendimientos y sus proyectos en un archivo csv.
+     * @throws IOException Si ocurre un error con la entrada/salida.
+     */
     public void guardarDatos() throws IOException
     {
         System.out.println("Guardando informacion...");
@@ -283,6 +322,12 @@ public class Menu
         escritorProyectos.close();
         System.out.println();
     }
+    /**
+     * Carga los datos de emprendimienots y sus proyectos asociados desde un archivo csv.
+     * @param rutaEmprendimiento Ruta del archivo csv de los emprendimientos.
+     * @param rutaProyectos Ruta del archivo csv de los proyectos.
+     * @throws IOException Si ocurre un error con la entrada/salida.
+     */
     public void cargarDatos(String rutaEmprendimiento, String rutaProyectos) throws IOException
     {
         InputStream archivoEmprendimientos = getClass().getClassLoader().getResourceAsStream(rutaEmprendimiento);
