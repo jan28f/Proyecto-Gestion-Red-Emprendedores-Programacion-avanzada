@@ -212,8 +212,20 @@ public class Emprendimiento
             totalGanancias += proyecto.getGanancias();
         }
 
-        float crecimiento = (totalGanancias / recursosApoyo.getCapitalInicial()) * 100;
-        setCrecimiento(crecimiento);
+        try
+        {
+            if (recursosApoyo.getCapitalInicial() == 0)
+            {
+                throw new ArithmeticException("El capital inicial es cero, no se puede calcular el crecimiento.");
+            }
+            float crecimiento = (totalGanancias / recursosApoyo.getCapitalInicial()) * 100;
+            setCrecimiento(crecimiento);
+        }
+        catch (ArithmeticException e)
+        {
+            System.out.println(e.getMessage());
+            setCrecimiento(0);
+        }
     }
     public void info()
     {
