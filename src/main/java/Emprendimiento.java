@@ -130,7 +130,7 @@ public class Emprendimiento
     }
     public boolean insertarProyecto(int identificador, String nombre, String encargado, int personalRequerido, int costo)
     {
-        if (conseguirProyecto(identificador) != null)
+        if (conseguirProyecto(identificador) == null)
         {
             Proyecto proyecto = new Proyecto(identificador, nombre, encargado, personalRequerido, costo);
             proyectos.add(proyecto);
