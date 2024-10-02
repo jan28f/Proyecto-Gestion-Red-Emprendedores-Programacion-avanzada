@@ -359,6 +359,27 @@ public class Emprendimiento
         }
     }
     /**
+     * Se muestran todos los proyectos con el estado indicado por el usuario.
+     * @param estado Estado de los proyectos que se quieren mostrar (En curso \ Completo \ Cancelado).
+     */
+    public void verProyectosFiltrados(String estado)
+    {
+        boolean encontrado = false;
+        for (Proyecto proyecto : proyectos)
+        {
+            if (proyecto.getEstado().equals(estado))
+            {
+                proyecto.info();
+                System.out.println();
+                encontrado = true;
+            }
+        }
+        if (!encontrado)
+        {
+            System.out.println("No se han encontrado proyectos con el estado especificado.");
+        }
+    }
+    /**
      * Calcula el crecimiento del emprendimiento, usando las ganancias de los proyectos.
      * Manejo de excepcion si el capital inicial es 0.
      */

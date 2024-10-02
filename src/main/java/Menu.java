@@ -91,6 +91,7 @@ public class Menu
             System.out.println("4) Eliminar proyecto por identificador");
             System.out.println("5) Eliminar proyecto por nombre");
             System.out.println("6) Ver proyectos");
+            System.out.println("7) Ver proyectos segun estado");
             System.out.println("7) Ver resultados de emprendimiento");
             System.out.println("8) Cambiar propietario del emprendimiento");
             System.out.println("9) Cambiar area del emprendimiento");
@@ -145,34 +146,38 @@ public class Menu
                     emprendimiento.verProyectos();
                     break;
                 case 7:
-                    emprendimiento.resultados();
+                    String estadoFiltro = leerCadena("Ingrese el estado por el que quiere filtrar los proyectos (En curso \\ Completo \\ Cancelado): ");
+                    emprendimiento.verProyectosFiltrados(estadoFiltro);
                     break;
                 case 8:
+                    emprendimiento.resultados();
+                    break;
+                case 9:
                     String propietarioNuevo = leerCadena("Ingrese el nombre del nuevo propietario del emprendimiento: ");
                     emprendimiento.setPropietario(propietarioNuevo);
                     System.out.println("Se ha cambiado el propietario del emprendimiento a " + propietarioNuevo);
                     break;
-                case 9:
+                case 10:
                     String areaNuevo = leerCadena("Ingrese la nueva area de trabajo del emprendimiento: ");
                     emprendimiento.setArea(areaNuevo);
                     System.out.println("Se ha cambiado el area de trabajo del emprendimiento a " + areaNuevo);
                     break;
-                case 10:
+                case 11:
                     int totalEmpleadosNuevo = leerEntero("Ingrese el nuevo total de empleados del emprendimiento: ");
                     emprendimiento.setTotalEmpleados(totalEmpleadosNuevo);
                     System.out.println("Se ha cambiado el total de empleados del emprendimiento a: " + totalEmpleadosNuevo);
                     break;
-                case 11:
+                case 12:
                     int capitalNuevo = leerEntero("Ingrese el nuevo capital del emprendimiento: ");
                     emprendimiento.setCapital(capitalNuevo);
                     System.out.println("Se ha cambiado el capital del emprendimiento a: " + capitalNuevo);
                     break;
-                case 12:
+                case 13:
                     break;
                 default:
                     break;
             }
-            if (opcion != 12)
+            if (opcion != 13)
             {
                 System.out.print("Presiona Enter para continuar...");
                 lector.readLine();
