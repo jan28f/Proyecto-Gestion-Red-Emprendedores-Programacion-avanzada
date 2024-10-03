@@ -24,6 +24,22 @@ public class ProyectoSocial extends Proyecto
         super(identificador, nombreProyecto, encargado, personalRequerido, costo);
         this.comunidadBeneficiada = comunidadBeneficiada;
     }
+    /**
+     * Constructor encargado de inicializar un proyecto social con un estado y ganancias especifico.
+     * @param identificador Identificador unico del proyecto.
+     * @param nombreProyecto Nombre del proyecto.
+     * @param encargado Nombre del encargado del proyecto.
+     * @param personalRequerido Numero de empleados requeridos para realizar el proyecto.
+     * @param costo Costo estimado del proyecto.
+     * @param ganancias Ganancias del proyecto.
+     * @param estado Estado actual del proyecto.
+     * @param comunidadBeneficiada Comunidad que se beneficia del proyecto.
+     */
+    public ProyectoSocial(int identificador, String nombreProyecto, String encargado, int personalRequerido, int costo, int ganancias, String estado, String comunidadBeneficiada)
+    {
+        super(identificador, nombreProyecto, encargado, personalRequerido, costo, ganancias, estado);
+        this.comunidadBeneficiada = comunidadBeneficiada;
+    }
 
     // Getter
     /**

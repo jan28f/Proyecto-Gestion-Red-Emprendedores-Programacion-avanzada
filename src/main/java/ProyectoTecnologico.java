@@ -21,6 +21,22 @@ public class ProyectoTecnologico extends Proyecto
         super(identificador, nombreProyecto, encargado, personalRequerido, costo);
         this.tecnologiaUsada = tecnologiaUsada;
     }
+    /**
+     * Constructor encargado de inicializar un proyecto tecnologico con un estado y ganancias especifico.
+     * @param identificador Identificador unico del proyecto.
+     * @param nombreProyecto Nombre del proyecto.
+     * @param encargado Nombre del encargado del proyecto.
+     * @param personalRequerido Numero de empleados requeridos para realizar el proyecto.
+     * @param costo Costo estimado del proyecto.
+     * @param ganancias Ganancias del proyecto.
+     * @param estado Estado actual del proyecto.
+     * @param tecnologiaUsada Tecnologia con la que se lleva a cabo el proyecto.
+     */
+    public ProyectoTecnologico(int identificador, String nombreProyecto, String encargado, int personalRequerido, int costo, int ganancias, String estado, String tecnologiaUsada)
+    {
+        super(identificador, nombreProyecto, encargado, personalRequerido, costo, ganancias, estado);
+        this.tecnologiaUsada = tecnologiaUsada;
+    }
 
     // Getter
     /**
