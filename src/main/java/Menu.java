@@ -33,7 +33,7 @@ public class Menu
             System.out.println("1) Registrar emprendimiento");
             System.out.println("2) Buscar emprendimiento");
             System.out.println("3) Eliminar emprendimiento");
-            System.out.println("4) Salir del programa\n");
+            System.out.println("4) Generar reporte y salir del programa\n");
 
             opcion = leerEntero("Ingrese una opcion: ");
             switch(opcion)
@@ -65,6 +65,7 @@ public class Menu
                     break;
                 case 4:
                     System.out.println("Saliendo del programa...");
+                    generarReporte();
                     guardarDatos();
                     break;
                 default:
@@ -429,5 +430,71 @@ public class Menu
             }
         }
         lectorArchivo.close();
+    }
+    public void generarReporte() throws IOException
+    {
+        BufferedWriter escritor = new BufferedWriter(new FileWriter(new File("reporte.txt")));
+        String clavesEmprendimiento = redemprendimiento.conseguirClaves();
+        String[] claves = clavesEmprendimiento.split(",");
+
+        escritor.write("----------------------------------------------------");
+        escritor.newLine();
+        escritor.write("                        Reporte");
+        escritor.newLine();
+        escritor.write("----------------------------------------------------");
+        escritor.newLine();
+        for (String clave : claves)
+        {
+            try
+            {
+                Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(clave);
+                escritor.write("Emprendimiento: " + emprendimiento.getNombre());
+                escritor.newLine();
+                escritor.write("Propietario: " + emprendimiento.getPropietario());
+                escritor.newLine();
+                escritor.write("Área: " + emprendimiento.getArea());
+                escritor.newLine();
+                escritor.write("Total de empleados: " + emprendimiento.getTotalEmpleados());
+                escritor.newLine();
+                escritor.write("Capital: " + emprendimiento.getCapital());
+                escritor.newLine();
+                escritor.write("Monto de apoyo: " + emprendimiento.getMontoApoyo());
+                escritor.newLine();
+                escritor.write("Proyectos:");
+                escritor.newLine();
+
+                String[] idProyectos = emprendimiento.conseguirIdProyectos().split(",");
+                for (String id : idProyectos)
+                {
+                    try
+                    {
+                        Proyecto proyecto = emprendimiento.conseguirProyecto(id);
+                        escritor.write("\tProyecto ID: " + proyecto.getIdentificador());
+                        escritor.newLine();
+                        escritor.write("\tNombre: " + proyecto.getNombreProyecto());
+                        escritor.newLine();
+                        escritor.write("\tEncargado: " + proyecto.getEncargado());
+                        escritor.newLine();
+                        escritor.write("\tEstado: " + proyecto.getEstado());
+                        escritor.newLine();
+                        escritor.write("\tGanancias: " + proyecto.getGanancias());
+                        escritor.newLine();
+                        escritor.newLine();
+                    }
+                    catch (ProyectoNoEncontradoException e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                escritor.write("----------------------------------------------------");
+                escritor.newLine();
+            }
+            catch (EmprendimientoNoEncontradoException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
+        escritor.close();
+        System.out.println("Reporte generado en 'reporte.txt'");
     }
 }
