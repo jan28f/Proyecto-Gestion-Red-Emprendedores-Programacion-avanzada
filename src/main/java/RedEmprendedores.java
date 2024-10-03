@@ -80,14 +80,14 @@ public class RedEmprendedores
      * Obtiene un emprendimiento registrado por su nombre.
      * @param aBuscar Nombre del emprendimiento a buscar.
      * @return Retorna el emprendimiento encontrado si esta, en caso contrario retorna null si no se encuentra registrado.
+     * @throws EmprendimientoNoEncontradoException Si no se encuentra el emprendimiento.
      */
-    public Emprendimiento obtenerEmprendimiento(String aBuscar)
+    public Emprendimiento obtenerEmprendimiento(String aBuscar) throws EmprendimientoNoEncontradoException
     {
         Emprendimiento emprendimiento = emprendimientos.get(aBuscar);
         if (emprendimiento == null)
         {
-            System.out.println("No se ha encontrado " + aBuscar + "en el registro");
-            return null;
+            throw new EmprendimientoNoEncontradoException("No se ha encontrado " + aBuscar + "en el registro");
         }
 
         return emprendimiento;
