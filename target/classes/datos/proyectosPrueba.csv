@@ -1,8 +1,18 @@
-Samsung,0201,Nuevo Celular,Xi Ping,15,50000,450000,Completado
-Samsung,7801,Investigación 5G,Ana Lopez,10,70000,570000,Completado
-Samsung,1290,Expansión Global,Pedro Martinez,8,60000,170000,En curso
-Entel,9036,Arreglar Internet,Franny Garcia,20,30000,240000,Completado
-Entel,3901,Expansión Fibra Óptica,Luis Morales,15,50000,37000,En curso
-EcoEnergy,4011,Planta Solar,Carlos Fernandez,25,100000,290000,En curso
-EcoEnergy,6170,Energía Eólica,Sandra Lima,20,80000,17000,En curso
-EcoEnergy,1052,Planta de Biomasa,Manuel Diaz,18,70000,46000,En curso
+TechSolutions,1101,Sistema de Gestión Empresarial,Laura Méndez,20,100000,250000,Completado,Tecnologico,Plataforma web integrada
+TechSolutions,1120,Aplicación Móvil de Salud,José Martínez,15,80000,200000,En curso,Tecnologico,Tecnología móvil avanzada
+TechSolutions,1150,Actualización de Infraestructura,Luisa Fernández,10,50000,150000,En curso,General,
+GreenHarvest,2105,Implementación de Riego Automatizado,María Sánchez,18,60000,180000,Completado,Tecnologico,Sensores IoT en agricultura
+GreenHarvest,2130,Programa de Compostaje Comunitario,Andrés Pérez,12,40000,90000,En curso,Social,Comunidades Rurales
+GreenHarvest,2150,Expansión de Cultivos Orgánicos,Sofía Díaz,15,50000,120000,En curso,General,
+SolarInnovations,3100,Instalación de Paneles en Escuelas,Pablo Ramírez,25,120000,300000,En curso,Social,Escuelas Públicas
+SolarInnovations,3125,Desarrollo de Nuevos Paneles,Susana Vega,22,150000,350000,En curso,Tecnologico,Nuevos materiales fotovoltaicos
+SolarInnovations,3150,Campaña de Concientización Ambiental,Cristina Morales,18,70000,50000,En curso,Social,Comunidades Urbanas
+BioTech Labs,4100,Desarrollo de Vacuna X,Ana Martínez,30,200000,500000,En curso,Tecnologico,Ingeniería genética
+BioTech Labs,4150,Investigación Genética Y,Juan Pérez,25,150000,400000,Completado,Tecnologico,Secuenciación de ADN
+BioTech Labs,4200,Programa de Educación Comunitaria,Laura Gómez,20,100000,150000,En curso,Social,Comunidades Rurales
+AquaPure,5100,Planta de Tratamiento Z,Carlos Ruiz,35,250000,600000,En curso,Tecnologico,Tecnología de membranas
+AquaPure,5150,Proyecto de Saneamiento Rural,María Fernández,28,180000,400000,En curso,Social,Zonas rurales
+AquaPure,5200,Optimización de Procesos,Luis González,22,120000,300000,Completado,General,
+UrbanGrow,6100,Instalación de Huertos Urbanos,Sofía Moreno,18,80000,200000,En curso,Social,Barrios Urbanos
+UrbanGrow,6150,Desarrollo de Sistemas Hidropónicos,Miguel Torres,15,90000,250000,En curso,Tecnologico,Cultivo hidropónico
+UrbanGrow,6200,Campaña de Concientización Alimentaria,Elena Díaz,12,60000,100000,En curso,Social,Escuelas
