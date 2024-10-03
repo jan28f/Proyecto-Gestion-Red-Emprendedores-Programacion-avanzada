@@ -302,6 +302,28 @@ public class Emprendimiento
         System.out.println("Ya existe un proyecto con el identificador " + identificador);
         return false;
     }
+    public boolean insertarProyectoTecnologico(int identificador, String nombre, String encargado, int personalRequerido, int costo, String tecnologiaUsada)
+    {
+        if (conseguirProyecto(identificador) == null)
+        {
+            ProyectoTecnologico proyecto = new ProyectoTecnologico(identificador, nombre, encargado, personalRequerido, costo, tecnologiaUsada);
+            proyectos.add(proyecto);
+            return true;
+        }
+        System.out.println("Ya existe un proyecto con el identificador " + identificador);
+        return false;
+    }
+    public boolean insertarProyectoSocial(int identificador, String nombre, String encargado, int personalRequerido, int costo, String comunidadBeneficiada)
+    {
+        if (conseguirProyecto(identificador) == null)
+        {
+            ProyectoSocial proyecto = new ProyectoSocial(identificador, nombre, encargado, personalRequerido, costo, comunidadBeneficiada);
+            proyectos.add(proyecto);
+            return true;
+        }
+        System.out.println("Ya existe un proyecto con el identificador " + identificador);
+        return false;
+    }
     /**
      * Se elimina un proyecto por su identificador
      * @param aEliminar Identificador del proyecto a eliminar.

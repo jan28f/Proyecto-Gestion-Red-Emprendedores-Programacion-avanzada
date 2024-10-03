@@ -103,12 +103,7 @@ public class Menu
             switch (opcion)
             {
                 case 1:
-                    int id = leerEntero("Ingrese el identificador del proyecto: ");
-                    String nombre = leerCadena("Ingrese el nombre del proyecto: ");
-                    String encargado = leerCadena("Ingrese el encargado del proyecto: ");
-                    int personal = leerEntero("Ingrese el personal requerido por el proyecto: ");
-                    int costo = leerEntero("Ingrese el costo del proyecto: ");
-                    emprendimiento.insertarProyecto(id, nombre, encargado, personal, costo);
+                    menuAgregarProyecto(emprendimiento);
                     break;
                 case 2:
                     int idBuscar = leerEntero("Ingrese el identificador del proyecto a buscar: ");
@@ -183,6 +178,41 @@ public class Menu
                 lector.readLine();
             }
         } while (opcion != 12);
+    }
+    /**
+     * Menu para agregar distintos tipos de proyectos a un emprendimiento.
+     * @param emprendimiento Emprendimiento al que se le agregara un proyecto.
+     * @throws IOException Si ocurre un error con la entrada/salida.
+     */
+    public void menuAgregarProyecto(Emprendimiento emprendimiento) throws IOException
+    {
+        System.out.println("Seleccione el tipo de proyecto:");
+        System.out.println("1) Proyecto General");
+        System.out.println("2) Proyecto Tecnológico");
+        System.out.println("3) Proyecto Social\n");
+        int tipoProyecto = leerEntero("Ingrese una opción: ");
+        int id = leerEntero("Ingrese el identificador del proyecto: ");
+        String nombreProyecto = leerCadena("Ingrese el nombre del proyecto: ");
+        String encargado = leerCadena("Ingrese el encargado del proyecto: ");
+        int personal = leerEntero("Ingrese el personal requerido por el proyecto: ");
+        int costo = leerEntero("Ingrese el costo del proyecto: ");
+        switch (tipoProyecto)
+        {
+            case 1:
+                emprendimiento.insertarProyecto(id, nombreProyecto, encargado, personal, costo);
+                break;
+            case 2:
+                String tecnologiaUsada = leerCadena("Ingrese la tecnología usada en el proyecto: ");
+                emprendimiento.insertarProyectoTecnologico(id, nombreProyecto, encargado, personal, costo, tecnologiaUsada);
+                break;
+            case 3:
+                String comunidadBeneficiada = leerCadena("Ingrese la comunidad beneficiada por el proyecto: ");
+                emprendimiento.insertarProyectoSocial(id, nombreProyecto, encargado, personal, costo, comunidadBeneficiada);
+                break;
+            default:
+                System.out.println("Opción no válida.");
+                break;
+        }
     }
     /**
      * Muestra el menu de opciones para gestionar un proyecto.
