@@ -354,10 +354,25 @@ public class Menu
                     try
                     {
                         Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(identificador));
+                        String tipoProyecto = "General";
+                        String infoAdicional = "";
+
+                        if (proyecto instanceof ProyectoSocial)
+                        {
+                            tipoProyecto = "Social";
+                            infoAdicional = ((ProyectoSocial)proyecto).getComunidadBeneficiada();
+                        }
+                        else if (proyecto instanceof ProyectoTecnologico)
+                        {
+                            tipoProyecto = "Tecnologico";
+                            infoAdicional = ((ProyectoTecnologico)proyecto).getTecnologiaUsada();
+                        }
+
                         String infoProyecto = emprendimiento.getNombre() + "," + identificador + "," + 
                                             proyecto.getNombreProyecto() + "," + proyecto.getEncargado() + "," +
                                             String.valueOf(proyecto.getPersonalRequerido()) + "," + String.valueOf(proyecto.getCosto())
-                                            + "," + String.valueOf(proyecto.getGanancias()) + "," + proyecto.getEstado();
+                                            + "," + String.valueOf(proyecto.getGanancias()) + "," + proyecto.getEstado() + "," +
+                                            tipoProyecto + "," + infoAdicional;
                         escritorProyectos.write(infoProyecto);
                         escritorProyectos.newLine();
                     }
@@ -408,7 +423,7 @@ public class Menu
         System.out.println("Cargando proyectos...");
         while ((linea = lectorArchivo.readLine()) != null)
         {
-            String[] infoProyecto = linea.split(",");
+            String[] infoProyecto = linea.split(",", -1);
             String nombreEmprendimiento = infoProyecto[0];
             int idProyecto = Integer.parseInt(infoProyecto[1]);
             String nombreProyecto = infoProyecto[2];
@@ -417,11 +432,24 @@ public class Menu
             int costoEstimado = Integer.parseInt(infoProyecto[5]);
             int ganancias = Integer.parseInt(infoProyecto[6]);
             String estado = infoProyecto[7];
+            String tipoProyecto = infoProyecto[8];
+            String infoAdicional = infoProyecto[9];
 
             try
             {
                 Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(nombreEmprendimiento);
-                emprendimiento.insertarProyecto(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, ganancias, estado);
+                if (tipoProyecto.equals("Social"))
+                {
+                    emprendimiento.insertarProyectoSocial(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, ganancias, estado, infoAdicional);
+                }
+                else if (tipoProyecto.equals("Tecnologico"))
+                {
+                    emprendimiento.insertarProyectoTecnologico(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, ganancias, estado, infoAdicional);
+                }
+                else
+                {
+                    emprendimiento.insertarProyecto(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, ganancias, estado);
+                }
                 System.out.println("Se ha agregado el proyecto " + nombreProyecto + " al emprendimiento " + nombreEmprendimiento);
             }
             catch (EmprendimientoNoEncontradoException e)
@@ -431,6 +459,10 @@ public class Menu
         }
         lectorArchivo.close();
     }
+    /**
+     * Genera un reporte en un archivo txt, con los emprendimientos y sus proyectos.
+     * @throws IOException
+     */
     public void generarReporte() throws IOException
     {
         BufferedWriter escritor = new BufferedWriter(new FileWriter(new File("reporte.txt")));
@@ -468,7 +500,7 @@ public class Menu
                 {
                     try
                     {
-                        Proyecto proyecto = emprendimiento.conseguirProyecto(id);
+                        Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(id));
                         escritor.write("\tProyecto ID: " + proyecto.getIdentificador());
                         escritor.newLine();
                         escritor.write("\tNombre: " + proyecto.getNombreProyecto());
@@ -479,6 +511,25 @@ public class Menu
                         escritor.newLine();
                         escritor.write("\tGanancias: " + proyecto.getGanancias());
                         escritor.newLine();
+                        if (proyecto instanceof ProyectoSocial)
+                        {
+                            escritor.write("\tTipo de proyecto: Social");
+                            escritor.newLine();
+                            escritor.write("\tComunidad beneficiada: " + ((ProyectoSocial)proyecto).getComunidadBeneficiada());
+                            escritor.newLine();
+                        }
+                        else if (proyecto instanceof ProyectoTecnologico)
+                        {
+                            escritor.write("\tTipo de proyecto: Tecnologico");
+                            escritor.newLine();
+                            escritor.write("\tTecnologia usada: " + ((ProyectoTecnologico)proyecto).getTecnologiaUsada());
+                            escritor.newLine();
+                        }
+                        else
+                        {
+                            escritor.write("\tTipo de proyecto: General");
+                            escritor.newLine();
+                        }
                         escritor.newLine();
                     }
                     catch (ProyectoNoEncontradoException e)
