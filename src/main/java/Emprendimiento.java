@@ -211,8 +211,9 @@ public class Emprendimiento
      * Busca un proyecto por su identificador.
      * @param aBuscar Numero de identificacion del proyecto a buscar.
      * @return Retorna el proyecto si lo encuentra, en caso contrario retorna null si no lo encuentra.
+     * @throws ProyectoNoEncontradoException Si no se encuentra el proyecto.
      */
-    public Proyecto conseguirProyecto(int aBuscar)
+    public Proyecto conseguirProyecto(int aBuscar) throws ProyectoNoEncontradoException
     {
         for (Proyecto proyecto : proyectos)
         {
@@ -221,14 +222,15 @@ public class Emprendimiento
                 return proyecto;
             }
         }
-        return null;
+        throw new ProyectoNoEncontradoException("No se ha encontrado proyecto con identificador " + aBuscar);
     }
     /**
-     * Busca un proyecto por su nombre.
+     * Busca el proyecto con el primer nombre que coincida.
      * @param aBuscar Nombre del proyecto a buscar.
      * @return Retorna el proyecto si lo encuentra, en caso contrario retorna null si no lo encuentra.
+     * @throws ProyectoNoEncontradoException Si no se encuentra el proyecto.
      */
-    public Proyecto conseguirProyecto(String aBuscar)
+    public Proyecto conseguirProyecto(String aBuscar) throws ProyectoNoEncontradoException
     {
         for (Proyecto proyecto : proyectos)
         {
@@ -237,7 +239,7 @@ public class Emprendimiento
                 return proyecto;
             }
         }
-        return null;
+        throw new ProyectoNoEncontradoException("No se ha encontrado proyecto con el nombre " + aBuscar);
     }
     /**
      * Inserta un nuevo proyecto sin especificar ganancias ni estado.
@@ -250,14 +252,18 @@ public class Emprendimiento
      */
     public boolean insertarProyecto(int identificador, String nombre, String encargado, int personalRequerido, int costo)
     {
-        if (conseguirProyecto(identificador) == null)
+        try
+        {
+            conseguirProyecto(identificador);
+            System.out.println("Ya existe un proyecto con el identificador " + identificador);
+            return false;
+        }
+        catch (ProyectoNoEncontradoException e)
         {
             Proyecto proyecto = new Proyecto(identificador, nombre, encargado, personalRequerido, costo);
             proyectos.add(proyecto);
             return true;
         }
-        System.out.println("Ya existe un proyecto con el identificador " + identificador);
-        return false;
     }
     /**
      * Inserta un proyecto especificando su estado.
@@ -271,14 +277,18 @@ public class Emprendimiento
      */
     public boolean insertarProyecto(int identificador, String nombre, String encargado, int personalRequerido, int costo, String estado)
     {
-        if (conseguirProyecto(identificador) == null)
+        try
+        {
+            conseguirProyecto(identificador);
+            System.out.println("Ya existe un proyecto con el identificador " + identificador);
+            return false;
+        }
+        catch (ProyectoNoEncontradoException e)
         {
             Proyecto proyecto = new Proyecto(identificador, nombre, encargado, personalRequerido, costo, estado);
             proyectos.add(proyecto);
             return true;
         }
-        System.out.println("Ya existe un proyecto con el identificador " + identificador);
-        return false;
     }
     /**
      * Inserta un proyecto especificando su estado y ganancias.
@@ -293,36 +303,48 @@ public class Emprendimiento
      */
     public boolean insertarProyecto(int identificador, String nombre, String encargado, int personalRequerido, int costo, int ganancias, String estado)
     {
-        if (conseguirProyecto(identificador) == null)
+        try
+        {
+            conseguirProyecto(identificador);
+            System.out.println("Ya existe un proyecto con el identificador " + identificador);
+            return false;
+        }
+        catch (ProyectoNoEncontradoException e)
         {
             Proyecto proyecto = new Proyecto(identificador, nombre, encargado, personalRequerido, costo, ganancias, estado);
             proyectos.add(proyecto);
             return true;
         }
-        System.out.println("Ya existe un proyecto con el identificador " + identificador);
-        return false;
     }
     public boolean insertarProyectoTecnologico(int identificador, String nombre, String encargado, int personalRequerido, int costo, String tecnologiaUsada)
     {
-        if (conseguirProyecto(identificador) == null)
+        try
+        {
+            conseguirProyecto(identificador);
+            System.out.println("Ya existe un proyecto con el identificador " + identificador);
+            return false;
+        }
+        catch (ProyectoNoEncontradoException e)
         {
             ProyectoTecnologico proyecto = new ProyectoTecnologico(identificador, nombre, encargado, personalRequerido, costo, tecnologiaUsada);
             proyectos.add(proyecto);
             return true;
         }
-        System.out.println("Ya existe un proyecto con el identificador " + identificador);
-        return false;
     }
     public boolean insertarProyectoSocial(int identificador, String nombre, String encargado, int personalRequerido, int costo, String comunidadBeneficiada)
     {
-        if (conseguirProyecto(identificador) == null)
+        try
+        {
+            conseguirProyecto(identificador);
+            System.out.println("Ya existe un proyecto con el identificador " + identificador);
+            return false;
+        }
+        catch (ProyectoNoEncontradoException e)
         {
             ProyectoSocial proyecto = new ProyectoSocial(identificador, nombre, encargado, personalRequerido, costo, comunidadBeneficiada);
             proyectos.add(proyecto);
             return true;
         }
-        System.out.println("Ya existe un proyecto con el identificador " + identificador);
-        return false;
     }
     /**
      * Se elimina un proyecto por su identificador
@@ -331,15 +353,18 @@ public class Emprendimiento
      */
     public boolean eliminarProyecto(int aEliminar)
     {
-        Proyecto proyecto = conseguirProyecto(aEliminar);
-        if (proyecto != null)
+        try
         {
+            Proyecto proyecto = conseguirProyecto(aEliminar);
             System.out.println("Se ha eliminado el proyecto con el identificador " + aEliminar);
             proyectos.remove(proyecto);
             return true;
         }
-        System.out.println("No se ha encontrado algun proyecto con el identificador " + aEliminar);
-        return false;
+        catch (ProyectoNoEncontradoException e)
+        {
+            System.out.println("No se ha encontrado algun proyecto con el identificador " + aEliminar);
+            return false;
+        }
     }
     /**
      * Se elimina un proyecto por su nombre.
@@ -348,15 +373,18 @@ public class Emprendimiento
      */
     public boolean eliminarProyecto(String aEliminar)
     {
-        Proyecto proyecto = conseguirProyecto(aEliminar);
-        if (proyecto != null)
+        try
         {
+            Proyecto proyecto = conseguirProyecto(aEliminar);
             System.out.println("Se ha eliminado el proyecto con el nombre " + aEliminar);
             proyectos.remove(proyecto);
             return true;
         }
-        System.out.println("No se ha encontrado algun proyecto con el nombre " + aEliminar);
-        return false;
+        catch (ProyectoNoEncontradoException e)
+        {
+            System.out.println("No se ha encontrado algun proyecto con el nombre " + aEliminar);
+            return false;
+        }
     }
     /**
      * Muestra todos los proyectos registrados en el emprendimiento.

@@ -49,10 +49,14 @@ public class Menu
                     break;
                 case 2:
                     String aBuscar = leerCadena("Ingresa el nombre del emprendimiento a buscar: ");
-                    Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(aBuscar);
-                    if (emprendimiento != null)
+                    try
                     {
-                    menuEmprendimiento(emprendimiento);
+                        Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(aBuscar);
+                        menuEmprendimiento(emprendimiento);
+                    }
+                    catch (EmprendimientoNoEncontradoException e)
+                    {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 3:
@@ -107,26 +111,26 @@ public class Menu
                     break;
                 case 2:
                     int idBuscar = leerEntero("Ingrese el identificador del proyecto a buscar: ");
-                    Proyecto proyecto = emprendimiento.conseguirProyecto(idBuscar);
-                    if (proyecto != null)
+                    try
                     {
+                        Proyecto proyecto = emprendimiento.conseguirProyecto(idBuscar);
                         menuProyecto(proyecto);
                     }
-                    else
+                    catch (ProyectoNoEncontradoException e)
                     {
-                        System.out.println("No se ha encontrado el proyecto con identificador " + idBuscar);
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 3:
                     String nombreBuscar = leerCadena("Ingrese el nombre del proyecto a buscar: ");
-                    proyecto = emprendimiento.conseguirProyecto(nombreBuscar);
-                    if (proyecto != null)
+                    try
                     {
+                        Proyecto proyecto = emprendimiento.conseguirProyecto(nombreBuscar);
                         menuProyecto(proyecto);
                     }
-                    else
+                    catch (ProyectoNoEncontradoException e)
                     {
-                        System.out.println("No se ha encontrado el proyecto con nombre " + nombreBuscar);
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 4:
@@ -330,27 +334,41 @@ public class Menu
         
         for (String clave : claves)
         {
-            Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(clave);
-            System.out.println("Emprendimiento: " + emprendimiento.getNombre());
-            String infoEmprendimiento = emprendimiento.getNombre() + "," + emprendimiento.getPropietario() + "," +
-                                        emprendimiento.getArea() + "," + emprendimiento.getTotalEmpleados() + "," +
-                                        emprendimiento.getCapital() + "," + emprendimiento.getCapitalInicial() + "," +
-                                        emprendimiento.getMontoApoyo();
-            escritorEmprendimientos.write(infoEmprendimiento);
-            escritorEmprendimientos.newLine();
-
-            String idProyectos = emprendimiento.conseguirIdProyectos();
-            System.out.println("Identificadores de proyecto: " + idProyectos + "\n");
-            String[] identificadores = idProyectos.split(",");
-            for (String identificador : identificadores)
+            try
             {
-                Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(identificador));
-                String infoProyecto = emprendimiento.getNombre() + "," + identificador + "," + 
-                                      proyecto.getNombreProyecto() + "," + proyecto.getEncargado() + "," +
-                                      String.valueOf(proyecto.getPersonalRequerido()) + "," + String.valueOf(proyecto.getCosto())
-                                      + "," + String.valueOf(proyecto.getGanancias()) + "," + proyecto.getEstado();
-                escritorProyectos.write(infoProyecto);
-                escritorProyectos.newLine();                      
+                Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(clave);
+                System.out.println("Emprendimiento: " + emprendimiento.getNombre());
+                String infoEmprendimiento = emprendimiento.getNombre() + "," + emprendimiento.getPropietario() + "," +
+                                            emprendimiento.getArea() + "," + emprendimiento.getTotalEmpleados() + "," +
+                                            emprendimiento.getCapital() + "," + emprendimiento.getCapitalInicial() + "," +
+                                            emprendimiento.getMontoApoyo();
+                escritorEmprendimientos.write(infoEmprendimiento);
+                escritorEmprendimientos.newLine();
+
+                String idProyectos = emprendimiento.conseguirIdProyectos();
+                System.out.println("Identificadores de proyecto: " + idProyectos + "\n");
+                String[] identificadores = idProyectos.split(",");
+                for (String identificador : identificadores)
+                {
+                    try
+                    {
+                        Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(identificador));
+                        String infoProyecto = emprendimiento.getNombre() + "," + identificador + "," + 
+                                            proyecto.getNombreProyecto() + "," + proyecto.getEncargado() + "," +
+                                            String.valueOf(proyecto.getPersonalRequerido()) + "," + String.valueOf(proyecto.getCosto())
+                                            + "," + String.valueOf(proyecto.getGanancias()) + "," + proyecto.getEstado();
+                        escritorProyectos.write(infoProyecto);
+                        escritorProyectos.newLine();
+                    }
+                    catch (ProyectoNoEncontradoException e)
+                    {
+                        System.out.println("No se pudo guardar el proyecto con identificador " + identificador + ": " + e.getMessage());
+                    }
+                }
+            }
+            catch (EmprendimientoNoEncontradoException e)
+            {
+                System.out.println("No se pudo guardar el emprendimiento " + clave + " y sus proyectos relacionados.");
             }
         }
         escritorEmprendimientos.close();
@@ -399,13 +417,13 @@ public class Menu
             int ganancias = Integer.parseInt(infoProyecto[6]);
             String estado = infoProyecto[7];
 
-            Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(nombreEmprendimiento);
-            if (emprendimiento != null)
+            try
             {
+                Emprendimiento emprendimiento = redemprendimiento.obtenerEmprendimiento(nombreEmprendimiento);
                 emprendimiento.insertarProyecto(idProyecto, nombreProyecto, encargadoProyecto, personalRequerido, costoEstimado, ganancias, estado);
                 System.out.println("Se ha agregado el proyecto " + nombreProyecto + " al emprendimiento " + nombreEmprendimiento);
             }
-            else
+            catch (EmprendimientoNoEncontradoException e)
             {
                  System.out.println("Emprendimiento no encontrado: " + nombreEmprendimiento);
             }
