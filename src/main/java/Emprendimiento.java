@@ -316,6 +316,16 @@ public class Emprendimiento
             return true;
         }
     }
+    /**
+     * Inserta un proyecto tecnologico con 0 ganancias y en estado "En curso".
+     * @param identificador Identificador del proyecto.
+     * @param nombre Nombre del proyecto.
+     * @param encargado Nombre del encargado del proyecto.
+     * @param personalRequerido Total de personal que requiere el proyecto.
+     * @param costo Costo estimado del proyecto.
+     * @param tecnologiaUsada Tecnologia utilizada para realizar el proyecto.
+     * @return Retorna true si se pudo insertar el proyecto, en caso contrario false.
+     */
     public boolean insertarProyectoTecnologico(int identificador, String nombre, String encargado, int personalRequerido, int costo, String tecnologiaUsada)
     {
         try
@@ -331,6 +341,43 @@ public class Emprendimiento
             return true;
         }
     }
+    /**
+     * Inserta un proyecto tecnologico con ganancias y un estado en especifico.
+     * @param identificador Identificador del proyecto.
+     * @param nombre Nombre del proyecto.
+     * @param encargado Nombre del encargado del proyecto.
+     * @param personalRequerido Total de personal que requiere el proyecto.
+     * @param costo Costo estimado del proyecto.
+     * @param ganancias Ganancias del proyecto.
+     * @param estado Estado actual del proyecto.
+     * @param tecnologiaUsada Tecnologia utilizada para realizar el proyecto.
+     * @return Retorna true si se pudo insertar el proyecto, en caso contrario false.
+     */
+    public boolean insertarProyectoTecnologico(int identificador, String nombre, String encargado, int personalRequerido, int costo, int ganancias, String estado, String tecnologiaUsada)
+    {
+        try
+        {
+            conseguirProyecto(identificador);
+            System.out.println("Ya existe un proyecto con el identificador " + identificador);
+            return false;
+        }
+        catch (ProyectoNoEncontradoException e)
+        {
+            ProyectoTecnologico proyecto = new ProyectoTecnologico(identificador, nombre, encargado, personalRequerido, costo, ganancias, estado, tecnologiaUsada);
+            proyectos.add(proyecto);
+            return true;
+        }
+    }
+    /**
+     * Inserta un proyecto social con 0 ganancias y en estado "En curso".
+     * @param identificador Identificador del proyecto.
+     * @param nombre Nombre del proyecto.
+     * @param encargado Nombre del encargado del proyecto.
+     * @param personalRequerido Total de personal que requiere el proyecto.
+     * @param costo Costo estimado del proyecto.
+     * @param comunidadBeneficiada Comunidad que se beneficia del proyecto.
+     * @return Retorna true si se pudo insertar el proyecto, en caso contrario false.
+     */
     public boolean insertarProyectoSocial(int identificador, String nombre, String encargado, int personalRequerido, int costo, String comunidadBeneficiada)
     {
         try
@@ -342,6 +389,33 @@ public class Emprendimiento
         catch (ProyectoNoEncontradoException e)
         {
             ProyectoSocial proyecto = new ProyectoSocial(identificador, nombre, encargado, personalRequerido, costo, comunidadBeneficiada);
+            proyectos.add(proyecto);
+            return true;
+        }
+    }
+    /**
+     * Inserta un proyecto social con ganancias y un estado en especifico.
+     * @param identificador Identificador del proyecto.
+     * @param nombre Nombre del proyecto.
+     * @param encargado Nombre del encargado del proyecto.
+     * @param personalRequerido Total de personal que requiere el proyecto.
+     * @param costo Costo estimado del proyecto.
+     * @param ganancias Ganancias del proyecto.
+     * @param estado Estado actual del proyecto.
+     * @param comunidadBeneficiada Comunidad que se beneficia del proyecto.
+     * @return Retorna true si se pudo ingresar el proyecto, false en caso contrario.
+     */
+    public boolean insertarProyectoSocial(int identificador, String nombre, String encargado, int personalRequerido, int costo, int ganancias, String estado, String comunidadBeneficiada)
+    {
+        try
+        {
+            conseguirProyecto(identificador);
+            System.out.println("Ya existe un proyecto con el identificador " + identificador);
+            return false;
+        }
+        catch (ProyectoNoEncontradoException e)
+        {
+            ProyectoSocial proyecto = new ProyectoSocial(identificador, nombre, encargado, personalRequerido, costo, ganancias, estado, comunidadBeneficiada);
             proyectos.add(proyecto);
             return true;
         }
