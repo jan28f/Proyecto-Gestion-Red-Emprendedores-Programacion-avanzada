@@ -97,12 +97,12 @@ public class Menu
             System.out.println("5) Eliminar proyecto por nombre");
             System.out.println("6) Ver proyectos");
             System.out.println("7) Ver proyectos segun estado");
-            System.out.println("7) Ver resultados de emprendimiento");
-            System.out.println("8) Cambiar propietario del emprendimiento");
-            System.out.println("9) Cambiar area del emprendimiento");
-            System.out.println("10) Cambiar total de empleados del emprendimiento");
-            System.out.println("11) Cambiar capital del emprendimiento");
-            System.out.println("12) Volver menu principal\n");
+            System.out.println("8) Ver resultados de emprendimiento");
+            System.out.println("9) Cambiar propietario del emprendimiento");
+            System.out.println("10) Cambiar area del emprendimiento");
+            System.out.println("11) Cambiar total de empleados del emprendimiento");
+            System.out.println("12) Cambiar capital del emprendimiento");
+            System.out.println("13) Volver menu principal\n");
 
             opcion = leerEntero("Ingrese una opcion: ");
             switch (opcion)
