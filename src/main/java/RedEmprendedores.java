@@ -87,7 +87,7 @@ public class RedEmprendedores
         Emprendimiento emprendimiento = emprendimientos.get(aBuscar);
         if (emprendimiento == null)
         {
-            throw new EmprendimientoNoEncontradoException("No se ha encontrado " + aBuscar + "en el registro");
+            throw new EmprendimientoNoEncontradoException("No se ha encontrado " + aBuscar + " en el registro");
         }
 
         return emprendimiento;
@@ -101,7 +101,7 @@ public class RedEmprendedores
     {
         if (emprendimientos.remove(aEliminar) == null)
         {
-            System.out.println("No se ha encontrado " + aEliminar + "en el registro");
+            System.out.println("No se ha encontrado " + aEliminar + " en el registro");
             return false;
         }
         System.out.println("Se ha eliminado " + aEliminar + " del registro");
