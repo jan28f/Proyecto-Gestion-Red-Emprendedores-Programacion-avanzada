@@ -328,8 +328,18 @@ public class Menu
     public void guardarDatos() throws IOException
     {
         System.out.println("Guardando informacion...");
-        BufferedWriter escritorEmprendimientos = new BufferedWriter(new FileWriter(new File("datos", "emprendimientos.csv")));
-        BufferedWriter escritorProyectos = new BufferedWriter(new FileWriter(new File("datos","proyectos.csv")));
+        File archivoEmprendimientos = new File("datos/emprendimientos.csv");
+        if (!archivoEmprendimientos.exists())
+        {
+            archivoEmprendimientos = new File("src/main/java/datos/emprendimientos.csv");
+        }
+        File archivoProyectos = new File("datos/proyectos.csv");
+        if (!archivoProyectos.exists())
+        {
+            archivoProyectos = new File("src/main/java/datos/proyectos.csv");
+        }
+        BufferedWriter escritorEmprendimientos = new BufferedWriter(new FileWriter(archivoEmprendimientos));
+        BufferedWriter escritorProyectos = new BufferedWriter(new FileWriter(archivoProyectos));
         String clavesEmprendimiento = redemprendimiento.conseguirClaves();
         String[] claves = clavesEmprendimiento.split(",");
         
