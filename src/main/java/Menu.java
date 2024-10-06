@@ -69,6 +69,7 @@ public class Menu
                     guardarDatos();
                     break;
                 default:
+                    System.out.println("Ingrese una opcion valida.");
                     break;
             }
             System.out.print("Presiona Enter para continuar...");
@@ -175,6 +176,7 @@ public class Menu
                 case 13:
                     break;
                 default:
+                    System.out.println("Ingrese una opcion valida.");   
                     break;
             }
             if (opcion != 13)
@@ -182,7 +184,7 @@ public class Menu
                 System.out.print("Presiona Enter para continuar...");
                 lector.readLine();
             }
-        } while (opcion != 12);
+        } while (opcion != 13);
     }
     /**
      * Menu para agregar distintos tipos de proyectos a un emprendimiento.
@@ -269,13 +271,15 @@ public class Menu
                     System.out.println("\nSe ha cambiado el costo del proyecto a: " + proyecto.getCosto());
                     break;
                 case 6:
-                    proyecto.setEstadoActual("Ingrese el nuevo estado del proyecto (En curso / Completo / Cancelado): ");
+                    proyecto.setEstadoActual(leerCadena("Ingrese el nuevo estado del proyecto (En curso / Completo / Cancelado): "));
                     System.out.println("\nSe ha cambiado el estado del proyecto a: " + proyecto.getEstado());
                     break;
+                
                 case 7:
                     System.out.println("Volviendo al menu anterior...");
                     break;
-                    default:
+                default:
+                    System.out.println("Ingrese una opcion valida.");
                     break;
             }
             if (opcion != 7)
@@ -357,38 +361,41 @@ public class Menu
                 escritorEmprendimientos.newLine();
 
                 String idProyectos = emprendimiento.conseguirIdProyectos();
-                System.out.println("Identificadores de proyecto: " + idProyectos + "\n");
-                String[] identificadores = idProyectos.split(",");
-                for (String identificador : identificadores)
+                if (!idProyectos.equals(""))
                 {
-                    try
+                    System.out.println("Identificadores de proyecto: " + idProyectos + "\n");
+                    String[] identificadores = idProyectos.split(",");
+                    for (String identificador : identificadores)
                     {
-                        Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(identificador));
-                        String tipoProyecto = "General";
-                        String infoAdicional = "";
-
-                        if (proyecto instanceof ProyectoSocial)
+                        try
                         {
-                            tipoProyecto = "Social";
-                            infoAdicional = ((ProyectoSocial)proyecto).getComunidadBeneficiada();
-                        }
-                        else if (proyecto instanceof ProyectoTecnologico)
-                        {
-                            tipoProyecto = "Tecnologico";
-                            infoAdicional = ((ProyectoTecnologico)proyecto).getTecnologiaUsada();
-                        }
+                            Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(identificador));
+                            String tipoProyecto = "General";
+                            String infoAdicional = "";
 
-                        String infoProyecto = emprendimiento.getNombre() + "," + identificador + "," + 
-                                            proyecto.getNombreProyecto() + "," + proyecto.getEncargado() + "," +
-                                            String.valueOf(proyecto.getPersonalRequerido()) + "," + String.valueOf(proyecto.getCosto())
-                                            + "," + String.valueOf(proyecto.getGanancias()) + "," + proyecto.getEstado() + "," +
-                                            tipoProyecto + "," + infoAdicional;
-                        escritorProyectos.write(infoProyecto);
-                        escritorProyectos.newLine();
-                    }
-                    catch (ProyectoNoEncontradoException e)
-                    {
-                        System.out.println("No se pudo guardar el proyecto con identificador " + identificador + ": " + e.getMessage());
+                            if (proyecto instanceof ProyectoSocial)
+                            {
+                                tipoProyecto = "Social";
+                                infoAdicional = ((ProyectoSocial)proyecto).getComunidadBeneficiada();
+                            }
+                            else if (proyecto instanceof ProyectoTecnologico)
+                            {
+                                tipoProyecto = "Tecnologico";
+                                infoAdicional = ((ProyectoTecnologico)proyecto).getTecnologiaUsada();
+                            }
+
+                            String infoProyecto = emprendimiento.getNombre() + "," + identificador + "," + 
+                                                proyecto.getNombreProyecto() + "," + proyecto.getEncargado() + "," +
+                                                String.valueOf(proyecto.getPersonalRequerido()) + "," + String.valueOf(proyecto.getCosto())
+                                                + "," + String.valueOf(proyecto.getGanancias()) + "," + proyecto.getEstado() + "," +
+                                                tipoProyecto + "," + infoAdicional;
+                            escritorProyectos.write(infoProyecto);
+                            escritorProyectos.newLine();
+                        }
+                        catch (ProyectoNoEncontradoException e)
+                        {
+                            System.out.println("No se pudo guardar el proyecto con identificador " + identificador + ": " + e.getMessage());
+                        }
                     }
                 }
             }
@@ -470,12 +477,18 @@ public class Menu
         lectorArchivo.close();
     }
     /**
-     * Genera un reporte en un archivo txt, con los emprendimientos y sus proyectos.
+     * Genera un reporte en un archivo txt, con los emprendimientos y sus proyectos y se almacena en datos.
      * @throws IOException
      */
     public void generarReporte() throws IOException
     {
-        BufferedWriter escritor = new BufferedWriter(new FileWriter(new File("reporte.txt")));
+        File archivo = new File("src/main/java/datos/emprendimientos.csv");
+        String ruta = "src/main/java/datos";
+        if (!archivo.exists())
+        {
+            ruta = "datos";
+        }
+        BufferedWriter escritor = new BufferedWriter(new FileWriter(new File(ruta, "reporte.txt")));
         String clavesEmprendimiento = redemprendimiento.conseguirClaves();
         String[] claves = clavesEmprendimiento.split(",");
 
@@ -505,46 +518,50 @@ public class Menu
                 escritor.write("Proyectos:");
                 escritor.newLine();
 
-                String[] idProyectos = emprendimiento.conseguirIdProyectos().split(",");
-                for (String id : idProyectos)
+                String StringIds = emprendimiento.conseguirIdProyectos();
+                if (!StringIds.equals(""))
                 {
-                    try
+                    String[] idProyectos = StringIds.split(",");
+                    for (String id : idProyectos)
                     {
-                        Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(id));
-                        escritor.write("\tProyecto ID: " + proyecto.getIdentificador());
-                        escritor.newLine();
-                        escritor.write("\tNombre: " + proyecto.getNombreProyecto());
-                        escritor.newLine();
-                        escritor.write("\tEncargado: " + proyecto.getEncargado());
-                        escritor.newLine();
-                        escritor.write("\tEstado: " + proyecto.getEstado());
-                        escritor.newLine();
-                        escritor.write("\tGanancias: " + proyecto.getGanancias());
-                        escritor.newLine();
-                        if (proyecto instanceof ProyectoSocial)
+                        try
                         {
-                            escritor.write("\tTipo de proyecto: Social");
+                            Proyecto proyecto = emprendimiento.conseguirProyecto(Integer.parseInt(id));
+                            escritor.write("\tProyecto ID: " + proyecto.getIdentificador());
                             escritor.newLine();
-                            escritor.write("\tComunidad beneficiada: " + ((ProyectoSocial)proyecto).getComunidadBeneficiada());
+                            escritor.write("\tNombre: " + proyecto.getNombreProyecto());
+                            escritor.newLine();
+                            escritor.write("\tEncargado: " + proyecto.getEncargado());
+                            escritor.newLine();
+                            escritor.write("\tEstado: " + proyecto.getEstado());
+                            escritor.newLine();
+                            escritor.write("\tGanancias: " + proyecto.getGanancias());
+                            escritor.newLine();
+                            if (proyecto instanceof ProyectoSocial)
+                            {
+                                escritor.write("\tTipo de proyecto: Social");
+                                escritor.newLine();
+                                escritor.write("\tComunidad beneficiada: " + ((ProyectoSocial)proyecto).getComunidadBeneficiada());
+                                escritor.newLine();
+                            }
+                            else if (proyecto instanceof ProyectoTecnologico)
+                            {
+                                escritor.write("\tTipo de proyecto: Tecnologico");
+                                escritor.newLine();
+                                escritor.write("\tTecnologia usada: " + ((ProyectoTecnologico)proyecto).getTecnologiaUsada());
+                                escritor.newLine();
+                            }
+                            else
+                            {
+                                escritor.write("\tTipo de proyecto: General");
+                                escritor.newLine();
+                            }
                             escritor.newLine();
                         }
-                        else if (proyecto instanceof ProyectoTecnologico)
+                        catch (ProyectoNoEncontradoException e)
                         {
-                            escritor.write("\tTipo de proyecto: Tecnologico");
-                            escritor.newLine();
-                            escritor.write("\tTecnologia usada: " + ((ProyectoTecnologico)proyecto).getTecnologiaUsada());
-                            escritor.newLine();
+                            System.out.println(e.getMessage());
                         }
-                        else
-                        {
-                            escritor.write("\tTipo de proyecto: General");
-                            escritor.newLine();
-                        }
-                        escritor.newLine();
-                    }
-                    catch (ProyectoNoEncontradoException e)
-                    {
-                        System.out.println(e.getMessage());
                     }
                 }
                 escritor.write("----------------------------------------------------");
