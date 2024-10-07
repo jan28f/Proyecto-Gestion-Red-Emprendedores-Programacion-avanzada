@@ -21,9 +21,9 @@ public class Menu
     public void menuPrincipal() throws IOException
     {
         System.out.println("Cargando casos de prueba...");
-        cargarDatos("datos/emprendimientosPrueba.csv", "datos/proyectosPrueba.csv");
+        cargarDatos("emprendimientosPrueba.csv", "proyectosPrueba.csv");
         System.out.println("Cargando datos...");
-        cargarDatos("datos/emprendimientos.csv", "datos/proyectos.csv");
+        cargarDatos("emprendimientos.csv", "proyectos.csv");
         int opcion = -1;
         do
         {
@@ -414,11 +414,17 @@ public class Menu
      * @param rutaProyectos Ruta del archivo csv de los proyectos.
      * @throws IOException Si ocurre un error con la entrada/salida.
      */
-    public void cargarDatos(String rutaEmprendimiento, String rutaProyectos) throws IOException
+    public void cargarDatos(String nombreArchivoEmprendimientos, String nombreArchivoProyectos) throws IOException
     {
-        InputStream archivoEmprendimientos = getClass().getClassLoader().getResourceAsStream(rutaEmprendimiento);
-        InputStream archivoProyectos = getClass().getClassLoader().getResourceAsStream(rutaProyectos);
-        BufferedReader lectorArchivo = new BufferedReader(new InputStreamReader(archivoEmprendimientos));
+        String ruta = "datos/";
+        File archivoEmprendimientos = new File(ruta, nombreArchivoEmprendimientos);
+        if (!archivoEmprendimientos.exists())
+        {
+            ruta = "src/main/java/datos/";
+            archivoEmprendimientos = new File(ruta, nombreArchivoEmprendimientos);
+        }
+        File archivoProyectos = new File(ruta, nombreArchivoProyectos);
+        BufferedReader lectorArchivo = new BufferedReader(new FileReader(archivoEmprendimientos));
         
         String linea;
         System.out.println("Cargando emprendimientos...");
@@ -436,7 +442,7 @@ public class Menu
             redemprendimiento.registrarEmprendimiento(nombre, propietario, area, empleados, capital, capitalInicial, montoApoyo);
         }
         lectorArchivo.close();
-        lectorArchivo = new BufferedReader(new InputStreamReader(archivoProyectos));
+        lectorArchivo = new BufferedReader(new FileReader(archivoProyectos));
         System.out.println("Cargando proyectos...");
         while ((linea = lectorArchivo.readLine()) != null)
         {
